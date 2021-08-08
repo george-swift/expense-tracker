@@ -1,0 +1,163 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snapshot of the user form component should render correctly on sign up 1`] = `
+<form
+  className={null}
+  onSubmit={[MockFunction]}
+>
+  <div
+    className="mb-3"
+  >
+    <label
+      className="form-label"
+      htmlFor="Username"
+    >
+      Username
+    </label>
+    <input
+      className="form-control"
+      minLength={2}
+      name="username"
+      onChange={[MockFunction]}
+      required={true}
+      type="text"
+      value="Test Dev"
+    />
+  </div>
+  <div
+    className="mb-3"
+  >
+    <label
+      className="form-label"
+      htmlFor="Email"
+    >
+      Email
+    </label>
+    <input
+      className="form-control"
+      name="email"
+      onChange={[MockFunction]}
+      required={true}
+      type="email"
+      value="testdev@email.com"
+    />
+  </div>
+  <div
+    className="mb-3"
+  >
+    <label
+      className="form-label"
+      htmlFor="Password"
+    >
+      Password
+    </label>
+    <input
+      className="form-control"
+      minLength={6}
+      name="password"
+      onChange={[MockFunction]}
+      required={true}
+      type="password"
+      value="testing101"
+    />
+  </div>
+  <div
+    className="mb-3"
+  >
+    <label
+      className="form-label"
+      htmlFor="Password Confirmation"
+    >
+      Password Confirmation
+    </label>
+    <input
+      className="form-control"
+      minLength={6}
+      name="password_confirmation"
+      onChange={[MockFunction]}
+      required={true}
+      type="password"
+      value="testing101"
+    />
+  </div>
+  <div>
+    <button
+      className="btn mb-3 w-100"
+      type="submit"
+    >
+      Sign up
+    </button>
+    <p
+      className="text-center"
+    >
+      <span
+        className="fst-italic"
+      >
+        Already have an account?
+      </span>
+       
+      <a
+        href="/login"
+        onClick={[Function]}
+      >
+        Click here to log in
+      </a>
+    </p>
+  </div>
+</form>
+`;
+
+exports[`Snapshot of the user form component should render edit form correctly if logged in 1`] = `
+<form
+  className="py-3"
+  onSubmit={[MockFunction]}
+>
+  <div
+    className="mb-3"
+  >
+    <label
+      className="form-label"
+      htmlFor="Username"
+    >
+      Username
+    </label>
+    <input
+      className="form-control"
+      minLength={2}
+      name="username"
+      onChange={[MockFunction]}
+      required={true}
+      type="text"
+      value="Test Dev"
+    />
+  </div>
+  <div
+    className="mb-3"
+  >
+    <label
+      className="form-label"
+      htmlFor="Email"
+    >
+      Email
+    </label>
+    <input
+      className="form-control"
+      name="email"
+      onChange={[MockFunction]}
+      required={true}
+      type="email"
+      value="testdev@email.com"
+    />
+  </div>
+  <div
+    className="mb-3"
+  >
+    <button
+      className="btn w-100"
+      type="submit"
+    >
+      Update Profile
+    </button>
+  </div>
+</form>
+`;
