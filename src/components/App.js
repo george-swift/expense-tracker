@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import { clearFlash } from '../actions';
 import Home from './Home';
 import Main from './Main';
+import NotFound from './NotFound';
 import SignUp from '../containers/SignUp';
 import LogIn from '../containers/LogIn';
 
@@ -22,6 +23,7 @@ const App = () => {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<LogIn />} />
         <Route path="/et/*" element={<Main />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );
