@@ -1,3 +1,4 @@
+import { runSaga } from 'redux-saga';
 import { takeEvery, takeLatest } from '@redux-saga/core/effects';
 
 import {
@@ -38,3 +39,17 @@ export default function* rootSaga() {
   yield takeEvery(UPDATE_EXPENSE, updateExpense);
   yield takeLatest(DELETE_EXPENSE, deleteExpense);
 }
+
+export const recordSaga = async (saga, initialAction) => {
+  const dispatched = [];
+
+  await runSaga(
+    {
+      dispatch: (action) => dispatched.push(action),
+    },
+    saga,
+    initialAction,
+  ).done;
+
+  return dispatched;
+};
