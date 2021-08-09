@@ -1,4 +1,4 @@
-export const API_BASE_URL = 'http://127.0.0.1:4000/';
+export const API_BASE_URL = 'https://api-expense-tracker.herokuapp.com/';
 
 export const CREATE_ACCOUNT_REQUEST = 'CREATE_ACCOUNT_REQUEST';
 export const CREATE_ACCOUNT_SUCCESSFUL = 'CREATE_ACCOUNT_SUCCESSFUL';
