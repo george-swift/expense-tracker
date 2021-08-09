@@ -4,8 +4,8 @@
 [Get started with Expense Tracker](https://redux-expense-tracker.netlify.app/)
 ## Objectives
 - Data management in front-end components
-- Handling lifecycle methods and resuable logic with React Hooks
-- Using client side routes with React Router
+- Handling lifecycle methods and reusable logic with React Hooks
+- Using client-side routes with React Router
 - Interacting with an API Backend
 - Integrating Redux in a React application
 - Structuring a Redux store
