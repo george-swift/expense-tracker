@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snapshot of the FlashMessage component should render error messages correctly 1`] = `
+<div
+  className="alert alert-danger"
+>
+  Network error! Try again.
+</div>
+`;
