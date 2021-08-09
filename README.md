@@ -1,70 +1,77 @@
-# Getting Started with Create React App
+# Expense Tracker
+![](./src/assets/images/list.png)
+## Live Link
+[Get started with Expense Tracker](https://redux-expense-tracker.netlify.app/)
+## Objectives
+- Data management in front-end components
+- Handling lifecycle methods and resuable logic with React Hooks
+- Using client side routes with React Router
+- Interacting with an API Backend
+- Integrating Redux in a React application
+- Structuring a Redux store
+- Using React Redux Hooks
+- Managing async workflows with Redux Sagas
+- Functional Programming
+- Meeting model client requirements
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Features
+A single page application that allows users to track expenses. It largely follows the design idea by [Gregoire Vella](https://www.behance.net/gallery/13271423/Bodytrackit-An-iOs-app-Branding-UX-and-UI) on Behance. _Expense Tracker_ is primarily designed for mobile devices but support is available for larger screen sizes. To get started, `Sign up` to access the application. Three **main pages** are available to signed in users. The `Lists` page allows for managing lists of expenses if any. Clicking on `Track expenses` opens up a `Track.it` page with information about expenses in a given list. Expenses can be added, edited and deleted as desired. The `Reports` page shows an overview of users' expenditure while the `More` page allows users to edit their profile. _Expense Tracker_ is deployed on Netlify.
 
-## Available Scripts
+_Sign up or log in to access the app_
 
-In the project directory, you can run:
+![](./src/assets/images/login.png)
 
-### `npm start`
+_Editing an expense_
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+![](./src/assets/images/expense.png)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Prerequisites
+- Internet Connection
+- An Integrated Development Environment
+- Chrome, Firefox or Safari across all screen sizes
+- Node Package Manager [(NPM)](https://docs.npmjs.com/about-npm)
 
-### `npm test`
+## Built With
+- React
+- React Router v6
+- Redux
+- Redux Saga
+- Javascript ES6+
+- npm packages
+- Bootstrap 5
+- SCSS
+- HTML5/CSS3
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+## Getting Started
+- Clone this project by running `git clone https://github.com/george-swift/expense-tracker.git`
+- Run `npm install` to install the required dependencies.
+- After installing all dependencies, run `npm start` to fire up a local server with live reloading.
+- If not already redirected, visit `http://localhost:3000/` in your browser to use _Expense Tracker._
+- To terminate the server, enter `Ctrl + C` in your terminal.
+- To get a production bundle, run `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Testing
+Run `npm test` to get a verbose test report.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Authors
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+👤 &nbsp; **Ubong George**
+- LinkedIn: [Ubong George](https://www.linkedin.com/in/ubong-itok)
+- Twitter: [@\_\_pragmaticdev](https://twitter.com/__pragmaticdev)
+- GitHub: [@george-swift](https://github.com/george-swift)
 
-### `npm run eject`
+## Acknowledgments
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- [Design idea](https://www.behance.net/gregoirevella)
+- [React](https://reactjs.org/)
+- [Redux](https://redux.js.org/api/api-reference)
+- [Microverse](https://www.microverse.org/)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Show your support
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Leave a :star:️ &nbsp; if you like this project!
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## License
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
