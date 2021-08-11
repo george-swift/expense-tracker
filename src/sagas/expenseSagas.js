@@ -1,11 +1,9 @@
 import { call, put } from '@redux-saga/core/effects';
 import * as api from '../api';
 import {
-  FETCH_EXPENSES_FAILED, FETCH_EXPENSES_SUCCESSFUL,
-  CREATE_EXPENSE_FAILED, CREATE_EXPENSE_SUCCESSFUL,
-  UPDATE_EXPENSE_SUCCESSFUL, UPDATE_EXPENSE_FAILED,
-  DELETE_EXPENSE_FAILED, DELETE_EXPENSE_SUCCESSFUL,
-  SHOW_EXPENSES_FAILED, SHOW_EXPENSES_SUCCESSFUL,
+  FETCH_EXPENSES_SUCCESSFUL, CREATE_EXPENSE_SUCCESSFUL,
+  UPDATE_EXPENSE_SUCCESSFUL, DELETE_EXPENSE_SUCCESSFUL,
+  SHOW_EXPENDITURE_SUCCESSFUL, REQUEST_FAILED,
 } from '../constants';
 
 export function* fetchExpenses({ payload }) {
@@ -17,7 +15,7 @@ export function* fetchExpenses({ payload }) {
     });
   } catch (error) {
     yield put({
-      type: FETCH_EXPENSES_FAILED,
+      type: REQUEST_FAILED,
       payload: error.message,
     });
   }
@@ -33,23 +31,23 @@ export function* createExpense({ payload }) {
     });
   } catch (error) {
     yield put({
-      type: CREATE_EXPENSE_FAILED,
+      type: REQUEST_FAILED,
       payload: error.message,
     });
   }
 }
 
-export function* showUserExpenses({ payload }) {
+export function* showExpenditure({ payload }) {
   try {
     const { data } = yield call(api.userDetails, payload);
     const { expenses } = data;
     yield put({
-      type: SHOW_EXPENSES_SUCCESSFUL,
+      type: SHOW_EXPENDITURE_SUCCESSFUL,
       payload: expenses,
     });
   } catch (e) {
     yield put({
-      type: SHOW_EXPENSES_FAILED,
+      type: REQUEST_FAILED,
       payload: e.message,
     });
   }
@@ -66,7 +64,7 @@ export function* updateExpense({ payload }) {
     });
   } catch (error) {
     yield put({
-      type: UPDATE_EXPENSE_FAILED,
+      type: REQUEST_FAILED,
       payload: error.message,
     });
   }
@@ -82,7 +80,7 @@ export function* deleteExpense({ payload }) {
     });
   } catch (error) {
     yield put({
-      type: DELETE_EXPENSE_FAILED,
+      type: REQUEST_FAILED,
       payload: error.message,
     });
   }
