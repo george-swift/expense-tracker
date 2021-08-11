@@ -1,23 +1,22 @@
 import { call, put } from '@redux-saga/core/effects';
 import * as api from '../api';
 import {
-  CREATE_ACCOUNT_FAILED, CREATE_ACCOUNT_SUCCESSFUL,
-  EDIT_USER_FAILED, EDIT_USER_SUCCESSFUL,
-  LOG_IN_FAILED, LOG_IN_SUCCESSFUL,
-  SIGN_OUT_FAILED, SIGN_OUT_SUCCESSFUL,
+  USER_AUTHENTICATED,
+  EDIT_USER_SUCCESSFUL,
+  SIGN_OUT_SUCCESSFUL,
+  REQUEST_FAILED,
 } from '../constants';
 
 export function* signUp({ payload }) {
   try {
     const { data } = yield call(api.createAccount, payload);
-    const { user } = data;
     yield put({
-      type: CREATE_ACCOUNT_SUCCESSFUL,
-      payload: user,
+      type: USER_AUTHENTICATED,
+      payload: data,
     });
   } catch (e) {
     yield put({
-      type: CREATE_ACCOUNT_FAILED,
+      type: REQUEST_FAILED,
       payload: e.message,
     });
   }
@@ -26,14 +25,13 @@ export function* signUp({ payload }) {
 export function* signIn({ payload }) {
   try {
     const { data } = yield call(api.signIn, payload);
-    const { user } = data;
     yield put({
-      type: LOG_IN_SUCCESSFUL,
-      payload: user,
+      type: USER_AUTHENTICATED,
+      payload: data,
     });
   } catch (e) {
     yield put({
-      type: LOG_IN_FAILED,
+      type: REQUEST_FAILED,
       payload: e.message,
     });
   }
@@ -50,7 +48,7 @@ export function* editAccount({ payload }) {
     });
   } catch (e) {
     yield put({
-      type: EDIT_USER_FAILED,
+      type: REQUEST_FAILED,
       paylaod: e.message,
     });
   }
@@ -65,7 +63,7 @@ export function* signOut() {
     });
   } catch (e) {
     yield put({
-      type: SIGN_OUT_FAILED,
+      type: REQUEST_FAILED,
       payload: e.message,
     });
   }
