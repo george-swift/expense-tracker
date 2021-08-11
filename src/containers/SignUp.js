@@ -2,26 +2,37 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FaCoins, FaSpinner } from 'react-icons/fa';
 import { useFormState, useVerify } from '../hooks';
-import { clearFlash, createAccountRequest, fetchLists } from '../actions';
+import { clearFlash, createAccountRequest } from '../actions';
 import FlashMessage from '../components/FlashMessage';
 import Form from '../components/UserForm';
 
 const SignUp = () => {
   const { state = {}, handleChange } = useFormState();
+
   const {
-    loggedIn, id, isLoading, error, dispatch, navigate,
+    loggedIn, isLoading, error, dispatch, navigate,
   } = useVerify();
 
   useEffect(() => {
-    if (id !== undefined) {
-      navigate('/et', { replace: true });
-      dispatch(fetchLists(id));
-    }
-  }, [id]);
+    if (loggedIn) navigate('/et', { replace: true });
+  }, [loggedIn]);
+
+  const validate = (...nodes) => {
+    nodes.forEach((el) => {
+      const [, input, small] = el.children;
+      input.classList.add('is-invalid');
+      small.classList.replace('d-none', 'd-block');
+    });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(createAccountRequest(state));
+    if (state.password !== state.password_confirmation) {
+      const [,, pwd, cpwd] = e.target.children;
+      validate(pwd, cpwd);
+    } else {
+      dispatch(createAccountRequest(state));
+    }
   };
 
   const switchAction = () => { if (error !== null) dispatch(clearFlash()); };

@@ -74,6 +74,9 @@ const Form = ({
               onChange={handleChange}
               required
             />
+            <small className="fst-italic text-danger d-none">
+              Password and password confirmation do not match. Try again
+            </small>
           </div>
 
           <div className="mb-3">
@@ -89,6 +92,9 @@ const Form = ({
               onChange={handleChange}
               required
             />
+            <small className="fst-italic text-danger d-none">
+              Password and password confirmations do not match. Try again
+            </small>
           </div>
           <div>
             <button
