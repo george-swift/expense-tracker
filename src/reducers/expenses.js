@@ -1,7 +1,6 @@
 import {
   FETCH_EXPENSES_SUCCESSFUL, CREATE_EXPENSE_SUCCESSFUL,
   UPDATE_EXPENSE_SUCCESSFUL, DELETE_EXPENSE_SUCCESSFUL,
-  SIGN_OUT_SUCCESSFUL,
 } from '../constants';
 
 export default function expenses(state = [], action) {
@@ -9,7 +8,7 @@ export default function expenses(state = [], action) {
 
   switch (type) {
     case FETCH_EXPENSES_SUCCESSFUL:
-      return [...payload];
+      return payload;
 
     case CREATE_EXPENSE_SUCCESSFUL:
       return [...state, payload];
@@ -24,9 +23,6 @@ export default function expenses(state = [], action) {
 
     case DELETE_EXPENSE_SUCCESSFUL:
       return state.filter((expense) => expense.id !== payload);
-
-    case SIGN_OUT_SUCCESSFUL:
-      return [];
 
     default:
       return state;
