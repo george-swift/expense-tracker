@@ -38,15 +38,12 @@ export const useVerify = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { loggedIn } = useSelector((state) => state.user);
-  const { id, username, email } = useSelector((state) => state.user.info);
+  const { authenticated: loggedIn, user } = useSelector((state) => state.user);
   const { isLoading, error } = useSelector((state) => state.notifications);
 
   return {
     loggedIn,
-    id,
-    username,
-    email,
+    user,
     isLoading,
     error,
     dispatch,
