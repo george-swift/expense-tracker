@@ -1,22 +1,24 @@
 import { call, put } from '@redux-saga/core/effects';
 import * as api from '../api';
 import {
-  FETCH_LISTS_SUCCESSFUL, FETCH_LISTS_FAILED,
-  CREATE_LIST_SUCCESSFUL, CREATE_LIST_FAILED,
-  UPDATE_LIST_SUCCESSFUL, UPDATE_LIST_FAILED,
-  DELETE_LIST_FAILED, DELETE_LIST_SUCCESSFUL,
+  FETCH_LISTS_SUCCESSFUL,
+  CREATE_LIST_SUCCESSFUL,
+  UPDATE_LIST_SUCCESSFUL,
+  DELETE_LIST_SUCCESSFUL,
+  REQUEST_FAILED,
 } from '../constants';
 
 export function* fetchLists({ payload }) {
+  const { id } = payload.user;
   try {
-    const { data } = yield call(api.fetchLists, payload);
+    const { data } = yield call(api.fetchLists, id);
     yield put({
       type: FETCH_LISTS_SUCCESSFUL,
       payload: data,
     });
   } catch (e) {
     yield put({
-      type: FETCH_LISTS_FAILED,
+      type: REQUEST_FAILED,
       payload: e.message,
     });
   }
@@ -32,7 +34,7 @@ export function* createList({ payload }) {
     });
   } catch (e) {
     yield put({
-      type: CREATE_LIST_FAILED,
+      type: REQUEST_FAILED,
       payload: e.message,
     });
   }
@@ -49,7 +51,7 @@ export function* updateList({ payload }) {
     });
   } catch (error) {
     yield put({
-      type: UPDATE_LIST_FAILED,
+      type: REQUEST_FAILED,
       payload: error.message,
     });
   }
@@ -65,7 +67,7 @@ export function* deleteList({ payload }) {
     });
   } catch (error) {
     yield put({
-      type: DELETE_LIST_FAILED,
+      type: REQUEST_FAILED,
       payload: error.message,
     });
   }
