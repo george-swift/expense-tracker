@@ -12,16 +12,14 @@ import {
 import {
   fetchExpenses, createExpense,
   updateExpense, deleteExpense,
-  showUserExpenses,
+  showExpenditure,
 } from './expenseSagas';
 
 import {
-  CREATE_ACCOUNT_REQUEST, LOG_IN_REQUEST,
-  FETCH_LISTS, CREATE_LIST, UPDATE_LIST, DELETE_LIST,
-  FETCH_EXPENSES, CREATE_EXPENSE, UPDATE_EXPENSE,
-  DELETE_EXPENSE, SHOW_EXPENSES_REQUEST,
-  SIGN_OUT_REQUEST,
-  EDIT_USER_REQUEST,
+  CREATE_ACCOUNT_REQUEST, LOG_IN_REQUEST, EDIT_USER_REQUEST,
+  USER_AUTHENTICATED, CREATE_LIST, UPDATE_LIST, DELETE_LIST,
+  FETCH_EXPENSES, CREATE_EXPENSE, UPDATE_EXPENSE, DELETE_EXPENSE,
+  SHOW_EXPENDITURE, SIGN_OUT_REQUEST,
 } from '../constants';
 
 export default function* rootSaga() {
@@ -29,11 +27,11 @@ export default function* rootSaga() {
   yield takeEvery(LOG_IN_REQUEST, signIn);
   yield takeLatest(EDIT_USER_REQUEST, editAccount);
   yield takeLatest(SIGN_OUT_REQUEST, signOut);
-  yield takeLatest(FETCH_LISTS, fetchLists);
+  yield takeLatest(USER_AUTHENTICATED, fetchLists);
   yield takeEvery(CREATE_LIST, createList);
   yield takeEvery(UPDATE_LIST, updateList);
   yield takeLatest(DELETE_LIST, deleteList);
-  yield takeLatest(SHOW_EXPENSES_REQUEST, showUserExpenses);
+  yield takeLatest(SHOW_EXPENDITURE, showExpenditure);
   yield takeLatest(FETCH_EXPENSES, fetchExpenses);
   yield takeEvery(CREATE_EXPENSE, createExpense);
   yield takeEvery(UPDATE_EXPENSE, updateExpense);
