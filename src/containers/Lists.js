@@ -10,10 +10,10 @@ import List from '../components/List';
 
 const Lists = () => {
   const {
-    id, username, isLoading, error, dispatch, navigate,
+    user, isLoading, error, dispatch, navigate,
   } = useVerify();
 
-  const [handle] = username?.split(/\s/) ?? '';
+  const [handle] = user?.username.split(/\s/) ?? '';
 
   const lists = useSelector((state) => (state.lists.length < 1 ? null : state.lists));
 
@@ -39,7 +39,7 @@ const Lists = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (listNames?.includes(state.name)) return;
-    dispatch(createList(id, state));
+    dispatch(createList(user?.id, state));
     toggleDisplay();
     reset();
   };

@@ -2,22 +2,19 @@ import { Link } from 'react-router-dom';
 import { FaCoins, FaSpinner } from 'react-icons/fa';
 import { useEffect } from 'react';
 import { useFormState, useVerify } from '../hooks';
-import { clearFlash, fetchLists, logInRequest } from '../actions';
+import { clearFlash, logInRequest } from '../actions';
 import FlashMessage from '../components/FlashMessage';
 import { userFormFields } from '../constants';
 
 const LogIn = () => {
   const { state = {}, handleChange } = useFormState();
   const {
-    id, isLoading, error, dispatch, navigate,
+    loggedIn, isLoading, error, dispatch, navigate,
   } = useVerify();
 
   useEffect(() => {
-    if (id !== undefined) {
-      navigate('/et', { replace: true });
-      dispatch(fetchLists(id));
-    }
-  }, [id]);
+    if (loggedIn) navigate('/et', { replace: true });
+  }, [loggedIn]);
 
   const handleSubmit = (e) => {
     e.preventDefault();

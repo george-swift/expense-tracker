@@ -2,17 +2,17 @@ import { useCallback, useEffect, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { FaSpinner } from 'react-icons/fa';
 import { useVerify } from '../hooks';
-import { showExpenses } from '../actions';
+import { showExpenditure } from '../actions';
 import Header from '../components/Header';
 import FlashMessage from '../components/FlashMessage';
 
 const Reports = () => {
   const {
-    id, isLoading, error, dispatch,
+    user, isLoading, error, dispatch,
   } = useVerify();
 
   useEffect(() => {
-    if (id !== undefined) dispatch(showExpenses(id));
+    if (user?.id !== undefined) dispatch(showExpenditure(user.id));
   }, []);
 
   const lists = useSelector((state) => state.lists);

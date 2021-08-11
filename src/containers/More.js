@@ -1,5 +1,4 @@
 import { FaPencilAlt, FaSpinner, FaUserCircle } from 'react-icons/fa';
-import { useSelector } from 'react-redux';
 import { useFormState, useVerify } from '../hooks';
 import { editUserRequest } from '../actions';
 import Header from '../components/Header';
@@ -8,14 +7,12 @@ import Form from '../components/UserForm';
 
 const More = () => {
   const {
-    loggedIn, id, username, email, dispatch, isLoading, error,
+    loggedIn, user, dispatch, isLoading, error,
   } = useVerify();
-
-  const { info } = useSelector((state) => state.user);
 
   const {
     state, handleChange, visible, toggleDisplay, reset,
-  } = useFormState(info);
+  } = useFormState(user);
 
   const manageEditor = () => {
     if (visible) {
@@ -23,6 +20,8 @@ const More = () => {
       reset();
     } else toggleDisplay();
   };
+
+  const { id, username, email } = user;
 
   const handleSubmit = (e) => {
     e.preventDefault();
