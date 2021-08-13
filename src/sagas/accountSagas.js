@@ -1,19 +1,13 @@
 import { call, put } from '@redux-saga/core/effects';
+import { authUser } from '../actions';
 import * as api from '../api';
-import {
-  USER_AUTHENTICATED,
-  EDIT_USER_SUCCESSFUL,
-  SIGN_OUT_SUCCESSFUL,
-  REQUEST_FAILED,
-} from '../constants';
+import { EDIT_USER_SUCCESSFUL, SIGN_OUT_SUCCESSFUL, REQUEST_FAILED } from '../constants';
 
 export function* signUp({ payload }) {
   try {
     const { data } = yield call(api.createAccount, payload);
-    yield put({
-      type: USER_AUTHENTICATED,
-      payload: data,
-    });
+    yield put(authUser(data));
+    localStorage.setItem('exp_tracker', JSON.stringify(data));
   } catch (e) {
     yield put({
       type: REQUEST_FAILED,
@@ -25,10 +19,8 @@ export function* signUp({ payload }) {
 export function* signIn({ payload }) {
   try {
     const { data } = yield call(api.signIn, payload);
-    yield put({
-      type: USER_AUTHENTICATED,
-      payload: data,
-    });
+    yield put(authUser(data));
+    localStorage.setItem('exp_tracker', JSON.stringify(data));
   } catch (e) {
     yield put({
       type: REQUEST_FAILED,
@@ -49,7 +41,7 @@ export function* editAccount({ payload }) {
   } catch (e) {
     yield put({
       type: REQUEST_FAILED,
-      paylaod: e.message,
+      payload: e.message,
     });
   }
 }
@@ -61,6 +53,7 @@ export function* signOut() {
       type: SIGN_OUT_SUCCESSFUL,
       payload: data,
     });
+    localStorage.removeItem('exp_tracker');
   } catch (e) {
     yield put({
       type: REQUEST_FAILED,
