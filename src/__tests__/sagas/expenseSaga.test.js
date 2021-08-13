@@ -2,7 +2,7 @@ import { recordSaga } from '../../sagas';
 import * as api from '../../api';
 import * as saga from '../../sagas/expenseSagas';
 import { createExpense } from '../../actions';
-import { CREATE_EXPENSE_FAILED, CREATE_EXPENSE_SUCCESSFUL } from '../../constants';
+import { CREATE_EXPENSE_SUCCESSFUL, REQUEST_FAILED } from '../../constants';
 
 describe('Testing the expense saga', () => {
   const listId = 12;
@@ -49,7 +49,7 @@ describe('Testing the expense saga', () => {
     expect(api.createExpense).toHaveBeenCalledWith(listId, expense);
 
     expect(dispatched).toContainEqual({
-      type: CREATE_EXPENSE_FAILED,
+      type: REQUEST_FAILED,
       payload: error,
     });
   });

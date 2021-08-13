@@ -1,37 +1,41 @@
 import { recordSaga } from '../../sagas';
 import * as api from '../../api';
 import * as saga from '../../sagas/listSagas';
-import { fetchLists } from '../../actions';
-import { FETCH_LISTS_FAILED, FETCH_LISTS_SUCCESSFUL } from '../../constants';
+import { createList } from '../../actions';
+import { CREATE_LIST_SUCCESSFUL, REQUEST_FAILED } from '../../constants';
 
 describe('Testing the list saga', () => {
   const userId = 2;
 
   const mockResponse = [
     {
-      id: 2,
-      name: 'Transport',
-      user_id: userId,
+      user: {
+        id: 2,
+        name: 'Transport',
+        user_id: userId,
+      },
     },
   ];
 
-  api.fetchLists = jest.fn();
+  const [payload] = mockResponse;
+
+  api.createList = jest.fn();
 
   beforeEach(() => {
     jest.resetAllMocks();
   });
 
   it('should handle a successful asynchronous action', async () => {
-    api.fetchLists.mockImplementation(() => Promise.resolve({ data: mockResponse }));
+    api.createList.mockImplementation(() => Promise.resolve({ data: mockResponse }));
 
-    const dispatched = await recordSaga(saga.fetchLists, fetchLists(userId));
+    const dispatched = await recordSaga(saga.createList, createList(userId, payload));
 
-    expect(api.fetchLists).toHaveBeenCalledTimes(1);
+    expect(api.createList).toHaveBeenCalledTimes(1);
 
-    expect(api.fetchLists).toHaveBeenCalledWith(userId);
+    expect(api.createList).toHaveBeenCalledWith(userId, payload);
 
     expect(dispatched).toContainEqual({
-      type: FETCH_LISTS_SUCCESSFUL,
+      type: CREATE_LIST_SUCCESSFUL,
       payload: mockResponse,
     });
   });
@@ -39,17 +43,14 @@ describe('Testing the list saga', () => {
   it('should handle an unsuccessful asynchronous action', async () => {
     const error = 'Network error. Could not retrieve lists';
 
-    api.fetchLists.mockImplementation(() => Promise.reject(new Error(error)));
+    api.createList.mockImplementation(() => Promise.reject(new Error(error)));
 
-    const dispatched = await recordSaga(saga.fetchLists, fetchLists(userId));
+    const dispatched = await recordSaga(saga.createList, createList(userId, payload));
 
-    expect(api.fetchLists).toHaveBeenCalledTimes(1);
+    expect(api.createList).toHaveBeenCalledTimes(1);
 
-    expect(api.fetchLists).toHaveBeenCalledWith(userId);
+    expect(api.createList).toHaveBeenCalledWith(userId, payload);
 
-    expect(dispatched).toContainEqual({
-      type: FETCH_LISTS_FAILED,
-      payload: error,
-    });
+    expect(dispatched).toContainEqual({ type: REQUEST_FAILED, payload: error });
   });
 });

@@ -1,7 +1,5 @@
 import {
-  userDetails,
-  CREATE_ACCOUNT_SUCCESSFUL,
-  LOG_IN_SUCCESSFUL,
+  USER_AUTHENTICATED,
   EDIT_USER_SUCCESSFUL,
   SIGN_OUT_SUCCESSFUL,
 } from '../../constants';
@@ -15,28 +13,19 @@ describe('Testing the user reducer', () => {
     email: 'testuser@test.com',
   };
 
-  const signUpAction = { type: CREATE_ACCOUNT_SUCCESSFUL, payload };
-  const signInAction = { type: LOG_IN_SUCCESSFUL, payload };
+  const authAction = { type: USER_AUTHENTICATED, payload };
 
-  const mockStore = user(undefined, signInAction);
+  const mockStore = user(undefined, authAction);
 
   it("should be an object of a user's log in status and details by default", () => {
     expect(user(undefined, [])).toStrictEqual(expect.objectContaining({
-      loggedIn: false,
-      info: {},
+      authenticated: false,
+      user: null,
     }));
   });
 
   it('should update state of the store when on successful sign up or sign in', () => {
-    expect(user(undefined, signUpAction)).toStrictEqual(expect.objectContaining({
-      loggedIn: true,
-      info: { ...payload },
-    }));
-
-    expect(user(undefined, signInAction)).toStrictEqual(expect.objectContaining({
-      loggedIn: true,
-      info: { ...payload },
-    }));
+    expect(user(undefined, authAction)).toStrictEqual(expect.objectContaining({ ...payload }));
   });
 
   it('should update state of the store when users successfully edit their profile', () => {
@@ -50,17 +39,19 @@ describe('Testing the user reducer', () => {
       payload: newPayload,
     };
 
-    expect(user(mockStore, editAction)).toStrictEqual(expect.objectContaining({
-      loggedIn: true,
-      info: { ...newPayload },
-    }));
+    expect(user(mockStore, editAction)).toStrictEqual(
+      expect.objectContaining({ user: newPayload }),
+    );
   });
 
   it('should return to default state when users sign out', () => {
     const signOutAction = { type: SIGN_OUT_SUCCESSFUL };
 
     expect(user(mockStore, signOutAction)).toStrictEqual(
-      expect.objectContaining({ ...userDetails }),
+      expect.objectContaining({
+        authenticated: false,
+        user: null,
+      }),
     );
   });
 });

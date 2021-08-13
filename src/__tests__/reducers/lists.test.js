@@ -1,7 +1,6 @@
 import {
   FETCH_LISTS_SUCCESSFUL, CREATE_LIST_SUCCESSFUL,
   UPDATE_LIST_SUCCESSFUL, DELETE_LIST_SUCCESSFUL,
-  SIGN_OUT_SUCCESSFUL,
 } from '../../constants';
 
 import lists from '../../reducers/lists';
@@ -81,11 +80,5 @@ describe('Testing the lists reducer', () => {
     expect(lists(mockStore, onDelete)).toStrictEqual(
       expect.arrayContaining([listTwo]),
     );
-  });
-
-  it('should return to its default state when a user is signed out', () => {
-    const onSignOut = { type: SIGN_OUT_SUCCESSFUL };
-
-    expect(lists(mockStore, onSignOut)).toStrictEqual([]);
   });
 });

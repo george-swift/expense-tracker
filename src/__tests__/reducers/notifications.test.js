@@ -1,28 +1,14 @@
-import {
-  UI, CREATE_ACCOUNT_REQUEST, FETCH_LISTS_FAILED, FETCH_LISTS_SUCCESSFUL,
-} from '../../constants';
+import { FETCH_LISTS_SUCCESSFUL, REQUEST_FAILED } from '../../constants';
 import notifications from '../../reducers/notifications';
 
 describe('Testing the notifications reducer', () => {
   const payload = 'Error message';
-  const failedAction = { type: FETCH_LISTS_FAILED, payload };
+  const failedAction = { type: REQUEST_FAILED, payload };
 
   it('should be an object with properties indicating loading and error states by default', () => {
     expect(notifications(undefined, {}))
       .toStrictEqual(
-        expect.objectContaining({ ...UI }),
-      );
-  });
-
-  it('should update the loading state in the store when an async operation is started', () => {
-    const signUpAction = { type: CREATE_ACCOUNT_REQUEST };
-
-    expect(notifications(undefined, signUpAction))
-      .toStrictEqual(
-        expect.objectContaining({
-          ...UI,
-          isLoading: true,
-        }),
+        expect.objectContaining({ isLoading: false, error: null }),
       );
   });
 
@@ -42,7 +28,7 @@ describe('Testing the notifications reducer', () => {
 
     expect(notifications(mockStore, succesfulAction))
       .toStrictEqual(
-        expect.objectContaining({ ...UI }),
+        expect.objectContaining({ isLoading: false, error: null }),
       );
   });
 });

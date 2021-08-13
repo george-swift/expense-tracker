@@ -2,7 +2,7 @@ import { recordSaga } from '../../sagas';
 import * as api from '../../api';
 import { signIn } from '../../sagas/accountSagas';
 import { logInRequest } from '../../actions';
-import { LOG_IN_FAILED, LOG_IN_SUCCESSFUL } from '../../constants';
+import { REQUEST_FAILED, USER_AUTHENTICATED } from '../../constants';
 
 describe('Testing the account saga', () => {
   const payload = {
@@ -38,8 +38,10 @@ describe('Testing the account saga', () => {
     expect(api.signIn).toHaveBeenCalledWith(payload);
 
     expect(dispatched).toContainEqual({
-      type: LOG_IN_SUCCESSFUL,
-      payload: mockResponse,
+      type: USER_AUTHENTICATED,
+      payload: {
+        user: mockResponse,
+      },
     });
   });
 
@@ -55,7 +57,7 @@ describe('Testing the account saga', () => {
     expect(api.signIn).toHaveBeenCalledWith(payload);
 
     expect(dispatched).toContainEqual({
-      type: LOG_IN_FAILED,
+      type: REQUEST_FAILED,
       payload: error,
     });
   });

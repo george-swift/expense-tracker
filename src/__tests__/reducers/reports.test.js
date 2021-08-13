@@ -1,4 +1,4 @@
-import { SHOW_EXPENSES_SUCCESSFUL, SIGN_OUT_SUCCESSFUL } from '../../constants';
+import { SHOW_EXPENDITURE_SUCCESSFUL } from '../../constants';
 import reports from '../../reducers/reports';
 
 describe('Testing the reports reducer', () => {
@@ -18,7 +18,7 @@ describe('Testing the reports reducer', () => {
     },
   ];
 
-  const fetchAction = { type: SHOW_EXPENSES_SUCCESSFUL, payload };
+  const fetchAction = { type: SHOW_EXPENDITURE_SUCCESSFUL, payload };
 
   it('should be an empty array by default', () => {
     expect(reports(undefined, [])).toStrictEqual([]);
@@ -28,12 +28,5 @@ describe('Testing the reports reducer', () => {
     expect(reports(undefined, fetchAction)).toStrictEqual(
       expect.arrayContaining([...payload]),
     );
-  });
-
-  it('should return to default state when a user is signed out', () => {
-    const mockStore = reports(undefined, fetchAction);
-    const signOutAction = { type: SIGN_OUT_SUCCESSFUL };
-
-    expect(reports(mockStore, signOutAction)).toStrictEqual([]);
   });
 });

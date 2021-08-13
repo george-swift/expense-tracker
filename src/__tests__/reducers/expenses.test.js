@@ -1,7 +1,6 @@
 import {
   FETCH_EXPENSES_SUCCESSFUL, CREATE_EXPENSE_SUCCESSFUL,
   UPDATE_EXPENSE_SUCCESSFUL, DELETE_EXPENSE_SUCCESSFUL,
-  SIGN_OUT_SUCCESSFUL,
 } from '../../constants';
 
 import expenses from '../../reducers/expenses';
@@ -84,11 +83,5 @@ describe('Testing the expenses reducer', () => {
     expect(expenses(mockStore, onDelete)).toStrictEqual(
       expect.arrayContaining([expenseTwo]),
     );
-  });
-
-  it('should return to its default state when a user is signed out', () => {
-    const onSignOut = { type: SIGN_OUT_SUCCESSFUL };
-
-    expect(expenses(mockStore, onSignOut)).toStrictEqual([]);
   });
 });
