@@ -16,14 +16,14 @@ import {
 } from './expenseSagas';
 
 import {
-  CREATE_ACCOUNT_REQUEST, LOG_IN_REQUEST, EDIT_USER_REQUEST,
+  SIGN_UP_REQUEST, LOG_IN_REQUEST, EDIT_USER_REQUEST,
   USER_AUTHENTICATED, CREATE_LIST, UPDATE_LIST, DELETE_LIST,
   FETCH_EXPENSES, CREATE_EXPENSE, UPDATE_EXPENSE, DELETE_EXPENSE,
   SHOW_EXPENDITURE, SIGN_OUT_REQUEST,
 } from '../constants';
 
 export default function* rootSaga() {
-  yield takeEvery(CREATE_ACCOUNT_REQUEST, signUp);
+  yield takeEvery(SIGN_UP_REQUEST, signUp);
   yield takeEvery(LOG_IN_REQUEST, signIn);
   yield takeLatest(EDIT_USER_REQUEST, editAccount);
   yield takeLatest(SIGN_OUT_REQUEST, signOut);

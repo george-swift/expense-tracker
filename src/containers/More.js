@@ -21,11 +21,9 @@ const More = () => {
     } else toggleDisplay();
   };
 
-  const { id, username, email } = user;
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(editUserRequest(id, state));
+    dispatch(editUserRequest(user?.id, state));
     toggleDisplay();
   };
 
@@ -39,9 +37,9 @@ const More = () => {
           <p className="text-center fw-bold">
             <FaUserCircle className="avatar mb-2" />
             <br />
-            <span className="fs-5">{username}</span>
+            <span className="fs-5">{user?.username}</span>
             <br />
-            <span className="fs-6 fw-lighter text-secondary">{email}</span>
+            <span className="fs-6 fw-lighter text-secondary">{user?.email}</span>
           </p>
         </section>
         <section className="row editor">

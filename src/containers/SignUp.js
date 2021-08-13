@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FaCoins, FaSpinner } from 'react-icons/fa';
 import { useFormState, useVerify } from '../hooks';
-import { clearFlash, createAccountRequest } from '../actions';
+import { clearFlash, signUpRequest } from '../actions';
 import FlashMessage from '../components/FlashMessage';
 import Form from '../components/UserForm';
 
@@ -31,7 +31,7 @@ const SignUp = () => {
       const [,, pwd, cpwd] = e.target.children;
       validate(pwd, cpwd);
     } else {
-      dispatch(createAccountRequest(state));
+      dispatch(signUpRequest(state));
     }
   };
 

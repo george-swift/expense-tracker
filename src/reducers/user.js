@@ -16,7 +16,7 @@ export default function user(state = initialState, action) {
     case EDIT_USER_SUCCESSFUL:
       return {
         ...state,
-        user: { ...payload },
+        user: payload,
       };
 
     case SIGN_OUT_SUCCESSFUL:

@@ -1,17 +1,15 @@
 import {
-  CLEAR_NOTIFICATIONS, CREATE_ACCOUNT_REQUEST,
-  LOG_IN_REQUEST, SIGN_OUT_REQUEST,
-  CREATE_LIST, UPDATE_LIST, DELETE_LIST,
-  FETCH_EXPENSES, CREATE_EXPENSE, UPDATE_EXPENSE,
-  SHOW_EXPENDITURE, DELETE_EXPENSE, EDIT_USER_REQUEST,
+  CLEAR_NOTIFICATIONS, SIGN_UP_REQUEST, LOG_IN_REQUEST,
+  USER_AUTHENTICATED, EDIT_USER_REQUEST, SIGN_OUT_REQUEST,
+  CREATE_LIST, UPDATE_LIST, DELETE_LIST, FETCH_EXPENSES,
+  CREATE_EXPENSE, UPDATE_EXPENSE, SHOW_EXPENDITURE, DELETE_EXPENSE,
 } from '../constants';
 
-export const createAccountRequest = (data) => ({
-  type: CREATE_ACCOUNT_REQUEST,
-  payload: { user: data },
-});
+export const signUpRequest = (data) => ({ type: SIGN_UP_REQUEST, payload: { user: data } });
 
 export const logInRequest = (data) => ({ type: LOG_IN_REQUEST, payload: data });
+
+export const authUser = (data) => ({ type: USER_AUTHENTICATED, payload: data });
 
 export const editUserRequest = (id, data) => ({ type: EDIT_USER_REQUEST, payload: { id, data } });
 

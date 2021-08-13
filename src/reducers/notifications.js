@@ -6,7 +6,7 @@ export default function notifications(state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
-    case ux.CREATE_ACCOUNT_REQUEST:
+    case ux.SIGN_UP_REQUEST:
     case ux.LOG_IN_REQUEST:
     case ux.CREATE_LIST:
     case ux.FETCH_EXPENSES:
