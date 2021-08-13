@@ -6,15 +6,23 @@ const client = axios.create({
   withCredentials: true,
 });
 
+client.interceptors.request.use((config) => {
+  const storage = localStorage.getItem('exp_tracker');
+  const { token } = storage ? JSON.parse(storage) : { token: '' };
+  // eslint-disable-next-line no-param-reassign
+  config.headers.common.Authorization = `Bearer ${token}`;
+  return config;
+});
+
 export const createAccount = (user) => client.post('users', user);
 
-export const signIn = (user) => client.post('login', user);
+export const signIn = (user) => client.post('sessions', user);
 
 export const userDetails = (id) => client.get(`users/${id}`);
 
 export const editUserDetails = (id, params) => client.put(`users/${id}`, params);
 
-export const signOut = () => client.delete('logout');
+export const signOut = () => client.delete('sessions');
 
 export const fetchLists = (id) => client.get(`users/${id}/lists`);
 
