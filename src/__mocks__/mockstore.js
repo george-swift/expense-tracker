@@ -4,17 +4,16 @@ const mockStore = configureStore();
 
 const store = mockStore({
   user: {
-    loggedIn: true,
-    info: {
-      id: 12,
-      username: 'username',
-      email: 'email',
-    },
+    authenticated: true,
+    user: null,
   },
+  lists: [],
+  expenses: [],
   notifications: {
     isLoading: false,
     error: null,
   },
+  reports: [],
 });
 
 export default store;
