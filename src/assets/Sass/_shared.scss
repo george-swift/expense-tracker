@@ -1,0 +1,47 @@
+$sky-blue: #62b5e5;
+$dark-blue: #678990;
+$darker-blue: #1f5879;
+$light-green: #addc91;
+$dark-green: #198754;
+$smoke: #f8f9fa;
+
+@mixin transform {
+  transform: scale(1) translateY(-2.8px);
+  transition: 0.4s ease-in;
+}
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.color-mix {
+  background-color: $darker-blue;
+  color: white;
+}
+
+.color-mix-one {
+  background-color: $sky-blue;
+  color: white;
+}
+
+.color-mix-two {
+  background-color: $dark-blue;
+  color: white;
+}
+
+.color-mix-three {
+  background-color: $light-green;
+  color: white;
+}
+
+.font-mix-one {
+  font-weight: 600;
+  color: $smoke;
+}
+
+.font-pattern {
+  letter-spacing: -1px;
+  font-weight: 600;
+}

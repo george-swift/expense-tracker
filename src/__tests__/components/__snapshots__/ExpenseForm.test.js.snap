@@ -1,0 +1,210 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snapshot of the expense form component should render correctly for creating a new expense 1`] = `
+<form
+  className="row m-0 px-0"
+  onSubmit={[MockFunction]}
+>
+  <div
+    className="col-12 mb-3"
+  >
+    <label
+      htmlFor="Title*"
+    >
+      Title*
+    </label>
+    <input
+      className="form-control"
+      minLength={2}
+      name="title"
+      onChange={[MockFunction]}
+      required={true}
+      type="text"
+      value="Test expense"
+    />
+  </div>
+  <div
+    className="col-sm-4 mb-3"
+  >
+    <label
+      htmlFor="Amount* ($)"
+    >
+      Amount* ($)
+    </label>
+    <input
+      className="form-control"
+      min={0.01}
+      name="amount"
+      onChange={[MockFunction]}
+      required={true}
+      step={0.01}
+      type="number"
+      value=""
+    />
+  </div>
+  <div
+    className="col-sm-8 mb-3"
+  >
+    <label
+      htmlFor="Incurred On*"
+    >
+      Incurred On*
+    </label>
+    <input
+      className="form-control"
+      name="date"
+      onChange={[MockFunction]}
+      required={true}
+      type="date"
+      value="2021-08-01"
+    />
+  </div>
+  <div
+    className="col-12 mb-3"
+  >
+    <label
+      htmlFor="Notes"
+    >
+      Notes
+    </label>
+    <textarea
+      className="form-control"
+      maxLength={140}
+      name="notes"
+      onChange={[MockFunction]}
+      rows="3"
+      value=""
+    />
+  </div>
+  <div
+    className="col-12"
+  >
+    <button
+      className="btn w-100 mb-3"
+      type="submit"
+    >
+      Create new expense
+    </button>
+    <button
+      className="btn btn-warning w-100"
+      onClick={[Function]}
+      type="button"
+    >
+      Cancel
+    </button>
+  </div>
+</form>
+`;
+
+exports[`Snapshot of the expense form component should render correctly for editing an expense 1`] = `
+<form
+  className="row m-0 px-0"
+  onSubmit={[MockFunction]}
+>
+  <div
+    className="col-12 mb-3"
+  >
+    <label
+      htmlFor="Title*"
+    >
+      Title*
+    </label>
+    <input
+      className="form-control"
+      minLength={2}
+      name="title"
+      onChange={[MockFunction]}
+      required={true}
+      type="text"
+      value="Updated Test expense"
+    />
+  </div>
+  <div
+    className="col-5 mb-3"
+  >
+    <label
+      htmlFor="Amount* ($)"
+    >
+      Amount* ($)
+    </label>
+    <input
+      className="form-control"
+      min={0.01}
+      name="amount"
+      onChange={[MockFunction]}
+      required={true}
+      step={0.01}
+      type="number"
+      value={85}
+    />
+  </div>
+  <div
+    className="col-7 mb-3"
+  >
+    <label
+      htmlFor="Incurred On*"
+    >
+      Incurred On*
+    </label>
+    <input
+      className="form-control"
+      name="date"
+      onChange={[MockFunction]}
+      required={true}
+      type="date"
+      value="2021-08-01"
+    />
+  </div>
+  <div
+    className="col-12 mb-3"
+  >
+    <label
+      htmlFor="Notes"
+    >
+      Notes
+    </label>
+    <textarea
+      className="form-control"
+      maxLength={140}
+      name="notes"
+      onChange={[MockFunction]}
+      rows="3"
+      value="Adding notes this time"
+    />
+  </div>
+  <div
+    className="col-12 mb-2 px-0 text-end"
+  >
+    <button
+      className="btn btn-sm fw-bold"
+      type="submit"
+    >
+      Update
+    </button>
+    <button
+      className="btn btn-sm ms-3"
+      onClick={[Function]}
+      type="button"
+    >
+      <svg
+        fill="currentColor"
+        height="1em"
+        stroke="currentColor"
+        strokeWidth="0"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+        viewBox="0 0 448 512"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"
+        />
+      </svg>
+    </button>
+  </div>
+</form>
+`;
