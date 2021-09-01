@@ -1,0 +1,336 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+p { margin-bottom: 0; }
+
+ul {
+  list-style: none;
+  padding: 0 0.5rem;
+}
+
+@import 'shared';
+
+button[type=submit] {
+  background-color: skyblue;
+
+  &:hover {
+    @extend .color-mix;
+  }
+}
+
+.home {
+  @extend .center;
+
+  flex-direction: column;
+  height: 100vh;
+  background-color: skyblue;
+}
+
+.home-btn {
+  width: 250px;
+  margin-bottom: 1rem;
+  color: $darker-blue;
+  border: 1px solid $darker-blue;
+  border-radius: 20rem;
+
+  &:first-of-type {
+    @extend .color-mix;
+  }
+
+  &:hover {
+    @include transform;
+  }
+}
+
+.brand {
+  margin-bottom: 1.5rem;
+  text-align: center;
+
+  h1,
+  p {
+    color: $darker-blue;
+    margin-bottom: 1rem;
+  }
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.page-loading {
+  text-align: center;
+  animation: spin 1.5s linear infinite;
+  font-size: 300%;
+}
+
+header {
+  @extend .center;
+  @extend .color-mix-one;
+
+  height: 10vh;
+}
+
+.wrap-theme {
+  @extend .center;
+
+  justify-content: space-between;
+  margin-bottom: 0;
+
+  a { color: white; }
+}
+
+.theme {
+  font-size: calc(1.3rem + 0.6vw);
+  letter-spacing: -1px;
+  text-align: center;
+}
+
+.theme,
+.form-label {
+  font-weight: bold;
+}
+
+.wrap-page {
+  height: 79vh;
+  overflow-y: scroll;
+  background-color: #e5e5e5;
+
+  form {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  h3 {
+    color: $dark-blue;
+    margin: 1rem 0;
+    text-align: center;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .wrap-page form {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.card {
+  border-radius: 0;
+  text-align: center;
+
+  h5 {
+    @extend .font-pattern;
+
+    color: $dark-blue;
+  }
+
+  p {
+    @extend .center;
+  }
+
+  .btn {
+    padding: 0.16rem 0.32rem 0.2rem;
+    font-size: 0.65rem;
+    margin-right: 0.5rem;
+    background-color: $darker-blue;
+    color: $light-green;
+    border: 2px solid $light-green;
+
+    &:hover {
+      @extend .color-mix-three;
+    }
+  }
+}
+
+.lists {
+  margin: 1.5rem 0;
+  padding: 0 1.2rem;
+
+  h3 {
+    color: $dark-blue;
+    letter-spacing: -1px;
+  }
+
+  li {
+    padding: 0;
+    margin-bottom: 1rem;
+    margin-right: 0.5rem;
+    background-color: whitesmoke;
+  }
+}
+
+.list {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.list-btn {
+  padding: 0.3rem 0.6rem;
+  border-radius: 0 0.25rem 0;
+  font-weight: 300;
+  font-size: 0.7rem;
+
+  @extend .color-mix;
+}
+
+.list-name {
+  display: flex;
+  align-items: center;
+
+  span {
+    color: $dark-blue;
+  }
+}
+
+.edit {
+  background-color: transparent;
+  border: transparent;
+  color: $darker-blue;
+}
+
+.track-it {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 0.5rem;
+  margin-bottom: 1rem;
+
+  .btn-sm {
+    display: flex;
+    align-items: center;
+
+    @extend .color-mix;
+
+    letter-spacing: -0.8px;
+
+    &:hover {
+      @extend .color-mix-one;
+    }
+  }
+}
+
+.expense {
+  background-color: whitesmoke;
+  border: 1px solid $sky-blue;
+  border-radius: 5px;
+  padding: 0.5rem 0.8rem;
+  margin-bottom: 1rem;
+
+  .details {
+    display: flex;
+    align-items: flex-end;
+  }
+
+  small {
+    font-style: italic;
+    color: #6c757d;
+  }
+
+  .title {
+    @extend .font-pattern;
+  }
+}
+
+tbody {
+  color: $dark-blue;
+}
+
+.overview-header {
+  padding: 1rem;
+  background-color: white;
+
+  h3 {
+    letter-spacing: -0.75px;
+    font-weight: 600;
+  }
+
+  div {
+    display: flex;
+    justify-content: center;
+  }
+
+  p {
+    @extend .color-mix;
+
+    padding: 2rem;
+    border: 3px solid $light-green;
+    text-align: center;
+  }
+}
+
+.user-info,
+.editor {
+  height: 50%;
+  overflow-y: scroll;
+}
+
+.user-info {
+  @extend .center;
+  @extend .color-mix-one;
+
+  border-top: 1px solid $sky-blue;
+}
+
+.avatar { font-size: 7.5rem; }
+
+.editor {
+  margin: 0;
+  padding-top: 2rem;
+  background-color: white;
+  color: $dark-blue;
+
+  h4 {
+    @extend .center;
+
+    text-align: center;
+  }
+}
+
+footer {
+  @extend .color-mix-two;
+
+  height: 11vh;
+
+  ul {
+    align-items: center;
+    height: 100%;
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .footer ul {
+    height: 50%;
+  }
+}
+
+.nav-item {
+  @extend .center;
+
+  background-color: $dark-blue;
+  height: 100%;
+
+  &:hover {
+    @extend .color-mix-one;
+  }
+}
+
+.nav-link {
+  color: whitesmoke;
+
+  &:hover {
+    @include transform;
+
+    color: white;
+  }
+}
