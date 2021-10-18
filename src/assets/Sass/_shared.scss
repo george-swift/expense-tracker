@@ -1,13 +1,28 @@
-$sky-blue: #62b5e5;
-$dark-blue: #678990;
-$darker-blue: #1f5879;
-$light-green: #addc91;
-$dark-green: #198754;
 $smoke: #f8f9fa;
+$black: #212529;
+$grey: #878686;
+$smoke: #f7f4f7;
+$blue: #0d6efd;
+$light-purple: #8f659a;
+$purple: #42224a;
+$orange: #ef8767;
+$fontPoppins: 'Poppins', sans-serif;
+$dark-border: 1px solid rgba(0, 0, 0, 0.125);
+$fz-sm: 0.825rem;
 
 @mixin transform {
   transform: scale(1) translateY(-2.8px);
   transition: 0.4s ease-in;
+}
+
+.mw-container { max-width: 1050px; }
+
+.mw-form {
+  max-width: 500px;
+
+  label {
+    font-size: $fz-sm;
+  }
 }
 
 .center {
@@ -17,31 +32,21 @@ $smoke: #f8f9fa;
 }
 
 .color-mix {
-  background-color: $darker-blue;
+  background-color: $light-purple;
   color: white;
 }
 
 .color-mix-one {
-  background-color: $sky-blue;
+  background-color: $purple;
   color: white;
 }
 
 .color-mix-two {
-  background-color: $dark-blue;
-  color: white;
-}
-
-.color-mix-three {
-  background-color: $light-green;
+  background-color: $orange;
   color: white;
 }
 
 .font-mix-one {
   font-weight: 600;
   color: $smoke;
-}
-
-.font-pattern {
-  letter-spacing: -1px;
-  font-weight: 600;
 }
