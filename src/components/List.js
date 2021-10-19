@@ -69,7 +69,7 @@ const List = ({
           <div className="">
             <input
               type="text"
-              className="form-control form-control-sm"
+              className="form-control form-control-sm cat-input"
               name="name"
               value={state.name}
               onChange={handleChange}

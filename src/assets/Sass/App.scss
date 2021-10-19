@@ -222,10 +222,6 @@ header {
   flex-direction: column;
   padding: 1rem;
 
-  input {
-    margin: 0 auto 1.5rem;
-  }
-
   .list-btn {
     &:first-of-type {
       min-width: 120px;
@@ -235,6 +231,10 @@ header {
       min-width: 65px;
     }
   }
+}
+
+.cat-input {
+  margin: 0 auto 1.5rem;
 }
 
 .edit {
