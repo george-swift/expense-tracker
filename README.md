@@ -10,6 +10,7 @@
 - Using a state management container in a React application
 - Modern redux with Redux toolkit
 - Managing async workflow with Redux Sagas
+- Basic data visualisation
 - Functional Programming
 - Meeting model client requirements
 
