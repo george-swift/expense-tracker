@@ -21,7 +21,7 @@ const Nav = () => (
           <li className="nav-item">
             <Link className="nav-link" to="/et">
               <span className="p-1 me-3"><FaList /></span>
-              Manage
+              Home
             </Link>
           </li>
           <li className="nav-item">
