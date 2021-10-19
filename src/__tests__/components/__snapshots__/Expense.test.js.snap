@@ -9,7 +9,7 @@ exports[`Snapshot of the Expense component should render correctly 1`] = `
   >
     <p>
       <span
-        className="fw-bold fs-3"
+        className="fs-4 amount"
       >
         $25
       </span>
@@ -22,12 +22,14 @@ exports[`Snapshot of the Expense component should render correctly 1`] = `
       className="align-self-center ms-3 flex-grow-1"
     >
       <span
-        className="title"
+        className="fw-bold"
       >
         Test expense
       </span>
       <br />
-      <span>
+      <span
+        className="notes"
+      >
         ...
       </span>
     </p>
