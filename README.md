@@ -43,6 +43,10 @@ _Visualisation of outcomes with Chart.js_
 ## Getting Started
 - Clone this project by running `git clone https://github.com/george-swift/expense-tracker.git`
 - Run `npm install` to install the required dependencies.
+- Clone the [back end](https://github.com/george-swift/expense-tracker-api) to allow CORS. In `config/initializers/cors.rb`,
+change `origins` to `http://localhost:FRONTENDPORT`.
+- Within this frontend app, navigate to `src/constants` and set the `API_BASE_URL` to `http://localhost:BACKENDPORT`.
+- Start the backend server and run `npm start` to fire up a local server.
 - To get a production bundle, run `npm run build`
 
 ## Testing
