@@ -1,30 +1,47 @@
-import { useCallback, useEffect, useMemo } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { FaSpinner } from 'react-icons/fa';
 import { useVerify } from '../hooks';
-import { showExpenditure } from '../actions';
+import { dataList, defaultColor } from '../constants';
+import buildChart from '../utils';
 import Header from '../components/Header';
 import FlashMessage from '../components/FlashMessage';
 
 const Reports = () => {
-  const {
-    user, isLoading, error, dispatch,
-  } = useVerify();
-
-  useEffect(() => {
-    if (user?.id !== undefined) dispatch(showExpenditure(user.id));
-  }, []);
-
+  const chartContainer = useRef(null);
+  const { isLoading, error } = useVerify();
   const lists = useSelector((state) => state.lists);
   const expenditure = useSelector((state) => state.reports);
 
-  const totalExpenses = useMemo(() => {
-    if (expenditure.length < 1) return 0;
-    return expenditure
-      .reduce((total, expense) => total + expense.amount, 0).toLocaleString();
+  const allCategories = lists?.map(({ id, name }) => {
+    const total = expenditure
+      ?.filter((expense) => expense.list_id === id)
+      .reduce((sum, expense) => sum + expense.amount, 0);
+    return { name, total };
+  });
+
+  const initChartData = useCallback(() => {
+    const ctx = chartContainer?.current;
+    const chartType = 'doughnut';
+    const labels = allCategories.map(({ name }) => name);
+    const data = allCategories.map(({ total }) => total);
+
+    const backgroundColor = labels
+      .map((category) => dataList
+        .find(({ value }) => category === value)?.color ?? defaultColor);
+
+    const config = {
+      ctx, labels, data, backgroundColor, chartType,
+    };
+
+    return config;
   }, [expenditure]);
 
-  const listName = useCallback((id) => lists.find((list) => list.id === id).name, [lists]);
+  useEffect(() => {
+    const config = initChartData();
+    const chart = buildChart(config);
+    return () => chart.destroy();
+  }, []);
 
   return (
     <>
@@ -35,52 +52,16 @@ const Reports = () => {
         {error !== null && (
           <FlashMessage>{ error }</FlashMessage>
         )}
-        <section className="overview-header">
-          <h3>Overview of expenditure</h3>
-          <hr />
-          <div className="mx-0">
-            <p>
-              <span>You&apos;ve spent</span>
-              <br />
-              <span className="display-3">
-                $
-                {totalExpenses}
-              </span>
-              <br />
-              <span>so far</span>
-            </p>
+        <section className="outcome">
+          <h3>Total Outcome</h3>
+          <div>
+            {isLoading
+              ? <p className="page-loading"><FaSpinner /></p>
+              : <canvas ref={chartContainer} />}
           </div>
         </section>
-        <div className="mt-3 bg-white">
-          {isLoading ? (
-            <p className="page-loading"><FaSpinner /></p>
-          ) : (
-            <table className="table table-hover bg-light">
-              <thead className="color-mix">
-                <tr>
-                  <th scope="col">Date</th>
-                  <th scope="col">Title</th>
-                  <th scope="col">List</th>
-                  <th scope="col">Amount</th>
-                </tr>
-              </thead>
-              <tbody>
-                {expenditure[0]?.id ? expenditure.map((expense) => (
-                  <tr key={expense.id}>
-                    <td>{expense.date}</td>
-                    <td>{expense.title}</td>
-                    <td>{listName(expense.list_id)}</td>
-                    <td className="fw-bold">{`$${expense.amount}`}</td>
-                  </tr>
-                )) : (
-                  <tr>
-                    <th scope="row">N/A</th>
-                    <td colSpan="4">No record of expenses available at this time</td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
-          )}
+        <div className="tool-tip">
+          <small>* Refresh page to reflect recent changes</small>
         </div>
       </div>
     </>

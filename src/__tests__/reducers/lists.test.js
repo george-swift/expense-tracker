@@ -3,7 +3,7 @@ import {
   UPDATE_LIST_SUCCESSFUL, DELETE_LIST_SUCCESSFUL,
 } from '../../constants';
 
-import lists from '../../reducers/lists';
+import lists from '../../slice/lists';
 
 describe('Testing the lists reducer', () => {
   const listOne = {

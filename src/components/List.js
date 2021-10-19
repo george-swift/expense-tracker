@@ -1,5 +1,9 @@
 import Proptypes from 'prop-types';
-import { FaPencilAlt, FaTrash } from 'react-icons/fa';
+import { IoFastFoodSharp } from 'react-icons/io5';
+import { GiWorld, GiTransportationRings, GiPayMoney } from 'react-icons/gi';
+import {
+  FaPencilAlt, FaShoppingCart, FaTrash, FaFirstAid, FaPlug,
+} from 'react-icons/fa';
 import { useFormState } from '../hooks';
 
 const List = ({
@@ -8,6 +12,18 @@ const List = ({
   const {
     state, handleChange, visible, toggleDisplay, reset,
   } = useFormState({ name });
+
+  const placeholder = (name) => {
+    switch (name) {
+      case 'Food & Drinks': return <IoFastFoodSharp />;
+      case 'Shopping': return <FaShoppingCart />;
+      case 'Healthcare': return <FaFirstAid />;
+      case 'Electricity': return <FaPlug />;
+      case 'Transport': return <GiTransportationRings />;
+      case 'Travel': return <GiWorld />;
+      default: return <GiPayMoney />;
+    }
+  };
 
   const edit = () => {
     if (visible) {
@@ -25,17 +41,18 @@ const List = ({
   };
 
   return (
-    <li className="col-12">
+    <li className="pt-3 pb-4">
       <div className="list">
-        <p className="list-name">
+        <span className="fs-2">{placeholder(name)}</span>
+        <p className="list-name mb-3">
+          <span className="ms-4 p-1">{name}</span>
           <button
             type="button"
-            className="btn edit list-btn"
+            className="btn ms-1 edit"
             onClick={edit}
           >
             <FaPencilAlt />
           </button>
-          <span className="ms-4 p-1">{name}</span>
         </p>
         {!visible && (
           <button
@@ -48,22 +65,22 @@ const List = ({
         )}
       </div>
       {visible && (
-        <form className="row mx-0 my-2 p-2" onSubmit={update}>
-          <div className="col-md-6">
+        <form className="cat-editor" onSubmit={update}>
+          <div className="">
             <input
               type="text"
-              className="form-control form-control-sm mb-3"
+              className="form-control form-control-sm cat-input"
               name="name"
               value={state.name}
               onChange={handleChange}
             />
           </div>
-          <div className="col-md-6 mb-2 text-end">
+          <div className="text-center">
             <button
               type="submit"
-              className="btn btn-sm fw-bold w-25 list-btn"
+              className="btn btn-sm fw-bold list-btn"
             >
-              Update
+              Rename
             </button>
             <button
               type="button"

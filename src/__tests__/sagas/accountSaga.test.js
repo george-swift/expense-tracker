@@ -2,7 +2,7 @@ import { recordSaga } from '../../sagas';
 import * as api from '../../api';
 import { signIn } from '../../sagas/accountSagas';
 import { logInRequest } from '../../actions';
-import { REQUEST_FAILED, USER_AUTHENTICATED } from '../../constants';
+import { REQUEST_FAILED, AUTHENTICATE_USER } from '../../constants';
 
 describe('Testing the account saga', () => {
   const payload = {
@@ -38,7 +38,7 @@ describe('Testing the account saga', () => {
     expect(api.signIn).toHaveBeenCalledWith(payload);
 
     expect(dispatched).toContainEqual({
-      type: USER_AUTHENTICATED,
+      type: AUTHENTICATE_USER,
       payload: {
         user: mockResponse,
       },

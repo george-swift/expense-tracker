@@ -1,5 +1,5 @@
 import { FETCH_LISTS_SUCCESSFUL, REQUEST_FAILED } from '../../constants';
-import notifications from '../../reducers/notifications';
+import notifications from '../../slice/notifications';
 
 describe('Testing the notifications reducer', () => {
   const payload = 'Error message';

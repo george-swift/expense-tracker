@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { FaCoins, FaSpinner } from 'react-icons/fa';
 import { useEffect } from 'react';
 import { useFormState, useVerify } from '../hooks';
-import { clearFlash, logInRequest } from '../actions';
+import { clearNotifications, logInRequest } from '../actions';
 import FlashMessage from '../components/FlashMessage';
 import { userFormFields } from '../constants';
 
@@ -21,26 +21,24 @@ const LogIn = () => {
     dispatch(logInRequest(state));
   };
 
-  const switchAction = () => { if (error !== null) dispatch(clearFlash()); };
+  const switchAction = () => {
+    if (error !== null) dispatch(clearNotifications());
+  };
 
   const { usernameField, passwordField } = userFormFields;
 
   return (
     <div className="container pt-5 row mx-0">
-      {error !== null && (
-        <FlashMessage>
-          { error }
-        </FlashMessage>
-      )}
+      {error !== null && <FlashMessage>{ error }</FlashMessage>}
 
-      <div className="col-md-4 offset-md-4">
+      <div className="mw-md mx-auto">
         <Link to="/" className="text-secondary">
           <FaCoins className="display-6 mb-3" />
         </Link>
         <h2 className="mb-4">Log in to Expense Tracker</h2>
 
         {isLoading
-          ? (<p className="page-loading"><FaSpinner /></p>)
+          ? <p className="page-loading"><FaSpinner /></p>
           : (
             <form onSubmit={handleSubmit}>
               <div className="mb-3">

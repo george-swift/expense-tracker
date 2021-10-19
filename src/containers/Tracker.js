@@ -7,6 +7,7 @@ import Header from '../components/Header';
 import FlashMessage from '../components/FlashMessage';
 import Form from '../components/ExpenseForm';
 import Expense from '../components/Expense';
+import { getExpenses } from '../selectors';
 
 const Tracker = () => {
   const {
@@ -17,7 +18,7 @@ const Tracker = () => {
   const listName = searchParams.get('list');
   const listId = searchParams.get('id');
 
-  const expenses = useSelector((state) => (state.expenses.length < 1 ? null : state.expenses));
+  const expenses = useSelector(getExpenses);
 
   const {
     state = {}, handleChange, visible, toggleDisplay, reset,
@@ -47,13 +48,13 @@ const Tracker = () => {
           <FaChartLine />
         </span>
       </Header>
-      <div className="wrap-page">
+      <div className="wrap-page mw-container mx-auto">
         {error !== null && (<FlashMessage>{ error }</FlashMessage>)}
         <h3>{listName}</h3>
-        <hr />
-        <div className="row mx-0">
+
+        <div className="mt-4 mx-auto">
           {visible && (
-            <div className="col-lg-6 mb-3">
+            <div className="mb-3">
               <Form
                 title={state.title || ''}
                 amount={state.amount || ''}
@@ -65,7 +66,7 @@ const Tracker = () => {
               />
             </div>
           )}
-          <div className="col-lg-6">
+          <div>
             {!visible && (
               <div className="track-it">
                 <button type="button" className="btn btn-sm" onClick={() => navigate('/et')}>
@@ -80,17 +81,15 @@ const Tracker = () => {
             {isLoading ? (
               <p className="page-loading"><FaSpinner /></p>
             ) : (
-              <ul className="mt-4">
-                {expenses?.map(({
-                  id, title, amount, date, notes,
-                }) => (
+              <ul className="all-expenses mt-4 pt-3">
+                {expenses?.map((expense) => (
                   <Expense
-                    key={id}
-                    id={id}
-                    title={title}
-                    amount={amount}
-                    date={date}
-                    notes={notes}
+                    key={expense.id}
+                    id={expense.id}
+                    title={expense.title}
+                    amount={expense.amount}
+                    date={expense.date}
+                    notes={expense.notes}
                     onUpdate={handleUpdate}
                     onDelete={handleDelete}
                   />

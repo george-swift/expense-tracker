@@ -7,6 +7,8 @@ import {
 import Header from '../components/Header';
 import FlashMessage from '../components/FlashMessage';
 import List from '../components/List';
+import { dataList } from '../constants';
+import { getLists } from '../selectors';
 
 const Lists = () => {
   const {
@@ -15,9 +17,9 @@ const Lists = () => {
 
   const [handle] = user?.username.split(/\s/) ?? '';
 
-  const lists = useSelector((state) => (state.lists.length < 1 ? null : state.lists));
-
+  const lists = useSelector(getLists);
   const listNames = lists?.map((list) => list.name);
+  const availableOptions = dataList.filter(({ value }) => !listNames?.includes(value));
 
   const {
     state = {}, handleChange, visible, toggleDisplay, reset,
@@ -53,7 +55,7 @@ const Lists = () => {
   return (
     <>
       <Header>
-        <span className="theme">Manage Lists</span>
+        <span className="theme">Home</span>
       </Header>
       <div className="wrap-page">
         {error !== null && (
@@ -65,10 +67,10 @@ const Lists = () => {
         <section className="col-lg-4 offset-lg-4 mb-3">
           <div className="card">
             <div className="card-body">
-              <h5 className="card-title">
-                Welcome&nbsp;
-                {handle}
-              </h5>
+              <h3 className="card-title mb-3 fw-normal">
+                Hello,&nbsp;
+                <span className="fs-4 fw-bold">{handle}</span>
+              </h3>
               <p className="card-text">
                 <button
                   type="button"
@@ -77,7 +79,7 @@ const Lists = () => {
                 >
                   <FaPlus />
                 </button>
-                <span>Add a list to track your expenses</span>
+                <span>{visible ? 'Click to close' : 'Add category'}</span>
               </p>
             </div>
           </div>
@@ -87,26 +89,18 @@ const Lists = () => {
 
         {visible && (
           <form className="col-lg-4 offset-lg-4" onSubmit={handleSubmit}>
-            <div className="input-group input-group-sm mb-3">
-              <span className="input-group-text fw-bold">Name</span>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="e.g Utilities, Transport"
-                name="name"
-                value={state.name || ''}
-                onChange={handleChange}
-                minLength={3}
-                maxLength={40}
-                required
-              />
-              <button className="btn" type="submit">Create List</button>
-            </div>
+            <input className="me-3" list="categories" name="name" onChange={handleChange} />
+            <datalist id="categories">
+              {availableOptions.map(({ value, color }) => (
+                <option key={color} value={value} aria-label="category-name" />
+              ))}
+            </datalist>
+            <button className="btn btn-sm" type="submit">Create</button>
           </form>
         )}
 
-        <ul className="row lists">
-          <h3>Current Lists</h3>
+        <ul className="lists">
+          <h4>Categories</h4>
           {lists?.map(({ id, name }) => (
             <List
               key={id}
@@ -117,7 +111,7 @@ const Lists = () => {
               deleteList={handleDelete}
             />
           )) ?? (
-            <li className="col-lg-3">
+            <li>
               <p className="mb-0 fst-italic">No lists of expenses available</p>
             </li>
           )}
