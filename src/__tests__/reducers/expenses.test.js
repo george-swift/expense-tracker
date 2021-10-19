@@ -3,7 +3,7 @@ import {
   UPDATE_EXPENSE_SUCCESSFUL, DELETE_EXPENSE_SUCCESSFUL,
 } from '../../constants';
 
-import expenses from '../../reducers/expenses';
+import expenses from '../../slice/expenses';
 
 describe('Testing the expenses reducer', () => {
   const expenseOne = {

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { getUser, getNotifications } from '../selectors';
 
 export const useFormState = (data) => {
   const [state, setState] = useState(data);
@@ -38,8 +39,8 @@ export const useVerify = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { authenticated: loggedIn, user } = useSelector((state) => state.user);
-  const { isLoading, error } = useSelector((state) => state.notifications);
+  const { authenticated: loggedIn, user } = useSelector(getUser);
+  const { isLoading, error } = useSelector(getNotifications);
 
   return {
     loggedIn,

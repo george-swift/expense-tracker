@@ -39,7 +39,7 @@ const More = () => {
             <br />
             <span className="fs-5">{user?.username}</span>
             <br />
-            <span className="fs-6 fw-lighter text-secondary">{user?.email}</span>
+            <span className="fs-6 fw-lighter">{user?.email}</span>
           </p>
         </section>
         <section className="row editor">

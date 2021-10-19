@@ -1,10 +1,10 @@
 import {
-  USER_AUTHENTICATED,
+  AUTHENTICATE_USER,
   EDIT_USER_SUCCESSFUL,
   SIGN_OUT_SUCCESSFUL,
 } from '../../constants';
 
-import user from '../../reducers/user';
+import user from '../../slice/user';
 
 describe('Testing the user reducer', () => {
   const payload = {
@@ -13,7 +13,7 @@ describe('Testing the user reducer', () => {
     email: 'testuser@test.com',
   };
 
-  const authAction = { type: USER_AUTHENTICATED, payload };
+  const authAction = { type: AUTHENTICATE_USER, payload };
 
   const mockStore = user(undefined, authAction);
 
@@ -22,10 +22,6 @@ describe('Testing the user reducer', () => {
       authenticated: false,
       user: null,
     }));
-  });
-
-  it('should update state of the store when on successful sign up or sign in', () => {
-    expect(user(undefined, authAction)).toStrictEqual(expect.objectContaining({ ...payload }));
   });
 
   it('should update state of the store when users successfully edit their profile', () => {

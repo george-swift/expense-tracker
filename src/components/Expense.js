@@ -31,14 +31,14 @@ const Expense = ({
     <li className="expense">
       <div className="details">
         <p>
-          <span className="fw-bold fs-3">{`$${amount}`}</span>
+          <span className="fs-4 amount">{`$${amount}`}</span>
           <br />
           <small>{date}</small>
         </p>
         <p className="align-self-center ms-3 flex-grow-1">
-          <span className="title">{title}</span>
+          <span className="fw-bold">{title}</span>
           <br />
-          <span>{notes || '...'}</span>
+          <span className="notes">{notes || '...'}</span>
         </p>
         <button className="mb-1 edit" type="button" onClick={edit}>
           <FaPencilAlt />
@@ -73,8 +73,6 @@ Expense.propTypes = {
   onDelete: PropTypes.func.isRequired,
 };
 
-Expense.defaultProps = {
-  notes: '',
-};
+Expense.defaultProps = { notes: '' };
 
 export default Expense;

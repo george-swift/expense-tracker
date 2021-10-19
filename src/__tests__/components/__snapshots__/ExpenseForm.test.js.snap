@@ -2,7 +2,7 @@
 
 exports[`Snapshot of the expense form component should render correctly for creating a new expense 1`] = `
 <form
-  className="row m-0 px-0"
+  className="row mw-form mx-auto px-1"
   onSubmit={[MockFunction]}
 >
   <div
@@ -14,7 +14,7 @@ exports[`Snapshot of the expense form component should render correctly for crea
       Title*
     </label>
     <input
-      className="form-control"
+      className="w-100 form-control"
       minLength={2}
       name="title"
       onChange={[MockFunction]}
@@ -32,7 +32,7 @@ exports[`Snapshot of the expense form component should render correctly for crea
       Amount* ($)
     </label>
     <input
-      className="form-control"
+      className="w-100 form-control"
       min={0.01}
       name="amount"
       onChange={[MockFunction]}
@@ -51,7 +51,7 @@ exports[`Snapshot of the expense form component should render correctly for crea
       Incurred On*
     </label>
     <input
-      className="form-control"
+      className="w-100 form-control"
       name="date"
       onChange={[MockFunction]}
       required={true}
@@ -68,7 +68,7 @@ exports[`Snapshot of the expense form component should render correctly for crea
       Notes
     </label>
     <textarea
-      className="form-control"
+      className="w-100 form-control"
       maxLength={140}
       name="notes"
       onChange={[MockFunction]}
@@ -86,7 +86,7 @@ exports[`Snapshot of the expense form component should render correctly for crea
       Create new expense
     </button>
     <button
-      className="btn btn-warning w-100"
+      className="btn w-100 color-mix-two"
       onClick={[Function]}
       type="button"
     >
@@ -98,7 +98,7 @@ exports[`Snapshot of the expense form component should render correctly for crea
 
 exports[`Snapshot of the expense form component should render correctly for editing an expense 1`] = `
 <form
-  className="row m-0 px-0"
+  className="row mw-form mx-auto px-1"
   onSubmit={[MockFunction]}
 >
   <div
@@ -110,7 +110,7 @@ exports[`Snapshot of the expense form component should render correctly for edit
       Title*
     </label>
     <input
-      className="form-control"
+      className="w-100 form-control"
       minLength={2}
       name="title"
       onChange={[MockFunction]}
@@ -128,7 +128,7 @@ exports[`Snapshot of the expense form component should render correctly for edit
       Amount* ($)
     </label>
     <input
-      className="form-control"
+      className="w-100 form-control"
       min={0.01}
       name="amount"
       onChange={[MockFunction]}
@@ -147,7 +147,7 @@ exports[`Snapshot of the expense form component should render correctly for edit
       Incurred On*
     </label>
     <input
-      className="form-control"
+      className="w-100 form-control"
       name="date"
       onChange={[MockFunction]}
       required={true}
@@ -164,7 +164,7 @@ exports[`Snapshot of the expense form component should render correctly for edit
       Notes
     </label>
     <textarea
-      className="form-control"
+      className="w-100 form-control"
       maxLength={140}
       name="notes"
       onChange={[MockFunction]}
