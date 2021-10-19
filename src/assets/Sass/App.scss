@@ -145,7 +145,7 @@ header {
     @extend .color-mix;
 
     padding: 0.3rem 0.5rem;
-    font-size: 0.65rem;
+    font-size: $fz-sm;
     margin-right: 0.75rem;
     border: 1px solid $purple;
     transition: transform 0.2s;
@@ -157,7 +157,7 @@ header {
     }
 
     &:focus {
-      box-shadow: 0 0 0 0.2rem $orange;
+      box-shadow: 0 0 0 0.2rem $smoke;
     }
   }
 }
@@ -191,11 +191,6 @@ header {
     margin-right: 0.5rem;
     background-color: $smoke;
   }
-
-  &::after {
-    content: '';
-    flex: auto;
-  }
 }
 
 .list {
@@ -209,7 +204,7 @@ header {
   min-width: 170px;
   border-radius: 0 0.25rem 0;
   font-weight: 300;
-  font-size: 0.7rem;
+  font-size: $fz-md;
 
   @extend .color-mix;
 }
@@ -246,7 +241,7 @@ header {
   border-radius: 0 0.25rem 0;
   border: transparent;
   color: $purple;
-  font-size: 0.8rem;
+  font-size: $fz-lg;
 }
 
 .track-it {
@@ -288,10 +283,10 @@ header {
 
     small {
       color: $grey;
-      font-size: 0.7rem;
+      font-size: $fz-md;
     }
 
-    .notes { font-size: $fz-sm; }
+    .notes { font-size: $fz-xs; }
   }
 }
 
@@ -312,7 +307,7 @@ header {
 .tool-tip {
   text-align: center;
   color: $grey;
-  font-size: $fz-sm;
+  font-size: $fz-xs;
 }
 
 .user-info,
@@ -372,7 +367,7 @@ header {
   &:hover {
     @extend .color-mix;
 
-    font-size: 1.2rem;
+    font-size: $fz-xl;
   }
 }
 

@@ -7,8 +7,12 @@ $light-purple: #8f659a;
 $purple: #42224a;
 $orange: #ef8767;
 $fontPoppins: 'Poppins', sans-serif;
+$fz-xl: 1.2rem;
+$fz-lg: 0.8rem;
+$fz-md: 0.7rem;
+$fz-sm: 0.65rem;
+$fz-xs: 0.825rem;
 $dark-border: 1px solid rgba(0, 0, 0, 0.125);
-$fz-sm: 0.825rem;
 
 @mixin transform {
   transform: scale(1) translateY(-2.8px);
@@ -17,11 +21,13 @@ $fz-sm: 0.825rem;
 
 .mw-container { max-width: 1050px; }
 
+.mw-md { max-width: 500px; }
+
 .mw-form {
-  max-width: 500px;
+  @extend .mw-md;
 
   label {
-    font-size: $fz-sm;
+    font-size: $fz-xs;
   }
 }
 
