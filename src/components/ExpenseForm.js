@@ -6,7 +6,6 @@ const Form = ({
   id, title, amount, date, notes, handleChange,
   submitAction, cancelAction, deleteAction,
 }) => {
-  const hint = typeof amount === 'string';
   const {
     titleField,
     amountField,
@@ -14,13 +13,15 @@ const Form = ({
     notesField,
   } = expenseFormFields;
 
+  const newExpense = id <= 0;
+
   return (
-    <form className="row m-0 px-0" onSubmit={submitAction}>
+    <form className="row mw-form mx-auto px-1" onSubmit={submitAction}>
       <div className="col-12 mb-3">
         <label htmlFor={titleField}>{titleField}</label>
         <input
           type="text"
-          className="form-control"
+          className="w-100 form-control"
           name="title"
           value={title}
           onChange={handleChange}
@@ -28,11 +29,11 @@ const Form = ({
           required
         />
       </div>
-      <div className={`${hint ? 'col-sm-4' : 'col-5'} mb-3`}>
+      <div className={`${newExpense ? 'col-sm-4' : 'col-5'} mb-3`}>
         <label htmlFor={amountField}>{amountField}</label>
         <input
           type="number"
-          className="form-control"
+          className="w-100 form-control"
           name="amount"
           value={amount}
           onChange={handleChange}
@@ -41,11 +42,11 @@ const Form = ({
           required
         />
       </div>
-      <div className={`${hint ? 'col-sm-8' : 'col-7'} mb-3`}>
+      <div className={`${newExpense ? 'col-sm-8' : 'col-7'} mb-3`}>
         <label htmlFor={dateField}>{dateField}</label>
         <input
           type="date"
-          className="form-control"
+          className="w-100 form-control"
           name="date"
           value={date}
           onChange={handleChange}
@@ -55,7 +56,7 @@ const Form = ({
       <div className="col-12 mb-3">
         <label htmlFor={notesField}>{notesField}</label>
         <textarea
-          className="form-control"
+          className="w-100 form-control"
           name="notes"
           rows="3"
           value={notes}
@@ -63,7 +64,7 @@ const Form = ({
           maxLength={140}
         />
       </div>
-      {hint ? (
+      {newExpense ? (
         <div className="col-12">
           <button
             type="submit"
@@ -73,7 +74,7 @@ const Form = ({
           </button>
           <button
             type="button"
-            className="btn btn-warning w-100"
+            className="btn w-100 color-mix-two"
             onClick={cancelAction}
           >
             Cancel
@@ -116,7 +117,7 @@ Form.propTypes = {
 };
 
 Form.defaultProps = {
-  id: 0,
+  id: -1,
   cancelAction: () => {},
   deleteAction: () => {},
 };

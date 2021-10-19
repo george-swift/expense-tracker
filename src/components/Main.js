@@ -15,7 +15,7 @@ const Main = () => {
   }, [loggedIn]);
 
   return (
-    <div className="vh-100">
+    <div className="vh-100 position-relative">
       <Routes>
         <Route path="/" element={<Lists />} />
         <Route path="/tracker" element={<Tracker />} />

@@ -7,12 +7,11 @@ import { useVerify } from '../hooks';
 
 const Header = ({ children }) => {
   const { loggedIn, dispatch, navigate } = useVerify();
+  const handleSignOut = () => dispatch(signOutRequest());
 
   useEffect(() => {
     if (loggedIn === false) navigate('/', { replace: true });
   }, [loggedIn]);
-
-  const handleSignOut = () => dispatch(signOutRequest());
 
   return (
     <header>

@@ -13,10 +13,7 @@ const Form = ({
   switchAction,
 }) => {
   const {
-    usernameField,
-    emailField,
-    passwordField,
-    passwordConfirmationField,
+    usernameField, emailField, passwordField, passwordConfirmationField,
   } = userFormFields;
 
   return (

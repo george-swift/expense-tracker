@@ -6,7 +6,8 @@ import {
 } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { authUser, clearFlash } from '../actions';
+import { clearNotifications } from '../actions';
+import { authenticateUser } from '../slice/user';
 import Home from './Home';
 import Main from './Main';
 import NotFound from './NotFound';
@@ -15,12 +16,12 @@ import LogIn from '../containers/LogIn';
 
 const App = () => {
   const dispatch = useDispatch();
-  const resetAlerts = () => dispatch(clearFlash());
+  const resetAlerts = () => dispatch(clearNotifications());
 
   useEffect(() => {
     const storage = localStorage.getItem('exp_tracker');
     if (storage) {
-      dispatch(authUser(JSON.parse(storage)));
+      dispatch(authenticateUser(JSON.parse(storage)));
     }
   }, []);
 
