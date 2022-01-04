@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { FaPencilAlt } from 'react-icons/fa';
 import { useFormState } from '../hooks';
-import Form from './ExpenseForm';
+import ExpenseForm from './ExpenseForm';
 
 const Expense = ({
   id, title, amount, date, notes, onUpdate, onDelete,
@@ -28,34 +28,34 @@ const Expense = ({
   };
 
   return (
-    <li className="expense">
+    <li>
       <div className="details">
         <p>
           <span className="fs-4 amount">{`$${amount}`}</span>
           <br />
           <small>{date}</small>
         </p>
-        <p className="align-self-center ms-3 flex-grow-1">
+        <p className="align-self-center ms-2 flex-grow-1">
           <span className="fw-bold">{title}</span>
           <br />
           <span className="notes">{notes || '...'}</span>
         </p>
-        <button className="mb-1 edit" type="button" onClick={edit}>
+        <button className="mb-1 toggle" type="button" onClick={edit}>
           <FaPencilAlt />
         </button>
       </div>
       {visible && (
         <div className="mt-3">
           <hr />
-          <Form
+          <ExpenseForm
             id={id}
             title={state.title}
             amount={state.amount}
             date={state.date}
             notes={state.notes || ''}
-            handleChange={handleChange}
-            deleteAction={onDelete}
-            submitAction={update}
+            setter={handleChange}
+            remove={onDelete}
+            submit={update}
           />
         </div>
       )}
