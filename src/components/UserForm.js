@@ -1,134 +1,67 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { userFormFields } from '../constants';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/button';
 
-const Form = ({
-  loggedIn,
+const UserForm = ({
+  auth,
   username,
   email,
   password,
-  passwordConfirmation,
-  handleChange,
-  submitAction,
-  switchAction,
-}) => {
-  const {
-    usernameField, emailField, passwordField, passwordConfirmationField,
-  } = userFormFields;
-
-  return (
-    <form className={loggedIn ? 'py-3' : null} onSubmit={submitAction}>
-      <div className="mb-3">
-        <label className="form-label" htmlFor={usernameField}>
-          {usernameField}
-        </label>
-        <input
-          type="text"
-          className="form-control"
-          name="username"
-          minLength={2}
-          value={username}
-          onChange={handleChange}
-          required
-        />
-      </div>
-
-      <div className="mb-3">
-        <label className="form-label" htmlFor={emailField}>
-          {emailField}
-        </label>
-        <input
-          type="email"
-          className="form-control"
-          name="email"
-          value={email}
-          onChange={handleChange}
-          required
-        />
-      </div>
-
-      {loggedIn ? (
-        <div className="mb-3">
-          <button
-            type="submit"
-            className="btn w-100"
-          >
-            Update Profile
-          </button>
-        </div>
-      ) : (
+  confirm,
+  setter,
+  submit,
+  reset,
+}) => (
+  <Form className={auth ? 'py-3' : 'py-1'} onSubmit={submit}>
+    <Form.Group className="mb-3" controlId="username">
+      <Form.Label>Username</Form.Label>
+      <Form.Control type="text" name="username" minLength={2} value={username} onChange={setter} required />
+    </Form.Group>
+    <Form.Group className="mb-3" controlId="email">
+      <Form.Label>Email</Form.Label>
+      <Form.Control type="email" name="email" value={email} onChange={setter} required />
+    </Form.Group>
+    {auth ? (<Button type="submit" className="w-100">Update Profile</Button>)
+      : (
         <>
-          <div className="mb-3">
-            <label className="form-label" htmlFor={passwordField}>
-              {passwordField}
-            </label>
-            <input
-              type="password"
-              className="form-control"
-              name="password"
-              minLength={6}
-              value={password}
-              onChange={handleChange}
-              required
-            />
-            <small className="fst-italic text-danger d-none">
-              Password and password confirmation do not match. Try again
-            </small>
-          </div>
-
-          <div className="mb-3">
-            <label className="form-label" htmlFor={passwordConfirmationField}>
-              {passwordConfirmationField}
-            </label>
-            <input
-              type="password"
-              className="form-control"
-              name="password_confirmation"
-              minLength={6}
-              value={passwordConfirmation}
-              onChange={handleChange}
-              required
-            />
-            <small className="fst-italic text-danger d-none">
-              Password and password confirmations do not match. Try again
-            </small>
-          </div>
+          <Form.Group className="mb-3" controlId="password">
+            <Form.Label>Password</Form.Label>
+            <Form.Control type="password" name="password" minLength={6} value={password} onChange={setter} required />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="passwordConfirmation">
+            <Form.Label>Password Confirmation</Form.Label>
+            <Form.Control type="password" name="password_confirmation" minLength={6} value={confirm} onChange={setter} required />
+          </Form.Group>
           <div>
-            <button
-              type="submit"
-              className="btn mb-3 w-100"
-            >
-              Sign up
-            </button>
+            <Button type="submit" className="mb-3 w-100">Sign up</Button>
             <p className="text-center">
-              <span className="fst-italic">
-                Already have an account?
-              </span>
-              {' '}
-              <Link to="/login" onClick={switchAction}>Click here to log in</Link>
+              <Form.Text>
+                Already have an account?&nbsp;
+                <Link to="/login" onClick={reset}>Log in</Link>
+              </Form.Text>
             </p>
           </div>
         </>
       )}
-    </form>
-  );
-};
+  </Form>
+);
 
-Form.propTypes = {
-  loggedIn: PropTypes.bool.isRequired,
+UserForm.propTypes = {
+  auth: PropTypes.bool.isRequired,
   username: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
   password: PropTypes.string,
-  passwordConfirmation: PropTypes.string,
-  handleChange: PropTypes.func.isRequired,
-  submitAction: PropTypes.func.isRequired,
-  switchAction: PropTypes.func,
+  confirm: PropTypes.string,
+  setter: PropTypes.func.isRequired,
+  submit: PropTypes.func.isRequired,
+  reset: PropTypes.func,
 };
 
-Form.defaultProps = {
+UserForm.defaultProps = {
   password: '',
-  passwordConfirmation: '',
-  switchAction: () => {},
+  confirm: '',
+  reset: () => {},
 };
 
-export default Form;
+export default UserForm;

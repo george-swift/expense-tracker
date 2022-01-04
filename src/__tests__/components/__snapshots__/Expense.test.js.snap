@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Snapshot of the Expense component should render correctly 1`] = `
-<li
-  className="expense"
->
+<li>
   <div
     className="details"
   >
@@ -19,7 +17,7 @@ exports[`Snapshot of the Expense component should render correctly 1`] = `
       </small>
     </p>
     <p
-      className="align-self-center ms-3 flex-grow-1"
+      className="align-self-center ms-2 flex-grow-1"
     >
       <span
         className="fw-bold"
@@ -34,7 +32,7 @@ exports[`Snapshot of the Expense component should render correctly 1`] = `
       </span>
     </p>
     <button
-      className="mb-1 edit"
+      className="mb-1 toggle"
       onClick={[Function]}
       type="button"
     >

@@ -46,7 +46,7 @@ const Reports = () => {
   return (
     <>
       <Header>
-        <span className="theme">Reports</span>
+        <span className="theme__heading">Reports</span>
       </Header>
       <div className="wrap-page">
         {error !== null && (

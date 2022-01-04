@@ -16,7 +16,7 @@ const Header = ({ children }) => {
   return (
     <header>
       <div className="container-fluid pe-4">
-        <h2 className="wrap-theme">
+        <h2 className="theme">
           { children }
           <Link to="/" className="center" onClick={handleSignOut}>
             <span className="fs-6 me-3">Sign out</span>

@@ -26,8 +26,7 @@ export function* signIn({ payload }) {
 export function* editAccount({ payload }) {
   const { id, data: params } = payload;
   try {
-    const { data } = yield call(api.editUserDetails, id, params);
-    const { user } = data;
+    const { data: { user } } = yield call(api.editUserDetails, id, params);
     yield put(editUserSucceeded(user));
   } catch (e) {
     yield put(requestFailed(e.message));

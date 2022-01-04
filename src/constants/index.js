@@ -31,20 +31,6 @@ export const DELETE_EXPENSE_SUCCESSFUL = 'expenses/deleteExpenseSucceeded';
 export const REQUEST_FAILED = 'requestFailed';
 export const CLEAR_NOTIFICATIONS = 'clearNotifications';
 
-export const userFormFields = {
-  usernameField: 'Username',
-  emailField: 'Email',
-  passwordField: 'Password',
-  passwordConfirmationField: 'Password Confirmation',
-};
-
-export const expenseFormFields = {
-  titleField: 'Title*',
-  amountField: 'Amount* ($)',
-  dateField: 'Incurred On*',
-  notesField: 'Notes',
-};
-
 export const defaultColor = '#7fb3d5';
 
 export const dataList = [

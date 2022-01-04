@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom/extend-expect';
 import renderer from 'react-test-renderer';
 import { BrowserRouter as Router } from 'react-router-dom';
-import Form from '../../components/UserForm';
+import UserForm from '../../components/UserForm';
 
 let loggedIn = false;
 const username = 'Test Dev';
@@ -17,15 +17,15 @@ describe('Snapshot of the user form component', () => {
     const tree = renderer
       .create(
         <Router>
-          <Form
-            loggedIn={loggedIn}
+          <UserForm
+            auth={loggedIn}
             username={username}
             email={email}
             password={password}
-            passwordConfirmation={passwordConfirmation}
-            handleChange={handleChange}
-            submitAction={submitAction}
-            switchAction={switchAction}
+            confirm={passwordConfirmation}
+            setter={handleChange}
+            submit={submitAction}
+            reset={switchAction}
           />
         </Router>,
       )
@@ -38,12 +38,12 @@ describe('Snapshot of the user form component', () => {
     const tree = renderer
       .create(
         <Router>
-          <Form
-            loggedIn={loggedIn}
+          <UserForm
+            auth={loggedIn}
             username={username}
             email={email}
-            handleChange={handleChange}
-            submitAction={submitAction}
+            setter={handleChange}
+            submit={submitAction}
           />
         </Router>,
       )

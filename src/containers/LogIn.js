@@ -1,19 +1,20 @@
 import { Link } from 'react-router-dom';
 import { FaCoins, FaSpinner } from 'react-icons/fa';
+import Form from 'react-bootstrap/Form';
 import { useEffect } from 'react';
 import { useFormState, useVerify } from '../hooks';
 import { clearNotifications, logInRequest } from '../actions';
 import FlashMessage from '../components/FlashMessage';
-import { userFormFields } from '../constants';
 
 const LogIn = () => {
-  const { state = {}, handleChange } = useFormState();
+  const { state, handleChange } = useFormState({ username: '', password: '' });
+
   const {
     loggedIn, isLoading, error, dispatch, navigate,
   } = useVerify();
 
   useEffect(() => {
-    if (loggedIn) navigate('/et', { replace: true });
+    if (loggedIn) navigate('/app', { replace: true });
   }, [loggedIn]);
 
   const handleSubmit = (e) => {
@@ -21,11 +22,9 @@ const LogIn = () => {
     dispatch(logInRequest(state));
   };
 
-  const switchAction = () => {
+  const resetFlash = () => {
     if (error !== null) dispatch(clearNotifications());
   };
-
-  const { usernameField, passwordField } = userFormFields;
 
   return (
     <div className="container pt-5 row mx-0">
@@ -35,53 +34,29 @@ const LogIn = () => {
         <Link to="/" className="text-secondary">
           <FaCoins className="display-6 mb-3" />
         </Link>
-        <h2 className="mb-4">Log in to Expense Tracker</h2>
+        <h2 className="mb-4">Log in to your account</h2>
 
-        {isLoading
-          ? <p className="page-loading"><FaSpinner /></p>
+        {isLoading ? <p className="page-loading"><FaSpinner /></p>
           : (
-            <form onSubmit={handleSubmit}>
-              <div className="mb-3">
-                <label className="form-label" htmlFor={usernameField}>
-                  {usernameField}
-                </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="username"
-                  minLength={2}
-                  value={state.username || ''}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-
-              <div className="mb-3">
-                <label className="form-label" htmlFor={passwordField}>
-                  {passwordField}
-                </label>
-                <input
-                  type="password"
-                  className="form-control"
-                  name="password"
-                  minLength={6}
-                  value={state.password || ''}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-
+            <Form onSubmit={handleSubmit}>
+              <Form.Group className="mb-3" controlId="username">
+                <Form.Label>Username</Form.Label>
+                <Form.Control type="text" name="username" minLength={2} value={state.username} onChange={handleChange} required />
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="password">
+                <Form.Label>Password</Form.Label>
+                <Form.Control type="password" name="password" minLength={6} value={state.password} onChange={handleChange} required />
+              </Form.Group>
               <div>
                 <button className="btn mb-3 w-100" type="submit">Log in</button>
                 <p className="text-center">
-                  <span className="fst-italic">
-                    New user?
-                  </span>
-                  {' '}
-                  <Link to="/signup" onClick={switchAction}>Sign up here</Link>
+                  <Form.Text>
+                    New user?&nbsp;
+                    <Link to="/signup" onClick={resetFlash}>Sign up</Link>
+                  </Form.Text>
                 </p>
               </div>
-            </form>
+            </Form>
           )}
       </div>
     </div>

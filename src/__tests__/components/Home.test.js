@@ -14,7 +14,7 @@ describe('Snapshot of the Home component', () => {
       .create(
         <Provider store={store}>
           <Router>
-            <Home ui={ui} />
+            <Home reset={ui} />
           </Router>
         </Provider>,
       )
@@ -28,7 +28,7 @@ describe('Querying the Home component', () => {
   beforeEach(() => render(
     <Provider store={store}>
       <Router>
-        <Home ui={ui} />
+        <Home reset={ui} />
       </Router>
     </Provider>,
   ));

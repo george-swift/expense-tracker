@@ -9,12 +9,14 @@ exports[`Snapshot of the expense form component should render correctly for crea
     className="col-12 mb-3"
   >
     <label
-      htmlFor="Title*"
+      className="form-label"
+      htmlFor="title"
     >
       Title*
     </label>
     <input
-      className="w-100 form-control"
+      className="form-control"
+      id="title"
       minLength={2}
       name="title"
       onChange={[MockFunction]}
@@ -27,12 +29,14 @@ exports[`Snapshot of the expense form component should render correctly for crea
     className="col-sm-4 mb-3"
   >
     <label
-      htmlFor="Amount* ($)"
+      className="form-label"
+      htmlFor="amount"
     >
-      Amount* ($)
+      Amount ($)*
     </label>
     <input
-      className="w-100 form-control"
+      className="form-control"
+      id="amount"
       min={0.01}
       name="amount"
       onChange={[MockFunction]}
@@ -46,12 +50,14 @@ exports[`Snapshot of the expense form component should render correctly for crea
     className="col-sm-8 mb-3"
   >
     <label
-      htmlFor="Incurred On*"
+      className="form-label"
+      htmlFor="date"
     >
       Incurred On*
     </label>
     <input
-      className="w-100 form-control"
+      className="form-control"
+      id="date"
       name="date"
       onChange={[MockFunction]}
       required={true}
@@ -60,19 +66,21 @@ exports[`Snapshot of the expense form component should render correctly for crea
     />
   </div>
   <div
-    className="col-12 mb-3"
+    className="col-12 mb-3 form"
   >
     <label
-      htmlFor="Notes"
+      className="form-label"
+      htmlFor="notes"
     >
       Notes
     </label>
     <textarea
-      className="w-100 form-control"
+      className="form-control"
+      id="notes"
       maxLength={140}
       name="notes"
       onChange={[MockFunction]}
-      rows="3"
+      rows={3}
       value=""
     />
   </div>
@@ -80,13 +88,15 @@ exports[`Snapshot of the expense form component should render correctly for crea
     className="col-12"
   >
     <button
-      className="btn w-100 mb-3"
+      className="w-100 mb-3 btn btn-primary"
+      disabled={false}
       type="submit"
     >
       Create new expense
     </button>
     <button
-      className="btn w-100 color-mix-two"
+      className="w-100 color-mix-two btn btn-bg-light"
+      disabled={false}
       onClick={[Function]}
       type="button"
     >
@@ -105,12 +115,14 @@ exports[`Snapshot of the expense form component should render correctly for edit
     className="col-12 mb-3"
   >
     <label
-      htmlFor="Title*"
+      className="form-label"
+      htmlFor="title"
     >
       Title*
     </label>
     <input
-      className="w-100 form-control"
+      className="form-control"
+      id="title"
       minLength={2}
       name="title"
       onChange={[MockFunction]}
@@ -123,12 +135,14 @@ exports[`Snapshot of the expense form component should render correctly for edit
     className="col-5 mb-3"
   >
     <label
-      htmlFor="Amount* ($)"
+      className="form-label"
+      htmlFor="amount"
     >
-      Amount* ($)
+      Amount ($)*
     </label>
     <input
-      className="w-100 form-control"
+      className="form-control"
+      id="amount"
       min={0.01}
       name="amount"
       onChange={[MockFunction]}
@@ -142,12 +156,14 @@ exports[`Snapshot of the expense form component should render correctly for edit
     className="col-7 mb-3"
   >
     <label
-      htmlFor="Incurred On*"
+      className="form-label"
+      htmlFor="date"
     >
       Incurred On*
     </label>
     <input
-      className="w-100 form-control"
+      className="form-control"
+      id="date"
       name="date"
       onChange={[MockFunction]}
       required={true}
@@ -156,19 +172,21 @@ exports[`Snapshot of the expense form component should render correctly for edit
     />
   </div>
   <div
-    className="col-12 mb-3"
+    className="col-12 mb-3 form"
   >
     <label
-      htmlFor="Notes"
+      className="form-label"
+      htmlFor="notes"
     >
       Notes
     </label>
     <textarea
-      className="w-100 form-control"
+      className="form-control"
+      id="notes"
       maxLength={140}
       name="notes"
       onChange={[MockFunction]}
-      rows="3"
+      rows={3}
       value="Adding notes this time"
     />
   </div>
@@ -176,13 +194,15 @@ exports[`Snapshot of the expense form component should render correctly for edit
     className="col-12 mb-2 px-0 text-end"
   >
     <button
-      className="btn btn-sm fw-bold"
+      className="fw-bold btn btn-primary btn-sm"
+      disabled={false}
       type="submit"
     >
       Update
     </button>
     <button
-      className="btn btn-sm ms-3"
+      className="ms-3 btn btn-primary btn-sm"
+      disabled={false}
       onClick={[Function]}
       type="button"
     >

@@ -4,11 +4,11 @@ import { FaCoins } from 'react-icons/fa';
 import { useEffect } from 'react';
 import { useVerify } from '../hooks';
 
-const Home = ({ ui }) => {
+const Home = ({ reset }) => {
   const { loggedIn, navigate } = useVerify();
 
   useEffect(() => {
-    if (loggedIn) navigate('et/');
+    if (loggedIn) navigate('app');
   }, []);
 
   return (
@@ -20,14 +20,14 @@ const Home = ({ ui }) => {
         </h1>
         <p className="fw-light">Stay in control of your money</p>
       </div>
-      <Link to="/signup" className="btn home-btn color-mix" onClick={ui}>Sign Up</Link>
-      <Link to="/login" className="btn home-btn" onClick={ui}>Log In</Link>
+      <Link to="/signup" className="btn home-btn color-mix" onClick={reset}>Sign Up</Link>
+      <Link to="/login" className="btn home-btn" onClick={reset}>Log In</Link>
     </section>
   );
 };
 
 Home.propTypes = {
-  ui: PropTypes.func.isRequired,
+  reset: PropTypes.func.isRequired,
 };
 
 export default Home;

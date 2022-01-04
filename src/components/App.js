@@ -1,9 +1,5 @@
-import '../assets/Sass/App.scss';
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-} from 'react-router-dom';
+import '../assets/App.scss';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { clearNotifications } from '../actions';
@@ -26,15 +22,15 @@ const App = () => {
   }, []);
 
   return (
-    <Router>
+    <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home ui={resetAlerts} />} />
+        <Route path="/" element={<Home reset={resetAlerts} />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<LogIn />} />
-        <Route path="/et/*" element={<Main />} />
+        <Route path="/app/*" element={<Main />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-    </Router>
+    </BrowserRouter>
   );
 };
 

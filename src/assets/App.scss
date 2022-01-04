@@ -28,8 +28,14 @@ ul {
 button[type=submit] {
   @extend .color-mix;
 
-  &:hover {
+  border-radius: 0 0.25rem 0;
+  border: none;
+
+  &:hover,
+  &:focus {
     @extend .color-mix-one;
+
+    box-shadow: none;
   }
 }
 
@@ -87,7 +93,7 @@ header {
   border-bottom: $dark-border;
 }
 
-.wrap-theme {
+.theme {
   @extend .center;
 
   justify-content: space-between;
@@ -96,12 +102,12 @@ header {
   a { color: $black; }
 }
 
-.theme {
+.theme__heading {
   font-size: calc(1.3rem + 0.6vw);
   text-align: center;
 }
 
-.theme,
+.theme__heading,
 .form-label {
   font-weight: bold;
 }
@@ -112,10 +118,6 @@ header {
 
   form {
     @extend .center;
-
-    input {
-      width: 200px;
-    }
   }
 
   h3 {
@@ -131,7 +133,7 @@ header {
   }
 }
 
-.card {
+.custom-card {
   padding-top: 2rem;
   border: none;
   border-radius: 0;
@@ -198,46 +200,55 @@ header {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-}
 
-.list-btn {
-  min-width: 170px;
-  border-radius: 0 0.25rem 0;
-  font-weight: 300;
-  font-size: $fz-md;
+  &__name {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.55rem;
 
-  @extend .color-mix;
-}
+    span {
+      color: $grey;
+    }
+  }
 
-.list-name {
-  display: flex;
-  align-items: center;
+  &__btn {
+    min-width: 170px;
+    border-radius: 0 0.25rem 0;
+    font-weight: 700;
+    font-size: $fz-md;
 
-  span {
-    color: $grey;
+    @extend .color-mix;
+  }
+
+  &__editor {
+    flex-direction: column;
+
+    input {
+      @extend .size-md;
+
+      margin: 0 auto 1rem;
+      min-height: calc(1.5em + (0.5rem + 2px));
+      padding: 0.25rem 0.5rem;
+      font-size: $fz-lg + 0.05rem;
+      border-radius: 0.2rem;
+    }
+
+    .list__btn {
+      padding: 0.25rem 0.5rem;
+
+      &:first-of-type {
+        min-width: 120px;
+      }
+
+      &:last-of-type {
+        min-width: 65px;
+        margin-left: 1rem;
+      }
+    }
   }
 }
 
-.cat-editor {
-  flex-direction: column;
-  padding: 1rem;
-
-  .list-btn {
-    &:first-of-type {
-      min-width: 120px;
-    }
-
-    &:last-of-type {
-      min-width: 65px;
-    }
-  }
-}
-
-.cat-input {
-  margin: 0 auto 1.5rem;
-}
-
-.edit {
+.toggle {
   border-radius: 0 0.25rem 0;
   border: transparent;
   color: $purple;
@@ -264,7 +275,7 @@ header {
   }
 }
 
-.all-expenses {
+.expenses {
   @extend .grid;
 
   li {
@@ -286,7 +297,7 @@ header {
       font-size: $fz-md;
     }
 
-    .notes { font-size: $fz-xs; }
+    .notes { font-size: $fz-lg; }
   }
 }
 
@@ -307,39 +318,40 @@ header {
 .tool-tip {
   text-align: center;
   color: $grey;
-  font-size: $fz-xs;
+  font-size: $fz-lg;
 }
 
-.user-info,
-.editor {
-  height: 50%;
-  overflow-y: scroll;
-}
-
-.user-info {
-  @extend .center;
-  @extend .color-mix-one;
-}
-
-.avatar { font-size: 7.5rem; }
-
-.editor {
-  margin: 0;
-  padding-top: 2rem;
-  background-color: $smoke;
-
-  h4 {
-    @extend .center;
-
-    text-align: center;
+.user {
+  section {
+    height: 50%;
+    overflow-y: scroll;
   }
 
-  form {
-    flex-direction: column;
+  &__info {
+    @extend .center;
+    @extend .color-mix-one;
+  }
 
-    div,
-    input {
-      width: 100%;
+  &__avatar { font-size: 7.5rem; }
+
+  &__editor {
+    margin: 0;
+    padding-top: 2rem;
+    background-color: $smoke;
+
+    h4 {
+      @extend .center;
+
+      text-align: center;
+    }
+
+    form {
+      flex-direction: column;
+
+      div,
+      input {
+        width: 100%;
+      }
     }
   }
 }
@@ -351,28 +363,41 @@ header {
 
 .trigger {
   font-weight: bold;
+  border: none;
   color: $purple;
 
-  &:hover {
-    color: $blue;
+  &:focus {
+    box-shadow: 0 0 0 0.25rem $smoke;
   }
 }
 
-.bg-purple,
-.bg-purple * {
+.offcanvas-header {
+  @extend .color-mix;
+}
+
+.offcanvas-body {
   @extend .color-mix-one;
+
+  padding-top: 0.45rem;
+
+  * {
+    @extend .color-mix-one;
+  }
 }
 
 .nav-link {
   &:hover {
-    @extend .color-mix;
-
     font-size: $fz-xl;
+  }
+
+  &:hover,
+  &:focus {
+    color: $smoke;
   }
 }
 
 @media screen and (max-width: 1000px) {
-  .all-expenses {
+  .expenses {
     grid-template-columns: repeat(2, 1fr);
 
     li { max-width: 350px; }
@@ -394,7 +419,7 @@ header {
     }
   }
 
-  .all-expenses li {
+  .expenses li {
     margin-left: 1rem;
     margin-right: 1rem;
   }

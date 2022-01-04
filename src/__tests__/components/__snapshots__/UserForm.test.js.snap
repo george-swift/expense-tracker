@@ -2,7 +2,7 @@
 
 exports[`Snapshot of the user form component should render correctly on sign up 1`] = `
 <form
-  className={null}
+  className="py-1"
   onSubmit={[MockFunction]}
 >
   <div
@@ -10,12 +10,13 @@ exports[`Snapshot of the user form component should render correctly on sign up 
   >
     <label
       className="form-label"
-      htmlFor="Username"
+      htmlFor="username"
     >
       Username
     </label>
     <input
       className="form-control"
+      id="username"
       minLength={2}
       name="username"
       onChange={[MockFunction]}
@@ -29,12 +30,13 @@ exports[`Snapshot of the user form component should render correctly on sign up 
   >
     <label
       className="form-label"
-      htmlFor="Email"
+      htmlFor="email"
     >
       Email
     </label>
     <input
       className="form-control"
+      id="email"
       name="email"
       onChange={[MockFunction]}
       required={true}
@@ -47,12 +49,13 @@ exports[`Snapshot of the user form component should render correctly on sign up 
   >
     <label
       className="form-label"
-      htmlFor="Password"
+      htmlFor="password"
     >
       Password
     </label>
     <input
       className="form-control"
+      id="password"
       minLength={6}
       name="password"
       onChange={[MockFunction]}
@@ -60,23 +63,19 @@ exports[`Snapshot of the user form component should render correctly on sign up 
       type="password"
       value="testing101"
     />
-    <small
-      className="fst-italic text-danger d-none"
-    >
-      Password and password confirmation do not match. Try again
-    </small>
   </div>
   <div
     className="mb-3"
   >
     <label
       className="form-label"
-      htmlFor="Password Confirmation"
+      htmlFor="passwordConfirmation"
     >
       Password Confirmation
     </label>
     <input
       className="form-control"
+      id="passwordConfirmation"
       minLength={6}
       name="password_confirmation"
       onChange={[MockFunction]}
@@ -84,15 +83,11 @@ exports[`Snapshot of the user form component should render correctly on sign up 
       type="password"
       value="testing101"
     />
-    <small
-      className="fst-italic text-danger d-none"
-    >
-      Password and password confirmations do not match. Try again
-    </small>
   </div>
   <div>
     <button
-      className="btn mb-3 w-100"
+      className="mb-3 w-100 btn btn-primary"
+      disabled={false}
       type="submit"
     >
       Sign up
@@ -100,18 +95,17 @@ exports[`Snapshot of the user form component should render correctly on sign up 
     <p
       className="text-center"
     >
-      <span
-        className="fst-italic"
+      <small
+        className="form-text"
       >
-        Already have an account?
-      </span>
-       
-      <a
-        href="/login"
-        onClick={[Function]}
-      >
-        Click here to log in
-      </a>
+        Already have an account? 
+        <a
+          href="/login"
+          onClick={[Function]}
+        >
+          Log in
+        </a>
+      </small>
     </p>
   </div>
 </form>
@@ -127,12 +121,13 @@ exports[`Snapshot of the user form component should render edit form correctly i
   >
     <label
       className="form-label"
-      htmlFor="Username"
+      htmlFor="username"
     >
       Username
     </label>
     <input
       className="form-control"
+      id="username"
       minLength={2}
       name="username"
       onChange={[MockFunction]}
@@ -146,12 +141,13 @@ exports[`Snapshot of the user form component should render edit form correctly i
   >
     <label
       className="form-label"
-      htmlFor="Email"
+      htmlFor="email"
     >
       Email
     </label>
     <input
       className="form-control"
+      id="email"
       name="email"
       onChange={[MockFunction]}
       required={true}
@@ -159,15 +155,12 @@ exports[`Snapshot of the user form component should render edit form correctly i
       value="testdev@email.com"
     />
   </div>
-  <div
-    className="mb-3"
+  <button
+    className="w-100 btn btn-primary"
+    disabled={false}
+    type="submit"
   >
-    <button
-      className="btn w-100"
-      type="submit"
-    >
-      Update Profile
-    </button>
-  </div>
+    Update Profile
+  </button>
 </form>
 `;

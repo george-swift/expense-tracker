@@ -1,4 +1,5 @@
 import Proptypes from 'prop-types';
+import Form from 'react-bootstrap/Form';
 import { IoFastFoodSharp } from 'react-icons/io5';
 import { GiWorld, GiTransportationRings, GiPayMoney } from 'react-icons/gi';
 import {
@@ -44,53 +45,29 @@ const List = ({
     <li className="pt-3 pb-4">
       <div className="list">
         <span className="fs-2">{placeholder(name)}</span>
-        <p className="list-name mb-3">
+        <p className="list__name">
           <span className="ms-4 p-1">{name}</span>
-          <button
-            type="button"
-            className="btn ms-1 edit"
-            onClick={edit}
-          >
+          <button type="button" className="btn ms-1 toggle" onClick={edit}>
             <FaPencilAlt />
           </button>
         </p>
         {!visible && (
-          <button
-            type="button"
-            className="btn list-btn"
-            onClick={() => trackExpenses(id, name)}
-          >
+          <button type="button" className="btn list__btn" onClick={() => trackExpenses(id, name)}>
             Track expenses
           </button>
         )}
       </div>
+
       {visible && (
-        <form className="cat-editor" onSubmit={update}>
-          <div className="">
-            <input
-              type="text"
-              className="form-control form-control-sm cat-input"
-              name="name"
-              value={state.name}
-              onChange={handleChange}
-            />
-          </div>
+        <Form className="list__editor" onSubmit={update}>
+          <Form.Control type="text" name="name" value={state.name} onChange={handleChange} />
           <div className="text-center">
-            <button
-              type="submit"
-              className="btn btn-sm fw-bold list-btn"
-            >
-              Rename
-            </button>
-            <button
-              type="button"
-              className="btn btn-sm ms-3 list-btn"
-              onClick={() => deleteList(id)}
-            >
+            <button type="submit" className="btn list__btn">Rename</button>
+            <button type="button" className="btn list__btn" onClick={() => deleteList(id)}>
               <FaTrash />
             </button>
           </div>
-        </form>
+        </Form>
       )}
     </li>
   );

@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom/extend-expect';
 import renderer from 'react-test-renderer';
-import Form from '../../components/ExpenseForm';
+import ExpenseForm from '../../components/ExpenseForm';
 
 const title = 'Test expense';
 const date = '2021-08-01';
@@ -11,13 +11,13 @@ describe('Snapshot of the expense form component', () => {
   it('should render correctly for creating a new expense', () => {
     const tree = renderer
       .create(
-        <Form
+        <ExpenseForm
           title={title}
           amount=""
           date={date}
           notes=""
-          handleChange={handleChange}
-          submitAction={submitAction}
+          setter={handleChange}
+          submit={submitAction}
         />,
       )
       .toJSON();
@@ -28,14 +28,14 @@ describe('Snapshot of the expense form component', () => {
   it('should render correctly for editing an expense', () => {
     const tree = renderer
       .create(
-        <Form
+        <ExpenseForm
           id={2}
           title={`Updated ${title}`}
           amount={85}
           date={date}
           notes="Adding notes this time"
-          handleChange={handleChange}
-          submitAction={submitAction}
+          setter={handleChange}
+          submit={submitAction}
         />,
       )
       .toJSON();
