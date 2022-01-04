@@ -1,5 +1,7 @@
-import { FaPlus, FaSpinner } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+import { FaPlus, FaWindowClose, FaSpinner } from 'react-icons/fa';
 import { useFormState, useVerify } from '../hooks';
 import {
   createList, fetchExpenses, updateList, deleteList,
@@ -47,7 +49,7 @@ const Lists = () => {
   };
 
   const view = (id, name) => {
-    const query = `/et/tracker?id=${id}&list=${name}`;
+    const query = `/app/tracker?id=${id}&list=${name}`;
     dispatch(fetchExpenses(id));
     navigate(query, { replace: true });
   };
@@ -55,44 +57,36 @@ const Lists = () => {
   return (
     <>
       <Header>
-        <span className="theme">Home</span>
+        <span className="theme__heading">Home</span>
       </Header>
       <div className="wrap-page">
-        {error !== null && (
-          <FlashMessage>
-            { error }
-          </FlashMessage>
-        )}
+        {error !== null && <FlashMessage>{error}</FlashMessage>}
 
         <section className="col-lg-4 offset-lg-4 mb-3">
-          <div className="card">
-            <div className="card-body">
-              <h3 className="card-title mb-3 fw-normal">
+          <Card className="custom-card">
+            <Card.Body>
+              <Card.Title>
                 Hello,&nbsp;
                 <span className="fs-4 fw-bold">{handle}</span>
-              </h3>
-              <p className="card-text">
-                <button
-                  type="button"
-                  className="btn btn-sm btn-outline-info"
-                  onClick={addList}
-                >
-                  <FaPlus />
-                </button>
+              </Card.Title>
+              <Card.Text>
+                <Button variant="outline-info" size="sm" onClick={addList}>
+                  {visible ? <FaWindowClose /> : <FaPlus />}
+                </Button>
                 <span>{visible ? 'Click to close' : 'Add category'}</span>
-              </p>
-            </div>
-          </div>
+              </Card.Text>
+            </Card.Body>
+          </Card>
         </section>
 
-        { isLoading && <p className="page-loading"><FaSpinner /></p> }
+        {isLoading && <p className="page-loading"><FaSpinner /></p>}
 
         {visible && (
           <form className="col-lg-4 offset-lg-4" onSubmit={handleSubmit}>
-            <input className="me-3" list="categories" name="name" onChange={handleChange} />
+            <input className="me-3 size-md" list="categories" name="categories" onChange={handleChange} />
             <datalist id="categories">
               {availableOptions.map(({ value, color }) => (
-                <option key={color} value={value} aria-label="category-name" />
+                <option key={color} value={value} aria-label="category" />
               ))}
             </datalist>
             <button className="btn btn-sm" type="submit">Create</button>

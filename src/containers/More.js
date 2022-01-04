@@ -3,23 +3,14 @@ import { useFormState, useVerify } from '../hooks';
 import { editUserRequest } from '../actions';
 import Header from '../components/Header';
 import FlashMessage from '../components/FlashMessage';
-import Form from '../components/UserForm';
+import UserForm from '../components/UserForm';
 
 const More = () => {
   const {
     loggedIn, user, dispatch, isLoading, error,
   } = useVerify();
 
-  const {
-    state, handleChange, visible, toggleDisplay, reset,
-  } = useFormState(user);
-
-  const manageEditor = () => {
-    if (visible) {
-      toggleDisplay();
-      reset();
-    } else toggleDisplay();
-  };
+  const { state, handleChange, toggleDisplay } = useFormState(user);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -28,49 +19,38 @@ const More = () => {
   };
 
   return (
-    <div className="profile page">
+    <div>
       <Header>
-        <span className="theme">Profile</span>
+        <span className="theme__heading">Profile</span>
       </Header>
-      <div className="wrap-page">
-        <section className="user-info">
+
+      <div className="wrap-page user">
+        <section className="user__info">
           <p className="text-center fw-bold">
-            <FaUserCircle className="avatar mb-2" />
+            <FaUserCircle className="user__avatar mb-2" />
             <br />
             <span className="fs-5">{user?.username}</span>
             <br />
             <span className="fs-6 fw-lighter">{user?.email}</span>
           </p>
         </section>
-        <section className="row editor">
+        <section className="row user__editor">
           <div className="col-md-4 offset-md-4">
             <h4>
-              <span className="me-2">EDIT PROFILE</span>
-              <button
-                type="button"
-                className="btn btn-sm"
-                onClick={manageEditor}
-              >
-                <FaPencilAlt />
-              </button>
+              <span className="me-3">Edit Profile</span>
+              <FaPencilAlt className="fs-6" />
             </h4>
-            {error !== null && (
-              <FlashMessage>
-                {error}
-              </FlashMessage>
-            )}
+            {error !== null && <FlashMessage>{error}</FlashMessage>}
 
             {isLoading && <p className="page-loading"><FaSpinner /></p>}
 
-            {visible && (
-              <Form
-                loggedIn={loggedIn}
-                username={state.username}
-                email={state.email}
-                handleChange={handleChange}
-                submitAction={handleSubmit}
-              />
-            )}
+            <UserForm
+              auth={loggedIn}
+              username={state?.username || ''}
+              email={state?.email || ''}
+              setter={handleChange}
+              submit={handleSubmit}
+            />
           </div>
         </section>
       </div>
