@@ -60,6 +60,6 @@ export const dataList = [
   },
   {
     value: 'Other',
-    color: '#d35400',
+    color: '#a7b979',
   },
 ];
