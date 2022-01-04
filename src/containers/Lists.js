@@ -83,7 +83,7 @@ const Lists = () => {
 
         {visible && (
           <form className="col-lg-4 offset-lg-4" onSubmit={handleSubmit}>
-            <input className="me-3 size-md" list="categories" name="categories" onChange={handleChange} />
+            <input className="me-3 size-md" list="categories" name="name" onChange={handleChange} />
             <datalist id="categories">
               {availableOptions.map(({ value, color }) => (
                 <option key={color} value={value} aria-label="category" />
