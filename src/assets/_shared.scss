@@ -8,10 +8,9 @@ $purple: #42224a;
 $orange: #ef8767;
 $fontPoppins: 'Poppins', sans-serif;
 $fz-xl: 1.2rem;
-$fz-lg: 0.8rem;
+$fz-lg: 0.825rem;
 $fz-md: 0.7rem;
 $fz-sm: 0.65rem;
-$fz-xs: 0.825rem;
 $dark-border: 1px solid rgba(0, 0, 0, 0.125);
 
 @mixin transform {
@@ -26,8 +25,28 @@ $dark-border: 1px solid rgba(0, 0, 0, 0.125);
 .mw-form {
   @extend .mw-md;
 
+  input,
+  textarea {
+    width: 100%;
+  }
+
   label {
-    font-size: $fz-xs;
+    font-size: $fz-lg;
+  }
+
+  .btn-primary {
+    &:hover,
+    &:focus {
+      @extend .color-mix-one;
+
+      box-shadow: none;
+    }
+
+    &:last-of-type {
+      @extend .color-mix;
+
+      border: none;
+    }
   }
 }
 
@@ -56,3 +75,5 @@ $dark-border: 1px solid rgba(0, 0, 0, 0.125);
   font-weight: 600;
   color: $smoke;
 }
+
+.size-md { width: 200px; }

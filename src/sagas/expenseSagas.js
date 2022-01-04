@@ -28,8 +28,7 @@ export function* createExpense({ payload }) {
 export function* updateExpense({ payload }) {
   const { id, data: params } = payload;
   try {
-    const { data } = yield call(api.updateExpense, id, params);
-    const { expense } = data;
+    const { data: { expense } } = yield call(api.updateExpense, id, params);
     yield put(updateExpenseSucceeded(expense));
   } catch (error) {
     yield put(requestFailed(error.message));
@@ -38,8 +37,7 @@ export function* updateExpense({ payload }) {
 
 export function* deleteExpense({ payload }) {
   try {
-    const { data } = yield call(api.deleteExpense, payload);
-    const { id } = data;
+    const { data: { id } } = yield call(api.deleteExpense, payload);
     yield put(deleteExpenseSucceeded(id));
   } catch (error) {
     yield put(requestFailed(error.message));

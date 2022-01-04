@@ -4,7 +4,7 @@ import { FaCoins, FaSpinner } from 'react-icons/fa';
 import { useVerify } from '../hooks';
 import { clearNotifications, signUpRequest } from '../actions';
 import FlashMessage from '../components/FlashMessage';
-import Form from '../components/UserForm';
+import UserForm from '../components/UserForm';
 
 const SignUp = () => {
   const [state, setState] = useState({
@@ -19,15 +19,16 @@ const SignUp = () => {
   } = useVerify();
 
   useEffect(() => {
-    if (loggedIn) navigate('/et', { replace: true });
+    if (loggedIn) navigate('/app', { replace: true });
   }, [loggedIn]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    if (name === 'password_confirmation') {
+    const mismatch = (name === 'password_confirmation') && value !== state.password;
+
+    if (mismatch) {
       e.target.setCustomValidity('Password does not match');
-      if (value === state.password) e.target.setCustomValidity('');
-    }
+    } else e.target.setCustomValidity('');
 
     setState({
       ...state,
@@ -40,17 +41,14 @@ const SignUp = () => {
     dispatch(signUpRequest(state));
   };
 
-  const switchAction = () => {
+  const resetFlash = () => {
     if (error !== null) dispatch(clearNotifications());
   };
 
   return (
     <div className="container pt-4 row mx-0">
-      {error !== null && (
-        <FlashMessage>
-          {error}
-        </FlashMessage>
-      )}
+      {error !== null && <FlashMessage>{error}</FlashMessage>}
+
       <div className="mw-md mx-auto">
         <Link to="/" className="text-secondary">
           <FaCoins className="display-6 mb-3" />
@@ -59,15 +57,15 @@ const SignUp = () => {
         {isLoading
           ? (<p className="page-loading"><FaSpinner /></p>)
           : (
-            <Form
+            <UserForm
+              auth={loggedIn}
               username={state.username}
               email={state.email}
               password={state.password}
-              passwordConfirmation={state.password_confirmation}
-              handleChange={handleChange}
-              submitAction={handleSubmit}
-              switchAction={switchAction}
-              loggedIn={loggedIn}
+              confirm={state.password_confirmation}
+              setter={handleChange}
+              submit={handleSubmit}
+              reset={resetFlash}
             />
           )}
       </div>

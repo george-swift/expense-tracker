@@ -5,7 +5,7 @@ import { useFormState, useVerify } from '../hooks';
 import { createExpense, deleteExpense, updateExpense } from '../actions';
 import Header from '../components/Header';
 import FlashMessage from '../components/FlashMessage';
-import Form from '../components/ExpenseForm';
+import ExpenseForm from '../components/ExpenseForm';
 import Expense from '../components/Expense';
 import { getExpenses } from '../selectors';
 
@@ -43,7 +43,7 @@ const Tracker = () => {
   return (
     <>
       <Header>
-        <span className="theme">
+        <span className="theme__heading">
           Track.it &nbsp;
           <FaChartLine />
         </span>
@@ -55,21 +55,22 @@ const Tracker = () => {
         <div className="mt-4 mx-auto">
           {visible && (
             <div className="mb-3">
-              <Form
+              <ExpenseForm
                 title={state.title || ''}
                 amount={state.amount || ''}
                 date={state.date || ''}
                 notes={state.notes || ''}
-                handleChange={handleChange}
-                submitAction={handleCreate}
-                cancelAction={cancelAction}
+                setter={handleChange}
+                submit={handleCreate}
+                cancel={cancelAction}
               />
+              <hr />
             </div>
           )}
           <div>
             {!visible && (
               <div className="track-it">
-                <button type="button" className="btn btn-sm" onClick={() => navigate('/et')}>
+                <button type="button" className="btn btn-sm" onClick={() => navigate('/app')}>
                   <FaChevronLeft />
                   <span className="ms-2">Back to Lists</span>
                 </button>
@@ -81,7 +82,7 @@ const Tracker = () => {
             {isLoading ? (
               <p className="page-loading"><FaSpinner /></p>
             ) : (
-              <ul className="all-expenses mt-4 pt-3">
+              <ul className="expenses mt-4 pt-3">
                 {expenses?.map((expense) => (
                   <Expense
                     key={expense.id}
@@ -93,13 +94,7 @@ const Tracker = () => {
                     onUpdate={handleUpdate}
                     onDelete={handleDelete}
                   />
-                )) ?? (
-                <li className="expense">
-                  No record of&nbsp;
-                  {listName?.toLowerCase()}
-                    &nbsp;expenses
-                </li>
-                )}
+                )) ?? <li>No record of expenses</li>}
               </ul>
             )}
           </div>

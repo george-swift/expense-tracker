@@ -6,7 +6,7 @@ exports[`Snapshot of the Header component should render correctly 1`] = `
     className="container-fluid pe-4"
   >
     <h2
-      className="wrap-theme"
+      className="theme"
     >
       <span>
         Track.it
