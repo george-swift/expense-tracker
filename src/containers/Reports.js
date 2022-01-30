@@ -57,7 +57,7 @@ const Reports = () => {
           <div>
             {isLoading
               ? <p className="page-loading"><FaSpinner /></p>
-              : <canvas ref={chartContainer} />}
+              : <canvas ref={chartContainer} width={500} height={500} />}
           </div>
         </section>
         <div className="tool-tip">

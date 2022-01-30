@@ -73,6 +73,12 @@ button[type=submit] {
   }
 }
 
+@-webkit-keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 @keyframes spin {
   100% {
     transform: rotate(360deg);
@@ -81,7 +87,8 @@ button[type=submit] {
 
 .page-loading {
   text-align: center;
-  animation: spin 1.5s linear infinite;
+  -webkit-animation: spin 1.5s linear infinite;
+          animation: spin 1.5s linear infinite;
   font-size: 300%;
 }
 
@@ -310,7 +317,6 @@ header {
   }
 
   div {
-    max-width: 450px;
     margin: 1rem auto;
   }
 }

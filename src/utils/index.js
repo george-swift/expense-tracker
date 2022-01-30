@@ -8,8 +8,6 @@ export default function buildChart(config) {
   return new Chart(ctx, {
     type: chartType,
     radius,
-    responsive: true,
-    maintainAspectRatio: false,
     data: {
       labels,
       datasets: [
@@ -21,6 +19,8 @@ export default function buildChart(config) {
       ],
     },
     options: {
+      responsive: true,
+      maintainAspectRatio: false,
       plugins: {
         title: {
           display: true,
