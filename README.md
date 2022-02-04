@@ -1,5 +1,5 @@
 # Expense Tracker
-![](./public/images/home.png)
+![](./public/images/home.webp)
 ## Live Link
 [Get started with Expense Tracker](https://redux-expense-tracker.netlify.app/)
 ## Objectives
@@ -15,12 +15,17 @@
 - Meeting model client requirements
 
 ## Features
-A single page application that allows users to keep track of expenses. After `Sign up` or `Log in`, users are authenticated and able to access the app. The home page allows for creating and managing categories of expenses. Clicking on `Track expenses` in any category opens up a `Track.it` page with information about expenses in a given list. Expenses can be added, edited and deleted as desired. The `Reports` page shows the total outcome of a user's expenses, _by categories_, in a doughnut chart. Lastly, the `Edit Profile` page allows users to edit their profile. _Expense Tracker_ is deployed on Netlify.
+A single page application that allows users to keep track of expenses. After `Sign up` or `Log in`, users are authenticated and able to access the app. The home page allows for creating and managing categories of expenses. Clicking on `Track expenses` in any category opens a page with information about expenses in a given list. Expenses can be added, edited and deleted as desired. The `Reports` page shows the total outcome of a user's expenses, _by categories_, in a doughnut chart. Lastly, the `Edit Profile` page allows users to edit their profile. _Expense Tracker_ is deployed on Netlify.
 
 _Visualisation of outcomes with Chart.js_
 
-![](./public/images/reports.png)
+![](./public/images/chart.webp)
 
+_Overview of expenses in a given category_
+![](./public/images/expense.webp)
+
+_Dark mode_
+![](./public/images/home-dark.webp)
 
 ## Prerequisites
 - Internet Connection
@@ -33,9 +38,10 @@ _Visualisation of outcomes with Chart.js_
 - React Router v6
 - Redux Toolkit
 - Redux Saga
-- Javascript ES6+
+- Javascript
 - Chart.js
-- Bootstrap 5
+- Bootstrap
+- Material UI
 - SCSS
 - HTML5/CSS3
 
@@ -43,8 +49,8 @@ _Visualisation of outcomes with Chart.js_
 ## Getting Started
 - Clone this project by running `git clone https://github.com/george-swift/expense-tracker.git`
 - Run `npm install` to install the required dependencies.
-- Clone the [back end](https://github.com/george-swift/expense-tracker-api) to allow CORS. In `config/initializers/cors.rb`,
-change `origins` to `http://localhost:FRONTENDPORT`.
+- Clone the [back end](https://github.com/george-swift/expense-tracker-api) and go to `config/initializers/cors.rb`.
+Change `origins` to `http://localhost:FRONTENDPORT`.
 - Within this frontend app, navigate to `src/constants` and set the `API_BASE_URL` to `http://localhost:BACKENDPORT`.
 - Start the backend server and run `npm start` to fire up a local server.
 - To get a production bundle, run `npm run build`

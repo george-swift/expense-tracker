@@ -1,9 +1,6 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { getUser, getNotifications } from '../selectors';
 
-export const useFormState = (data) => {
+export default function useFormState(data) {
   const [state, setState] = useState(data);
   const [visible, setVisible] = useState(false);
 
@@ -24,30 +21,16 @@ export const useFormState = (data) => {
     });
   };
 
+  const handleDate = (newDate) => setState({ ...state, date: newDate.toISOString().slice(0, 10) });
+
   const reset = () => setState(data);
 
   return {
     state,
     handleChange,
+    handleDate,
     visible,
     toggleDisplay,
     reset,
   };
-};
-
-export const useVerify = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  const { authenticated: loggedIn, user } = useSelector(getUser);
-  const { isLoading, error } = useSelector(getNotifications);
-
-  return {
-    loggedIn,
-    user,
-    isLoading,
-    error,
-    dispatch,
-    navigate,
-  };
-};
+}

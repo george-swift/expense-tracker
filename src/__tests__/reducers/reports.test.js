@@ -1,4 +1,3 @@
-import { FETCH_REPORT_SUCCESSFUL } from '../../constants';
 import reports from '../../slice/reports';
 
 describe('Testing the reports reducer', () => {
@@ -18,7 +17,7 @@ describe('Testing the reports reducer', () => {
     },
   ];
 
-  const fetchAction = { type: FETCH_REPORT_SUCCESSFUL, payload };
+  const fetchAction = { type: 'reports/fetchReportSucceeded', payload };
 
   it('should be an empty array by default', () => {
     expect(reports(undefined, [])).toStrictEqual([]);

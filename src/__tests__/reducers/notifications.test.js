@@ -1,4 +1,4 @@
-import { FETCH_LISTS_SUCCESSFUL, REQUEST_FAILED } from '../../constants';
+import { REQUEST_FAILED } from '../../utils';
 import notifications from '../../slice/notifications';
 
 describe('Testing the notifications reducer', () => {
@@ -24,7 +24,7 @@ describe('Testing the notifications reducer', () => {
 
   it('should update the error and loading states in the store when an async operation is successful', () => {
     const mockStore = notifications(undefined, failedAction);
-    const succesfulAction = ({ type: FETCH_LISTS_SUCCESSFUL });
+    const succesfulAction = ({ type: 'lists/fetchListsSucceeded' });
 
     expect(notifications(mockStore, succesfulAction))
       .toStrictEqual(
