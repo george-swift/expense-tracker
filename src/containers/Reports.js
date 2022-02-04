@@ -1,71 +1,58 @@
-import { useCallback, useEffect, useRef } from 'react';
+import DonutLargeTwoToneIcon from '@mui/icons-material/DonutLargeTwoTone';
+import { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
-import { FaSpinner } from 'react-icons/fa';
-import { useVerify } from '../hooks';
-import { dataList, defaultColor } from '../constants';
-import buildChart from '../utils';
+import { isReportAvailable, getTotalExpenses } from '../selectors';
+import { suggested, miscellaenous, buildChart } from '../utils';
 import Header from '../components/Header';
+import Progress from '../components/Progress';
 import FlashMessage from '../components/FlashMessage';
 
-const Reports = () => {
+export default function Reports() {
+  const userSpent = useSelector(isReportAvailable);
+  const { isLoading, error } = useSelector((state) => state.notifications);
+
   const chartContainer = useRef(null);
-  const { isLoading, error } = useVerify();
-  const lists = useSelector((state) => state.lists);
-  const expenditure = useSelector((state) => state.reports);
+  const outcomes = useSelector(getTotalExpenses);
 
-  const allCategories = lists?.map(({ id, name }) => {
-    const total = expenditure
-      ?.filter((expense) => expense.list_id === id)
-      .reduce((sum, expense) => sum + expense.amount, 0);
-    return { name, total };
-  });
-
-  const initChartData = useCallback(() => {
+  const initChartData = () => {
     const ctx = chartContainer?.current;
     const chartType = 'doughnut';
-    const labels = allCategories.map(({ name }) => name);
-    const data = allCategories.map(({ total }) => total);
-
+    const labels = outcomes.map(({ name }) => name);
+    const data = outcomes.map(({ total }) => total);
     const backgroundColor = labels
-      .map((category) => dataList
-        .find(({ value }) => category === value)?.color ?? defaultColor);
-
+      .map((name) => suggested
+        .find(({ label }) => name === label)?.color ?? miscellaenous);
     const config = {
       ctx, labels, data, backgroundColor, chartType,
     };
-
     return config;
-  }, [expenditure]);
+  };
 
   useEffect(() => {
-    const config = initChartData();
-    const chart = buildChart(config);
+    if (!userSpent) return () => {};
+
+    const chart = buildChart(initChartData());
     return () => chart.destroy();
   }, []);
 
   return (
     <>
       <Header>
-        <span className="theme__heading">Reports</span>
+        <span className="theme__heading">
+          <DonutLargeTwoToneIcon />
+        </span>
       </Header>
+      {error && <FlashMessage message={error} />}
       <div className="wrap-page">
-        {error !== null && (
-          <FlashMessage>{ error }</FlashMessage>
-        )}
         <section className="outcome">
-          <h3>Total Outcome</h3>
-          <div>
-            {isLoading
-              ? <p className="page-loading"><FaSpinner /></p>
-              : <canvas ref={chartContainer} width={500} height={500} />}
-          </div>
+          <h3>Overview of expenses</h3>
+          {userSpent ? (
+            <div>
+              {isLoading ? <Progress /> : <canvas ref={chartContainer} width={500} height={500} />}
+            </div>
+          ) : <p className="mt-5 text-center">No record</p>}
         </section>
-        <div className="tool-tip">
-          <small>* Refresh page to reflect recent changes</small>
-        </div>
       </div>
     </>
   );
-};
-
-export default Reports;
+}
