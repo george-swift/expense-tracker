@@ -1,8 +1,4 @@
-import {
-  AUTHENTICATE_USER,
-  EDIT_USER_SUCCESSFUL,
-  SIGN_OUT_SUCCESSFUL,
-} from '../../constants';
+import { AUTH_USER } from '../../utils';
 
 import user from '../../slice/user';
 
@@ -13,7 +9,7 @@ describe('Testing the user reducer', () => {
     email: 'testuser@test.com',
   };
 
-  const authAction = { type: AUTHENTICATE_USER, payload };
+  const authAction = { type: AUTH_USER, payload };
 
   const mockStore = user(undefined, authAction);
 
@@ -31,7 +27,7 @@ describe('Testing the user reducer', () => {
     };
 
     const editAction = {
-      type: EDIT_USER_SUCCESSFUL,
+      type: 'user/editUserSucceeded',
       payload: newPayload,
     };
 
@@ -41,7 +37,7 @@ describe('Testing the user reducer', () => {
   });
 
   it('should return to default state when users sign out', () => {
-    const signOutAction = { type: SIGN_OUT_SUCCESSFUL };
+    const signOutAction = { type: 'user/signOutSucceeded' };
 
     expect(user(mockStore, signOutAction)).toStrictEqual(
       expect.objectContaining({

@@ -2,7 +2,7 @@ import { recordSaga } from '../../sagas';
 import * as api from '../../api';
 import * as saga from '../../sagas/listSagas';
 import { createList } from '../../actions';
-import { CREATE_LIST_SUCCESSFUL, REQUEST_FAILED } from '../../constants';
+import { REQUEST_FAILED } from '../../utils';
 
 describe('Testing the list saga', () => {
   const userId = 2;
@@ -35,7 +35,7 @@ describe('Testing the list saga', () => {
     expect(api.createList).toHaveBeenCalledWith(userId, payload);
 
     expect(dispatched).toContainEqual({
-      type: CREATE_LIST_SUCCESSFUL,
+      type: 'lists/createListSucceeded',
       payload: mockResponse,
     });
   });
