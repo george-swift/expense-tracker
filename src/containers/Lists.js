@@ -1,55 +1,42 @@
-import { useSelector } from 'react-redux';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
-import { FaPlus, FaWindowClose, FaSpinner } from 'react-icons/fa';
-import { useFormState, useVerify } from '../hooks';
-import {
-  createList, fetchExpenses, updateList, deleteList,
-} from '../actions';
+import Fab from '@mui/material/Fab';
+import HomeIcon from '@mui/icons-material/Home';
+import AddIcon from '@mui/icons-material/Add';
+import CloseIcon from '@mui/icons-material/Close';
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+import { createList, fetchExpenses, deleteList } from '../actions';
+import { getAuthedUser, getAvailableOptions } from '../selectors';
+import { actionTheme } from '../utils';
 import Header from '../components/Header';
 import FlashMessage from '../components/FlashMessage';
 import List from '../components/List';
-import { dataList } from '../constants';
-import { getLists } from '../selectors';
 
-const Lists = () => {
-  const {
-    user, isLoading, error, dispatch, navigate,
-  } = useVerify();
+export default function Lists() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { authedUserID, authedUserName } = useSelector(getAuthedUser);
+  const { lists, suggested } = useSelector(getAvailableOptions);
+  const { error } = useSelector((state) => state.notifications);
 
-  const [handle] = user?.username.split(/\s/) ?? '';
+  const [visible, setVisible] = useState(false);
+  const toggleDisplay = () => setVisible((visible) => !visible);
 
-  const lists = useSelector(getLists);
-  const listNames = lists?.map((list) => list.name);
-  const availableOptions = dataList.filter(({ value }) => !listNames?.includes(value));
-
-  const {
-    state = {}, handleChange, visible, toggleDisplay, reset,
-  } = useFormState();
-
-  const addList = () => {
-    if (visible) {
-      toggleDisplay();
-      reset();
-    } else {
-      toggleDisplay();
-    }
-  };
-
-  const handleUpdate = (id, data) => dispatch(updateList(id, data));
-
+  const [category, setCategory] = useState({ name: '' });
+  const handleChange = (_, name) => setCategory({ name });
   const handleDelete = (id) => dispatch(deleteList(id));
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (listNames?.includes(state.name)) return;
-    dispatch(createList(user?.id, state));
+    if (!category.name.length) return;
+    dispatch(createList(authedUserID, category));
     toggleDisplay();
-    reset();
   };
 
   const view = (id, name) => {
-    const query = `/app/tracker?id=${id}&list=${name}`;
+    const query = `/app/track?id=${id}&list=${name}`;
     dispatch(fetchExpenses(id));
     navigate(query, { replace: true });
   };
@@ -57,62 +44,63 @@ const Lists = () => {
   return (
     <>
       <Header>
-        <span className="theme__heading">Home</span>
+        <span className="theme__heading"><HomeIcon fontSize="large" /></span>
       </Header>
       <div className="wrap-page">
-        {error !== null && <FlashMessage>{error}</FlashMessage>}
+        {error && <FlashMessage message={error} />}
 
         <section className="col-lg-4 offset-lg-4 mb-3">
-          <Card className="custom-card">
+          <Card>
             <Card.Body>
               <Card.Title>
-                Hello,&nbsp;
-                <span className="fs-4 fw-bold">{handle}</span>
+                Hello 👋🏼 &nbsp;
+                <span className="fs-3 fw-bold">{authedUserName}</span>
               </Card.Title>
-              <Card.Text>
-                <Button variant="outline-info" size="sm" onClick={addList}>
-                  {visible ? <FaWindowClose /> : <FaPlus />}
-                </Button>
-                <span>{visible ? 'Click to close' : 'Add category'}</span>
-              </Card.Text>
+              {!visible && suggested.length > 0 && (
+                <Card.Text>
+                  <span>Add category</span>
+                  <Fab size="small" sx={actionTheme} aria-label="add" onClick={toggleDisplay}>
+                    <AddIcon />
+                  </Fab>
+                </Card.Text>
+              )}
             </Card.Body>
           </Card>
         </section>
 
-        {isLoading && <p className="page-loading"><FaSpinner /></p>}
-
         {visible && (
           <form className="col-lg-4 offset-lg-4" onSubmit={handleSubmit}>
-            <input className="me-3 size-md" list="categories" name="name" onChange={handleChange} />
-            <datalist id="categories">
-              {availableOptions.map(({ value, color }) => (
-                <option key={color} value={value} aria-label="category" />
-              ))}
-            </datalist>
-            <button className="btn btn-sm" type="submit">Create</button>
+            <Autocomplete
+              disablePortal
+              inputValue={category.name}
+              onInputChange={handleChange}
+              options={suggested}
+              sx={{ width: 180 }}
+              size="small"
+              // eslint-disable-next-line react/jsx-props-no-spreading
+              renderInput={(params) => <TextField {...params} label="Category" />}
+            />
+            <button className="btn ms-2" type="submit">ADD</button>
+            <Fab sx={actionTheme} size="small" aria-label="add" onClick={toggleDisplay}>
+              <CloseIcon />
+            </Fab>
           </form>
         )}
 
         <ul className="lists">
-          <h4>Categories</h4>
-          {lists?.map(({ id, name }) => (
+          {lists.map(({ id, name }) => (
             <List
               key={id}
               id={id}
               name={name}
-              trackExpenses={view}
-              updateList={handleUpdate}
-              deleteList={handleDelete}
+              track={view}
+              discard={handleDelete}
             />
-          )) ?? (
-            <li>
-              <p className="mb-0 fst-italic">No lists of expenses available</p>
-            </li>
-          )}
+          ))}
         </ul>
+
+        {!lists.length && (<p className="p-3 text-center">No records</p>)}
       </div>
     </>
   );
-};
-
-export default Lists;
+}
