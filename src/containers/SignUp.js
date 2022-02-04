@@ -1,26 +1,28 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { FaCoins, FaSpinner } from 'react-icons/fa';
-import { useVerify } from '../hooks';
-import { clearNotifications, signUpRequest } from '../actions';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import CreditScoreTwoToneIcon from '@mui/icons-material/CreditScoreTwoTone';
+import { signUpRequest } from '../actions';
 import FlashMessage from '../components/FlashMessage';
+import Progress from '../components/Progress';
 import UserForm from '../components/UserForm';
 
-const SignUp = () => {
+export default function SignUp() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const authed = useSelector((state) => state.user.authenticated);
+  const { isLoading, error } = useSelector((state) => state.notifications);
+
+  useEffect(() => {
+    if (authed) navigate('/app', { replace: true });
+  }, [authed]);
+
   const [state, setState] = useState({
     username: '',
     email: '',
     password: '',
     password_confirmation: '',
   });
-
-  const {
-    loggedIn, isLoading, error, dispatch, navigate,
-  } = useVerify();
-
-  useEffect(() => {
-    if (loggedIn) navigate('/app', { replace: true });
-  }, [loggedIn]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -41,36 +43,26 @@ const SignUp = () => {
     dispatch(signUpRequest(state));
   };
 
-  const resetFlash = () => {
-    if (error !== null) dispatch(clearNotifications());
-  };
-
   return (
     <div className="container pt-4 row mx-0">
-      {error !== null && <FlashMessage>{error}</FlashMessage>}
+      {error && <FlashMessage message={error} />}
 
       <div className="mw-md mx-auto">
-        <Link to="/" className="text-secondary">
-          <FaCoins className="display-6 mb-3" />
-        </Link>
-        <h2 className="mb-4">Create your account</h2>
-        {isLoading
-          ? (<p className="page-loading"><FaSpinner /></p>)
+        <CreditScoreTwoToneIcon fontSize="large" />
+        <h2 className="my-3">Create your account</h2>
+        {isLoading ? <Progress />
           : (
             <UserForm
-              auth={loggedIn}
+              auth={authed}
               username={state.username}
               email={state.email}
               password={state.password}
               confirm={state.password_confirmation}
               setter={handleChange}
               submit={handleSubmit}
-              reset={resetFlash}
             />
           )}
       </div>
     </div>
   );
-};
-
-export default SignUp;
+}
