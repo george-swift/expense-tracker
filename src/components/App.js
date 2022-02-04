@@ -1,8 +1,9 @@
 import '../assets/App.scss';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useMemo, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { clearNotifications } from '../actions';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { authenticateUser } from '../slice/user';
 import Home from './Home';
 import Main from './Main';
@@ -12,25 +13,35 @@ import LogIn from '../containers/LogIn';
 
 const App = () => {
   const dispatch = useDispatch();
-  const resetAlerts = () => dispatch(clearNotifications());
 
   useEffect(() => {
-    const storage = localStorage.getItem('exp_tracker');
-    if (storage) {
-      dispatch(authenticateUser(JSON.parse(storage)));
+    const auth = localStorage.getItem('exp_tracker');
+    if (auth) {
+      dispatch(authenticateUser(JSON.parse(auth)));
     }
   }, []);
 
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+
+  const theme = useMemo(() => createTheme({
+    palette: {
+      mode: prefersDarkMode ? 'dark' : 'light',
+    },
+  }),
+  [prefersDarkMode]);
+
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home reset={resetAlerts} />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/login" element={<LogIn />} />
-        <Route path="/app/*" element={<Main />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </BrowserRouter>
+    <ThemeProvider theme={theme}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/login" element={<LogIn />} />
+          <Route path="/app/*" element={<Main />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 };
 

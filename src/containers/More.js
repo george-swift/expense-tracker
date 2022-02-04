@@ -1,14 +1,17 @@
-import { FaPencilAlt, FaSpinner, FaUserCircle } from 'react-icons/fa';
-import { useFormState, useVerify } from '../hooks';
+import { useDispatch, useSelector } from 'react-redux';
+import { FaUserCircle } from 'react-icons/fa';
+import EditIcon from '@mui/icons-material/Edit';
+import ManageAccountsTwoToneIcon from '@mui/icons-material/ManageAccountsTwoTone';
+import useFormState from '../hooks';
 import { editUserRequest } from '../actions';
 import Header from '../components/Header';
 import FlashMessage from '../components/FlashMessage';
 import UserForm from '../components/UserForm';
 
-const More = () => {
-  const {
-    loggedIn, user, dispatch, isLoading, error,
-  } = useVerify();
+export default function More() {
+  const dispatch = useDispatch();
+  const { authenticated, user } = useSelector((state) => state.user);
+  const { error } = useSelector((state) => state.notifications);
 
   const { state, handleChange, toggleDisplay } = useFormState(user);
 
@@ -21,31 +24,32 @@ const More = () => {
   return (
     <div>
       <Header>
-        <span className="theme__heading">Profile</span>
+        <span className="theme__heading">
+          <ManageAccountsTwoToneIcon />
+        </span>
       </Header>
+
+      {error && <FlashMessage message={error} />}
 
       <div className="wrap-page user">
         <section className="user__info">
           <p className="text-center fw-bold">
-            <FaUserCircle className="user__avatar mb-2" />
+            <FaUserCircle className="user__avatar mb-3" />
             <br />
-            <span className="fs-5">{user?.username}</span>
+            <span className="fs-3">{user?.username}</span>
             <br />
-            <span className="fs-6 fw-lighter">{user?.email}</span>
+            <small>{user?.email}</small>
           </p>
         </section>
         <section className="row user__editor">
           <div className="col-md-4 offset-md-4">
             <h4>
-              <span className="me-3">Edit Profile</span>
-              <FaPencilAlt className="fs-6" />
+              <span className="me-3">Manage account</span>
+              <EditIcon />
             </h4>
-            {error !== null && <FlashMessage>{error}</FlashMessage>}
-
-            {isLoading && <p className="page-loading"><FaSpinner /></p>}
 
             <UserForm
-              auth={loggedIn}
+              auth={authenticated}
               username={state?.username || ''}
               email={state?.email || ''}
               setter={handleChange}
@@ -56,6 +60,4 @@ const More = () => {
       </div>
     </div>
   );
-};
-
-export default More;
+}

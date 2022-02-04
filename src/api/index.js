@@ -1,10 +1,8 @@
 import axios from 'axios';
-import { API_BASE_URL } from '../constants';
 
-const client = axios.create({
-  baseURL: API_BASE_URL,
-  withCredentials: true,
-});
+export const baseURL = 'https://api-expense-tracker.herokuapp.com/';
+
+const client = axios.create({ baseURL, withCredentials: true });
 
 client.interceptors.request.use((config) => {
   const storage = localStorage.getItem('exp_tracker');

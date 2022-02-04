@@ -1,7 +1,10 @@
-import { call, put } from '@redux-saga/core/effects';
-import { requestFailed } from '../actions';
+import {
+  call, put, takeEvery, takeLatest,
+} from '@redux-saga/core/effects';
 import * as api from '../api';
-import { createListSucceeded, deleteListSucceeded, updateListSucceeded } from '../slice/lists';
+import { requestFailed } from '../actions';
+import { createListSucceeded, updateListSucceeded, deleteListSucceeded } from '../slice/lists';
+import { CREATE_LIST, UPDATE_LIST, DELETE_LIST } from '../utils';
 
 export function* createList({ payload }) {
   const { id, data: list } = payload;
@@ -31,3 +34,11 @@ export function* deleteList({ payload }) {
     yield put(requestFailed(e.message));
   }
 }
+
+const listSagas = () => ([
+  takeEvery(CREATE_LIST, createList),
+  takeLatest(UPDATE_LIST, updateList),
+  takeLatest(DELETE_LIST, deleteList),
+]);
+
+export default listSagas;

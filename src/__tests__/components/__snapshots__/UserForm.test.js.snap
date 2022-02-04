@@ -156,7 +156,7 @@ exports[`Snapshot of the user form component should render edit form correctly i
     />
   </div>
   <button
-    className="w-100 btn btn-primary"
+    className="w-100 mt-3 btn btn-primary"
     disabled={false}
     type="submit"
   >

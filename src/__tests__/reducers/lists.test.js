@@ -1,8 +1,3 @@
-import {
-  FETCH_LISTS_SUCCESSFUL, CREATE_LIST_SUCCESSFUL,
-  UPDATE_LIST_SUCCESSFUL, DELETE_LIST_SUCCESSFUL,
-} from '../../constants';
-
 import lists from '../../slice/lists';
 
 describe('Testing the lists reducer', () => {
@@ -19,7 +14,7 @@ describe('Testing the lists reducer', () => {
   };
 
   const mockStore = lists(undefined, {
-    type: FETCH_LISTS_SUCCESSFUL,
+    type: 'lists/fetchListsSucceeded',
     payload: [listOne, listTwo],
   });
 
@@ -31,7 +26,7 @@ describe('Testing the lists reducer', () => {
     const dataFromDB = [listOne, listTwo];
 
     const fetchComplete = {
-      type: FETCH_LISTS_SUCCESSFUL,
+      type: 'lists/fetchListsSucceeded',
       payload: dataFromDB,
     };
 
@@ -47,7 +42,7 @@ describe('Testing the lists reducer', () => {
       user_id: 112,
     };
 
-    const onCreate = { type: CREATE_LIST_SUCCESSFUL, payload };
+    const onCreate = { type: 'lists/createListSucceeded', payload };
     const updatedMockStore = lists(mockStore, onCreate);
 
     expect(updatedMockStore).toHaveLength(3);
@@ -63,7 +58,7 @@ describe('Testing the lists reducer', () => {
       name: 'Utilities',
     };
 
-    const onUpdate = { type: UPDATE_LIST_SUCCESSFUL, payload };
+    const onUpdate = { type: 'lists/updateListSucceeded', payload };
     const updatedMockStore = lists(mockStore, onUpdate);
 
     expect(updatedMockStore).toStrictEqual(
@@ -73,7 +68,7 @@ describe('Testing the lists reducer', () => {
 
   it('should update the state of the store when a list is deleted', () => {
     const onDelete = {
-      type: DELETE_LIST_SUCCESSFUL,
+      type: 'lists/deleteListSucceeded',
       payload: listOne.id,
     };
 

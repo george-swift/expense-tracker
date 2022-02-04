@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom/extend-expect';
 import renderer from 'react-test-renderer';
 import { Provider } from 'react-redux';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Home from '../../components/Home';
 import store from '../../__mocks__/mockstore';
@@ -39,10 +39,6 @@ describe('Querying the Home component', () => {
     expect(signUpLink).toBeInTheDocument();
 
     expect(signUpLink).toHaveAttribute('href', '/signup');
-
-    fireEvent.click(signUpLink);
-
-    expect(ui).toHaveBeenCalledTimes(1);
   });
 
   it('should have a button for redirecting users to log in', () => {
@@ -51,9 +47,5 @@ describe('Querying the Home component', () => {
     expect(logInLink).toBeInTheDocument();
 
     expect(logInLink).toHaveAttribute('href', '/login');
-
-    fireEvent.click(logInLink);
-
-    expect(ui).toHaveBeenCalledTimes(1);
   });
 });

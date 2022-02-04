@@ -1,17 +1,20 @@
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
-import { FaDoorOpen } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import LogoutTwoToneIcon from '@mui/icons-material/LogoutTwoTone';
 import { signOutRequest } from '../actions';
-import { useVerify } from '../hooks';
 
 const Header = ({ children }) => {
-  const { loggedIn, dispatch, navigate } = useVerify();
-  const handleSignOut = () => dispatch(signOutRequest());
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const authed = useSelector((state) => state.user.authenticated);
 
   useEffect(() => {
-    if (loggedIn === false) navigate('/', { replace: true });
-  }, [loggedIn]);
+    if (authed === false) navigate('/', { replace: true });
+  }, [authed]);
+
+  const handleSignOut = () => dispatch(signOutRequest());
 
   return (
     <header>
@@ -19,8 +22,8 @@ const Header = ({ children }) => {
         <h2 className="theme">
           { children }
           <Link to="/" className="center" onClick={handleSignOut}>
-            <span className="fs-6 me-3">Sign out</span>
-            <FaDoorOpen className="fs-5" />
+            <span>Sign out</span>
+            <LogoutTwoToneIcon fontSize="small" />
           </Link>
         </h2>
       </div>

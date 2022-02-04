@@ -1,8 +1,3 @@
-import {
-  FETCH_EXPENSES_SUCCESSFUL, CREATE_EXPENSE_SUCCESSFUL,
-  UPDATE_EXPENSE_SUCCESSFUL, DELETE_EXPENSE_SUCCESSFUL,
-} from '../../constants';
-
 import expenses from '../../slice/expenses';
 
 describe('Testing the expenses reducer', () => {
@@ -21,8 +16,8 @@ describe('Testing the expenses reducer', () => {
     date: '2021-08-01',
   };
 
-  const mockStore = expenses(undefined, {
-    type: FETCH_EXPENSES_SUCCESSFUL,
+  const mockState = expenses(undefined, {
+    type: 'expenses/fetchExpensesSucceeded',
     payload: [expenseOne, expenseTwo],
   });
 
@@ -34,7 +29,7 @@ describe('Testing the expenses reducer', () => {
     const dataFromDB = [expenseOne, expenseTwo];
 
     const fetchComplete = {
-      type: FETCH_EXPENSES_SUCCESSFUL,
+      type: 'expenses/fetchExpensesSucceeded',
       payload: dataFromDB,
     };
 
@@ -50,8 +45,8 @@ describe('Testing the expenses reducer', () => {
       user_id: 112,
     };
 
-    const onCreate = { type: CREATE_EXPENSE_SUCCESSFUL, payload };
-    const updatedMockStore = expenses(mockStore, onCreate);
+    const onCreate = { type: 'expenses/createExpenseSucceeded', payload };
+    const updatedMockStore = expenses(mockState, onCreate);
 
     expect(updatedMockStore).toHaveLength(3);
 
@@ -66,8 +61,8 @@ describe('Testing the expenses reducer', () => {
       name: 'Utilities',
     };
 
-    const onUpdate = { type: UPDATE_EXPENSE_SUCCESSFUL, payload };
-    const updatedMockStore = expenses(mockStore, onUpdate);
+    const onUpdate = { type: 'expenses/updateExpenseSucceeded', payload };
+    const updatedMockStore = expenses(mockState, onUpdate);
 
     expect(updatedMockStore).toStrictEqual(
       expect.arrayContaining([expenseOne, payload]),
@@ -76,11 +71,11 @@ describe('Testing the expenses reducer', () => {
 
   it('should update the state of the store when a expense is deleted', () => {
     const onDelete = {
-      type: DELETE_EXPENSE_SUCCESSFUL,
+      type: 'expenses/deleteExpenseSucceeded',
       payload: expenseOne.id,
     };
 
-    expect(expenses(mockStore, onDelete)).toStrictEqual(
+    expect(expenses(mockState, onDelete)).toStrictEqual(
       expect.arrayContaining([expenseTwo]),
     );
   });

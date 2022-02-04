@@ -1,5 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 @import 'shared';
+
+@font-face {
+  font-family: 'Gilroy';
+  font-style: normal;
+  font-weight: bold;
+  src: url('./fonts/Gilroy-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Gilroy';
+  font-style: normal;
+  font-weight: normal;
+  src: url('./fonts/Gilroy-Regular.woff2') format('woff');
+}
 
 *,
 *::before,
@@ -8,7 +21,8 @@
 }
 
 body {
-  font-family: $fontPoppins;
+  font-family: 'Gilroy', sans-serif;
+  font-weight: normal;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -26,85 +40,84 @@ ul {
 }
 
 button[type=submit] {
-  @extend .color-mix;
+  @extend .bg-lightPurple;
 
   border-radius: 0 0.25rem 0;
   border: none;
 
   &:hover,
   &:focus {
-    @extend .color-mix-one;
+    @extend .bg-darkPurple;
 
     box-shadow: none;
   }
 }
 
 .home {
-  @extend .center;
+  @extend .flex-Center;
 
   flex-direction: column;
   min-height: 100vh;
-  background-color: $smoke;
+  background-color: $offWhite;
   color: $purple;
-}
 
-.home-btn {
-  width: 250px;
-  margin-bottom: 1rem;
-  border: 1px solid $purple;
-  border-radius: 20rem;
+  &__banner {
+    margin-bottom: 1.5rem;
+    text-align: center;
 
-  &:first-of-type {
-    @extend .color-mix;
+    h1,
+    p {
+      margin-bottom: 1rem;
+    }
   }
 
-  &:hover {
-    @include transform;
-  }
-}
-
-.brand {
-  margin-bottom: 1.5rem;
-  text-align: center;
-
-  h1,
-  p {
+  &__btn {
+    width: 250px;
     margin-bottom: 1rem;
-  }
-}
+    border: 1px solid $purple;
+    border-radius: 20rem;
 
-@keyframes spin {
-  100% {
-    transform: rotate(360deg);
-  }
-}
+    &:first-of-type {
+      @extend .bg-lightPurple;
+    }
 
-.page-loading {
-  text-align: center;
-  animation: spin 1.5s linear infinite;
-  font-size: 300%;
+    &:hover {
+      @include transform;
+    }
+  }
 }
 
 header {
-  @extend .center;
+  @extend .flex-Center;
 
   height: 8vh;
-  background-color: $smoke;
-  border-bottom: $dark-border;
+  background-color: $offWhite;
 }
 
 .theme {
-  @extend .center;
+  @extend .flex-Center;
 
   justify-content: space-between;
   margin-bottom: 0;
 
-  a { color: $black; }
-}
+  a {
+    color: $purple;
 
-.theme__heading {
-  font-size: calc(1.3rem + 0.6vw);
-  text-align: center;
+    span {
+      margin-right: 1rem;
+      font-size: 1rem;
+      text-transform: uppercase;
+    }
+
+    &:hover {
+      font-weight: bold;
+    }
+  }
+
+  &__heading {
+    color: $purple;
+    font-size: calc(1.75rem + 0.6vw);
+  }
 }
 
 .theme__heading,
@@ -117,12 +130,17 @@ header {
   overflow-y: scroll;
 
   form {
-    @extend .center;
+    display: flex;
+    justify-content: center;
   }
 
   h3 {
     margin: 1rem 0;
     text-align: center;
+  }
+
+  .btn:focus {
+    box-shadow: 0 0 0 0.25rem $offWhite;
   }
 }
 
@@ -133,51 +151,33 @@ header {
   }
 }
 
-.custom-card {
+.card {
   padding-top: 2rem;
   border: none;
   border-radius: 0;
   text-align: center;
 
+  &-title {
+    color: $light-purple;
+    font-size: 1.4rem;
+    margin-bottom: 0.85rem;
+  }
+
   p {
-    @extend .center;
-  }
+    @extend .flex-Center;
 
-  .btn {
-    @extend .color-mix;
-
-    padding: 0.3rem 0.5rem;
-    font-size: $fz-sm;
-    margin-right: 0.75rem;
-    border: 1px solid $purple;
-    transition: transform 0.2s;
-
-    &:hover {
-      @extend .color-mix-one;
-
-      transform: scale(1.1);
-    }
-
-    &:focus {
-      box-shadow: 0 0 0 0.2rem $smoke;
-    }
-  }
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-
-  li {
-    max-width: 320px;
+    font-size: $fz-lg;
+    text-transform: uppercase;
+    color: $purple;
   }
 }
 
 .lists {
-  @extend .grid;
-
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  gap: 0.85rem;
   max-width: 1050px;
-  margin: 2rem auto 1.5rem;
+  margin: 5rem auto 1.5rem;
   padding: 0 1.2rem;
 
   h4 {
@@ -191,24 +191,25 @@ header {
     padding: 0;
     margin-bottom: 1rem;
     margin-right: 0.5rem;
-    background-color: $smoke;
+    background-color: $offWhite;
+    border-radius: 0 0.25rem 0;
+
+    &:hover {
+      box-shadow: 0 0.35rem 0.75rem $light-purple;
+    }
   }
 }
 
 .list {
-  display: flex;
+  @extend .flex-Between;
+
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  position: relative;
+  color: $purple;
 
-  &__name {
-    display: flex;
-    align-items: center;
-    margin-bottom: 0.55rem;
-
-    span {
-      color: $grey;
-    }
+  &__icon {
+    font-size: calc(1.355rem + 0.9vw);
   }
 
   &__btn {
@@ -217,87 +218,49 @@ header {
     font-weight: 700;
     font-size: $fz-md;
 
-    @extend .color-mix;
-  }
+    @extend .bg-lightPurple;
 
-  &__editor {
-    flex-direction: column;
-
-    input {
-      @extend .size-md;
-
-      margin: 0 auto 1rem;
-      min-height: calc(1.5em + (0.5rem + 2px));
-      padding: 0.25rem 0.5rem;
-      font-size: $fz-lg + 0.05rem;
-      border-radius: 0.2rem;
+    &:hover {
+      @extend .bg-darkPurple;
     }
 
-    .list__btn {
-      padding: 0.25rem 0.5rem;
-
-      &:first-of-type {
-        min-width: 120px;
-      }
-
-      &:last-of-type {
-        min-width: 65px;
-        margin-left: 1rem;
-      }
+    & + .list__btn {
+      position: absolute;
+      top: 0;
+      right: 0;
+      min-width: 0;
+      margin-top: -16px;
     }
   }
 }
 
-.toggle {
-  border-radius: 0 0.25rem 0;
-  border: transparent;
-  color: $purple;
-  font-size: $fz-lg;
+.tracker {
+  max-width: 1050px;
+  margin-left: auto;
+  margin-right: auto;
+
+  h3 {
+    font-weight: 600;
+    color: $purple;
+  }
 }
 
-.track-it {
-  display: flex;
-  justify-content: space-between;
-  padding: 0 0.5rem;
+.actions {
+  @extend .flex-Between;
+
   margin-bottom: 1rem;
 
   .btn-sm {
     display: flex;
     align-items: center;
 
-    @extend .color-mix;
+    @extend .bg-lightPurple;
 
     letter-spacing: -0.8px;
 
     &:hover {
-      @extend .color-mix-one;
+      @extend .bg-darkPurple;
     }
-  }
-}
-
-.expenses {
-  @extend .grid;
-
-  li {
-    background-color: $smoke;
-    border: 1px solid $purple;
-    border-radius: 5px;
-    padding: 0.5rem;
-    margin-bottom: 1rem;
-
-    .details {
-      display: flex;
-      align-items: flex-end;
-    }
-
-    .amount { color: $purple; }
-
-    small {
-      color: $grey;
-      font-size: $fz-md;
-    }
-
-    .notes { font-size: $fz-lg; }
   }
 }
 
@@ -305,20 +268,14 @@ header {
   padding: 1rem;
 
   h3 {
+    color: $purple;
     letter-spacing: -0.75px;
     font-weight: 600;
   }
 
   div {
-    max-width: 450px;
     margin: 1rem auto;
   }
-}
-
-.tool-tip {
-  text-align: center;
-  color: $grey;
-  font-size: $fz-lg;
 }
 
 .user {
@@ -328,11 +285,19 @@ header {
   }
 
   &__info {
-    @extend .center;
-    @extend .color-mix-one;
+    @extend .flex-Center;
+    @extend .bg-darkPurple;
+
+    small {
+      color: $light-purple;
+    }
   }
 
-  &__avatar { font-size: 7.5rem; }
+  &__avatar {
+    border: 0.5rem solid $light-purple;
+    border-radius: 100%;
+    font-size: 9rem;
+  }
 
   &__editor {
     margin: 0;
@@ -340,8 +305,10 @@ header {
     background-color: $smoke;
 
     h4 {
-      @extend .center;
+      @extend .flex-Center;
 
+      color: $light-purple;
+      text-transform: uppercase;
       text-align: center;
     }
 
@@ -352,41 +319,40 @@ header {
       input {
         width: 100%;
       }
+
+      label {
+        color: $purple;
+      }
     }
   }
 }
 
-.app-nav {
+.navigate {
   position: absolute;
-  bottom: 1.5rem;
-}
-
-.trigger {
-  font-weight: bold;
-  border: none;
-  color: $purple;
-
-  &:focus {
-    box-shadow: 0 0 0 0.25rem $smoke;
-  }
+  right: 0;
+  bottom: 1.35rem;
 }
 
 .offcanvas-header {
-  @extend .color-mix;
+  @extend .bg-lightPurple;
 }
 
 .offcanvas-body {
-  @extend .color-mix-one;
+  @extend .bg-darkPurple;
 
   padding-top: 0.45rem;
 
   * {
-    @extend .color-mix-one;
+    @extend .bg-darkPurple;
   }
 }
 
 .nav-link {
+  text-transform: uppercase;
+  font-size: 1.25rem;
+
   &:hover {
+    border: 1px solid $smoke;
     font-size: $fz-xl;
   }
 
@@ -396,31 +362,62 @@ header {
   }
 }
 
-@media screen and (max-width: 1000px) {
-  .expenses {
-    grid-template-columns: repeat(2, 1fr);
-
-    li { max-width: 350px; }
+@media (prefers-color-scheme: dark) {
+  body,
+  .lists li {
+    background-color: $black;
   }
-}
 
-@media screen and (max-width: 600px) {
-  .grid {
-    grid-template-columns: 1fr;
-  }
-}
+  .home {
+    background-color: transparent;
 
-@media screen and (max-width: 480px) {
-  .grid {
-    li {
-      max-width: 100%;
-      margin-right: 0;
-      grid-column: 1 / -1;
+    &__btn,
+    &__btn:hover {
+      color: $offWhite;
+    }
+
+    &__btn:hover {
+      background-color: $purple;
     }
   }
 
-  .expenses li {
-    margin-left: 1rem;
-    margin-right: 1rem;
+  header {
+    background-color: $purple;
+    border: $dark-border;
+  }
+
+  .mw-md,
+  .mw-md a,
+  .theme__heading,
+  .theme a,
+  .outcome h3,
+  .tracker h3 {
+    color: $offWhite;
+  }
+
+  .card {
+    background-color: transparent;
+
+    &-title,
+    p {
+      color: $offWhite;
+    }
+  }
+
+  .lists li {
+    border: 1px solid $light-purple;
+  }
+
+  h1,
+  .list {
+    color: $light-purple;
+  }
+
+  .user__editor {
+    background-color: transparent;
+
+    form label {
+      color: $light-purple;
+    }
   }
 }

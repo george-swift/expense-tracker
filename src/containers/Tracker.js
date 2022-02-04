@@ -1,30 +1,38 @@
-import { FaChartLine, FaChevronLeft, FaSpinner } from 'react-icons/fa';
-import { useSearchParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { useFormState, useVerify } from '../hooks';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import Fab from '@mui/material/Fab';
+import AddIcon from '@mui/icons-material/Add';
+import ArrowCircleLeftTwoToneIcon from '@mui/icons-material/ArrowCircleLeftTwoTone';
+import TrackChangesTwoToneIcon from '@mui/icons-material/TrackChangesTwoTone';
+import useFormState from '../hooks';
 import { createExpense, deleteExpense, updateExpense } from '../actions';
+import { actionTheme, iconify } from '../utils';
 import Header from '../components/Header';
 import FlashMessage from '../components/FlashMessage';
+import Progress from '../components/Progress';
 import ExpenseForm from '../components/ExpenseForm';
-import Expense from '../components/Expense';
-import { getExpenses } from '../selectors';
+import ExpenseGrid from '../components/ExpenseGrid';
 
-const Tracker = () => {
-  const {
-    isLoading, error, dispatch, navigate,
-  } = useVerify();
+export default function Tracker() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const expenses = useSelector((state) => state.expenses);
+  const { isLoading, error } = useSelector((state) => state.notifications);
 
   const [searchParams] = useSearchParams();
   const listName = searchParams.get('list');
   const listId = searchParams.get('id');
 
-  const expenses = useSelector(getExpenses);
-
   const {
-    state = {}, handleChange, visible, toggleDisplay, reset,
-  } = useFormState();
+    state, handleChange, handleDate, visible, toggleDisplay, reset,
+  } = useFormState({
+    title: '',
+    date: new Date().toISOString(),
+    notes: '',
+    amount: '0',
+  });
 
-  const cancelAction = () => {
+  const closeModal = () => {
     reset();
     toggleDisplay();
   };
@@ -32,11 +40,14 @@ const Tracker = () => {
   const handleCreate = (e) => {
     e.preventDefault();
     dispatch(createExpense(listId, state));
-    toggleDisplay();
-    reset();
+    closeModal();
   };
 
-  const handleUpdate = (id, data) => dispatch(updateExpense(id, data));
+  const handleUpdate = (params) => {
+    const { id } = params;
+    const data = { [params.field]: params.value };
+    dispatch(updateExpense(id, data));
+  };
 
   const handleDelete = (id) => dispatch(deleteExpense(id));
 
@@ -44,64 +55,50 @@ const Tracker = () => {
     <>
       <Header>
         <span className="theme__heading">
-          Track.it &nbsp;
-          <FaChartLine />
+          <TrackChangesTwoToneIcon />
         </span>
       </Header>
-      <div className="wrap-page mw-container mx-auto">
-        {error !== null && (<FlashMessage>{ error }</FlashMessage>)}
-        <h3>{listName}</h3>
+      <div className="wrap-page tracker">
+        {error && <FlashMessage message={error} />}
+        <h3>
+          {iconify(listName)}
+          {' '}
+          {listName}
+        </h3>
 
         <div className="mt-4 mx-auto">
           {visible && (
-            <div className="mb-3">
-              <ExpenseForm
-                title={state.title || ''}
-                amount={state.amount || ''}
-                date={state.date || ''}
-                notes={state.notes || ''}
-                setter={handleChange}
-                submit={handleCreate}
-                cancel={cancelAction}
-              />
-              <hr />
-            </div>
+            <ExpenseForm
+              state={state}
+              handleChange={handleChange}
+              handleDate={handleDate}
+              open={visible}
+              handleClose={closeModal}
+              save={handleCreate}
+            />
           )}
-          <div>
+          <div className="px-2">
             {!visible && (
-              <div className="track-it">
+              <div className="actions">
                 <button type="button" className="btn btn-sm" onClick={() => navigate('/app')}>
-                  <FaChevronLeft />
-                  <span className="ms-2">Back to Lists</span>
+                  <ArrowCircleLeftTwoToneIcon fontSize="small" />
+                  <span className="ms-2">Back</span>
                 </button>
-                <button type="button" className="btn btn-sm" onClick={toggleDisplay}>
-                  Add expense
-                </button>
+                <Fab size="small" sx={actionTheme} aria-label="add" onClick={toggleDisplay}>
+                  <AddIcon />
+                </Fab>
               </div>
             )}
-            {isLoading ? (
-              <p className="page-loading"><FaSpinner /></p>
-            ) : (
-              <ul className="expenses mt-4 pt-3">
-                {expenses?.map((expense) => (
-                  <Expense
-                    key={expense.id}
-                    id={expense.id}
-                    title={expense.title}
-                    amount={expense.amount}
-                    date={expense.date}
-                    notes={expense.notes}
-                    onUpdate={handleUpdate}
-                    onDelete={handleDelete}
-                  />
-                )) ?? <li>No record of expenses</li>}
-              </ul>
+            {isLoading ? <Progress /> : (
+              <ExpenseGrid
+                rows={expenses}
+                editCell={handleUpdate}
+                deleteCell={handleDelete}
+              />
             )}
           </div>
         </div>
       </div>
     </>
   );
-};
-
-export default Tracker;
+}

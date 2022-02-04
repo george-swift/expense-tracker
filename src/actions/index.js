@@ -1,16 +1,16 @@
 import { createAction } from '@reduxjs/toolkit';
 import {
-  SIGN_UP, LOG_IN, AUTHENTICATE_USER, EDIT_USER, SIGN_OUT,
+  SIGN_UP, LOG_IN, AUTH_USER, EDIT_USER, SIGN_OUT,
   CREATE_LIST, UPDATE_LIST, DELETE_LIST, FETCH_EXPENSES,
   CREATE_EXPENSE, UPDATE_EXPENSE, DELETE_EXPENSE,
   FETCH_REPORT, REQUEST_FAILED, CLEAR_NOTIFICATIONS,
-} from '../constants';
+} from '../utils';
 
-export const signUpRequest = createAction(SIGN_UP, (data) => ({ payload: { user: data } }));
+export const signUpRequest = createAction(SIGN_UP, (user) => ({ payload: { user } }));
 
-export const logInRequest = createAction(LOG_IN, (data) => ({ payload: data }));
+export const logInRequest = createAction(LOG_IN, (payload) => ({ payload }));
 
-export const authUser = createAction(AUTHENTICATE_USER, (data) => ({ payload: data }));
+export const authUser = createAction(AUTH_USER, (payload) => ({ payload }));
 
 export const editUserRequest = createAction(EDIT_USER, (id, data) => (
   {

@@ -1,11 +1,10 @@
 $smoke: #f8f9fa;
-$black: #212529;
+$black: #121212;
 $grey: #878686;
-$smoke: #f7f4f7;
+$offWhite: #f7f4f7;
 $blue: #0d6efd;
 $light-purple: #8f659a;
 $purple: #42224a;
-$orange: #ef8767;
 $fontPoppins: 'Poppins', sans-serif;
 $fz-xl: 1.2rem;
 $fz-lg: 0.825rem;
@@ -17,8 +16,6 @@ $dark-border: 1px solid rgba(0, 0, 0, 0.125);
   transform: scale(1) translateY(-2.8px);
   transition: 0.4s ease-in;
 }
-
-.mw-container { max-width: 1050px; }
 
 .mw-md { max-width: 500px; }
 
@@ -37,43 +34,36 @@ $dark-border: 1px solid rgba(0, 0, 0, 0.125);
   .btn-primary {
     &:hover,
     &:focus {
-      @extend .color-mix-one;
+      @extend .bg-darkPurple;
 
       box-shadow: none;
     }
 
     &:last-of-type {
-      @extend .color-mix;
+      @extend .bg-lightPurple;
 
       border: none;
     }
   }
 }
 
-.center {
+.flex-Center {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.color-mix {
+.flex-Between {
+  display: flex;
+  justify-content: space-between;
+}
+
+.bg-lightPurple {
   background-color: $light-purple;
   color: white;
 }
 
-.color-mix-one {
+.bg-darkPurple {
   background-color: $purple;
   color: white;
 }
-
-.color-mix-two {
-  background-color: $orange;
-  color: white;
-}
-
-.font-mix-one {
-  font-weight: 600;
-  color: $smoke;
-}
-
-.size-md { width: 200px; }
