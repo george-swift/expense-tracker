@@ -1,67 +1,104 @@
 import PropTypes from 'prop-types';
-import { FaTrash } from 'react-icons/fa';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
+import Backdrop from '@mui/material/Backdrop';
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
+import Fade from '@mui/material/Fade';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import DatePicker from '@mui/lab/DatePicker';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import TextField from '@mui/material/TextField';
+import SendAndArchiveTwoToneIcon from '@mui/icons-material/SendAndArchiveTwoTone';
+import { useMediaQuery } from '@mui/material';
+import { modalTheme } from '../utils';
 
 const ExpenseForm = ({
-  id, title, amount, date, notes, setter, submit, cancel, remove,
+  state, handleChange, handleDate, open, handleClose, save,
 }) => {
-  const newExpense = id <= 0;
+  const darkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  const variableTheme = darkMode ? {
+    ...modalTheme,
+    bgcolor: '#121212',
+    '& .MuiTypography-root': {
+      mb: 3,
+      color: '#8f659a',
+    },
+  } : modalTheme;
 
   return (
-    <Form className="row mw-form mx-auto px-1" onSubmit={submit}>
-      <Form.Group className="col-12 mb-3" controlId="title">
-        <Form.Label>Title*</Form.Label>
-        <Form.Control type="text" name="title" value={title} onChange={setter} minLength={2} required />
-      </Form.Group>
-      <Form.Group className={`${newExpense ? 'col-sm-4' : 'col-5'} mb-3`} controlId="amount">
-        <Form.Label>Amount ($)*</Form.Label>
-        <Form.Control type="number" name="amount" value={amount} onChange={setter} min={0.01} step={0.01} required />
-      </Form.Group>
-      <Form.Group className={`${newExpense ? 'col-sm-8' : 'col-7'} mb-3`} controlId="date">
-        <Form.Label>Incurred On*</Form.Label>
-        <Form.Control type="date" name="date" value={date} onChange={setter} required />
-      </Form.Group>
-      <Form.Group className="col-12 mb-3 form" controlId="notes">
-        <Form.Label>Notes</Form.Label>
-        <Form.Control as="textarea" rows={3} name="notes" value={notes} onChange={setter} maxLength={140} />
-      </Form.Group>
-      {newExpense ? (
-        <div className="col-12">
-          <Button type="submit" className="w-100 mb-3">Create new expense</Button>
-          <Button variant="bg-light" className="w-100 color-mix-two" onClick={cancel}>Cancel</Button>
-        </div>
-      ) : (
-        <div className="col-12 mb-2 px-0 text-end">
-          <Button type="submit" className="fw-bold" size="sm">Update</Button>
-          <Button className="ms-3" size="sm" onClick={() => remove(id)}>
-            <FaTrash />
-          </Button>
-        </div>
-      )}
-    </Form>
+    <Modal
+      aria-labelledby="modal-title"
+      open={open}
+      onClose={handleClose}
+      closeAfterTransition
+      BackdropComponent={Backdrop}
+      BackdropProps={{ timeout: 500 }}
+    >
+      <Fade in={open}>
+        <Box sx={variableTheme}>
+          <Typography id="modal-title" variant="h4">Add Expense</Typography>
+          <Box
+            component="form"
+            sx={{
+              '& > .MuiTextField-root': { mb: 3, width: '100%' },
+            }}
+            autoComplete="off"
+            onSubmit={save}
+          >
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <DatePicker
+                label="Date incurred"
+                value={state.date}
+                onChange={handleDate}
+                // eslint-disable-next-line react/jsx-props-no-spreading
+                renderInput={(params) => <TextField {...params} />}
+              />
+            </LocalizationProvider>
+            <TextField
+              label="Title"
+              name="title"
+              value={state.title}
+              onChange={handleChange}
+              required
+            />
+            <TextField
+              label="Amount"
+              name="amount"
+              inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
+              value={state.amount}
+              onChange={handleChange}
+              required
+            />
+            <TextField
+              label="Notes"
+              name="notes"
+              multiline
+              minRows={4}
+              value={state.notes}
+              onChange={handleChange}
+            />
+            <Button
+              type="submit"
+              variant="contained"
+              endIcon={<SendAndArchiveTwoToneIcon />}
+            >
+              Save
+            </Button>
+          </Box>
+        </Box>
+      </Fade>
+    </Modal>
   );
 };
 
 ExpenseForm.propTypes = {
-  id: PropTypes.number,
-  title: PropTypes.string.isRequired,
-  amount: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-  ]).isRequired,
-  date: PropTypes.string.isRequired,
-  notes: PropTypes.string.isRequired,
-  cancel: PropTypes.func,
-  remove: PropTypes.func,
-  setter: PropTypes.func.isRequired,
-  submit: PropTypes.func.isRequired,
-};
-
-ExpenseForm.defaultProps = {
-  id: -1,
-  cancel: () => {},
-  remove: () => {},
+  state: PropTypes.objectOf(PropTypes.string).isRequired,
+  handleChange: PropTypes.func.isRequired,
+  handleDate: PropTypes.func.isRequired,
+  open: PropTypes.bool.isRequired,
+  handleClose: PropTypes.func.isRequired,
+  save: PropTypes.func.isRequired,
 };
 
 export default ExpenseForm;
