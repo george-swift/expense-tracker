@@ -11,7 +11,6 @@ const UserForm = ({
   confirm,
   setter,
   submit,
-  reset,
 }) => (
   <Form className={auth ? 'py-3' : 'py-1'} onSubmit={submit}>
     <Form.Group className="mb-3" controlId="username">
@@ -22,7 +21,7 @@ const UserForm = ({
       <Form.Label>Email</Form.Label>
       <Form.Control type="email" name="email" value={email} onChange={setter} required />
     </Form.Group>
-    {auth ? (<Button type="submit" className="w-100">Update Profile</Button>)
+    {auth ? <Button type="submit" className="w-100 mt-3">Update Profile</Button>
       : (
         <>
           <Form.Group className="mb-3" controlId="password">
@@ -38,7 +37,7 @@ const UserForm = ({
             <p className="text-center">
               <Form.Text>
                 Already have an account?&nbsp;
-                <Link to="/login" onClick={reset}>Log in</Link>
+                <Link to="/login">Log in</Link>
               </Form.Text>
             </p>
           </div>
@@ -55,13 +54,11 @@ UserForm.propTypes = {
   confirm: PropTypes.string,
   setter: PropTypes.func.isRequired,
   submit: PropTypes.func.isRequired,
-  reset: PropTypes.func,
 };
 
 UserForm.defaultProps = {
   password: '',
   confirm: '',
-  reset: () => {},
 };
 
 export default UserForm;
