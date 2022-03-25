@@ -1,26 +1,17 @@
 import Proptypes from 'prop-types';
-import { FaTrash } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 import { iconify } from '../utils';
 
-export default function List({
-  id, name, track, discard,
-}) {
-  const seeAll = () => track(id, name);
-
-  const deleteList = () => discard(id);
+export default function List({ id, name, track }) {
+  const listPath = `track?id=${id}&list=${name}`;
+  const seeAll = () => track(id);
 
   return (
-    <li className="pt-3 pb-4">
-      <div className="list">
+    <li>
+      <Link to={listPath} className="list" onClick={seeAll}>
         <span className="list__icon">{iconify(name)}</span>
-        <span className="mb-3">{name}</span>
-        <button type="button" className="btn list__btn" onClick={seeAll}>
-          Track expenses
-        </button>
-        <button type="button" className="btn list__btn" onClick={deleteList}>
-          <FaTrash />
-        </button>
-      </div>
+        <span className="list__name">{name}</span>
+      </Link>
     </li>
   );
 }
@@ -29,5 +20,4 @@ List.propTypes = {
   id: Proptypes.number.isRequired,
   name: Proptypes.string.isRequired,
   track: Proptypes.func.isRequired,
-  discard: Proptypes.func.isRequired,
 };
