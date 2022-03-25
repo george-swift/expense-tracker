@@ -1,10 +1,32 @@
+@font-face {
+  font-family: 'Gilroy';
+  font-style: normal;
+  font-weight: bold;
+  src: url('./fonts/Gilroy-Bold.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Gilroy';
+  font-style: normal;
+  font-weight: 600;
+  src: url('./fonts/Gilroy-Medium.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Gilroy';
+  font-style: normal;
+  font-weight: 400;
+  src: url('./fonts/Gilroy-Regular.woff2') format('woff');
+}
+
 $smoke: #f8f9fa;
-$black: #121212;
+$black: #181818;
 $grey: #878686;
 $offWhite: #f7f4f7;
 $blue: #0d6efd;
 $light-purple: #8f659a;
 $purple: #42224a;
+$fontGilroy: 'Gilroy', sans-serif;
 $fontPoppins: 'Poppins', sans-serif;
 $fz-xl: 1.2rem;
 $fz-lg: 0.825rem;
@@ -15,36 +37,6 @@ $dark-border: 1px solid rgba(0, 0, 0, 0.125);
 @mixin transform {
   transform: scale(1) translateY(-2.8px);
   transition: 0.4s ease-in;
-}
-
-.mw-md { max-width: 500px; }
-
-.mw-form {
-  @extend .mw-md;
-
-  input,
-  textarea {
-    width: 100%;
-  }
-
-  label {
-    font-size: $fz-lg;
-  }
-
-  .btn-primary {
-    &:hover,
-    &:focus {
-      @extend .bg-darkPurple;
-
-      box-shadow: none;
-    }
-
-    &:last-of-type {
-      @extend .bg-lightPurple;
-
-      border: none;
-    }
-  }
 }
 
 .flex-Center {
