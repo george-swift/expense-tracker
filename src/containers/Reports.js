@@ -1,9 +1,7 @@
-import DonutLargeTwoToneIcon from '@mui/icons-material/DonutLargeTwoTone';
 import { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { isReportAvailable, getTotalExpenses } from '../selectors';
 import { suggested, miscellaenous, buildChart } from '../utils';
-import Header from '../components/Header';
 import Progress from '../components/Progress';
 import FlashMessage from '../components/FlashMessage';
 
@@ -36,23 +34,16 @@ export default function Reports() {
   }, []);
 
   return (
-    <>
-      <Header>
-        <span className="theme__heading">
-          <DonutLargeTwoToneIcon />
-        </span>
-      </Header>
+    <main>
       {error && <FlashMessage message={error} />}
-      <div className="wrap-page">
-        <section className="outcome">
-          <h3>Overview of expenses</h3>
-          {userSpent ? (
-            <div>
-              {isLoading ? <Progress /> : <canvas ref={chartContainer} width={500} height={500} />}
-            </div>
-          ) : <p className="mt-5 text-center">No record</p>}
-        </section>
-      </div>
-    </>
+      <section className="outcome">
+        <h3 className="theme">Overview of expenses</h3>
+        {userSpent ? (
+          <div>
+            {isLoading ? <Progress /> : <canvas ref={chartContainer} width={500} height={500} />}
+          </div>
+        ) : <p className="mt-5 text-center">No record</p>}
+      </section>
+    </main>
   );
 }

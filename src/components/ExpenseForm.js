@@ -10,87 +10,74 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import SendAndArchiveTwoToneIcon from '@mui/icons-material/SendAndArchiveTwoTone';
-import { useMediaQuery } from '@mui/material';
 import { modalTheme } from '../utils';
 
 const ExpenseForm = ({
   state, handleChange, handleDate, open, handleClose, save,
-}) => {
-  const darkMode = useMediaQuery('(prefers-color-scheme: dark)');
-  const variableTheme = darkMode ? {
-    ...modalTheme,
-    bgcolor: '#121212',
-    '& .MuiTypography-root': {
-      mb: 3,
-      color: '#8f659a',
-    },
-  } : modalTheme;
-
-  return (
-    <Modal
-      aria-labelledby="modal-title"
-      open={open}
-      onClose={handleClose}
-      closeAfterTransition
-      BackdropComponent={Backdrop}
-      BackdropProps={{ timeout: 500 }}
-    >
-      <Fade in={open}>
-        <Box sx={variableTheme}>
-          <Typography id="modal-title" variant="h4">Add Expense</Typography>
-          <Box
-            component="form"
-            sx={{
-              '& > .MuiTextField-root': { mb: 3, width: '100%' },
-            }}
-            autoComplete="off"
-            onSubmit={save}
-          >
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
-              <DatePicker
-                label="Date incurred"
-                value={state.date}
-                onChange={handleDate}
+}) => (
+  <Modal
+    aria-labelledby="modal-title"
+    open={open}
+    onClose={handleClose}
+    closeAfterTransition
+    BackdropComponent={Backdrop}
+    BackdropProps={{ timeout: 500 }}
+  >
+    <Fade in={open}>
+      <Box sx={modalTheme}>
+        <Typography id="modal-title" variant="h4">Add Expense</Typography>
+        <Box
+          component="form"
+          sx={{
+            '& > .MuiTextField-root': { mb: 3, width: '100%' },
+          }}
+          autoComplete="off"
+          onSubmit={save}
+        >
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <DatePicker
+              label="Date incurred"
+              value={state.date}
+              onChange={handleDate}
                 // eslint-disable-next-line react/jsx-props-no-spreading
-                renderInput={(params) => <TextField {...params} />}
-              />
-            </LocalizationProvider>
-            <TextField
-              label="Title"
-              name="title"
-              value={state.title}
-              onChange={handleChange}
-              required
+              renderInput={(params) => <TextField {...params} />}
             />
-            <TextField
-              label="Amount"
-              name="amount"
-              inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
-              value={state.amount}
-              onChange={handleChange}
-              required
-            />
-            <TextField
-              label="Notes"
-              name="notes"
-              multiline
-              minRows={4}
-              value={state.notes}
-              onChange={handleChange}
-            />
-            <Button
-              type="submit"
-              variant="contained"
-              endIcon={<SendAndArchiveTwoToneIcon />}
-            >
-              Save
-            </Button>
-          </Box>
+          </LocalizationProvider>
+          <TextField
+            label="Title"
+            name="title"
+            value={state.title}
+            onChange={handleChange}
+            required
+          />
+          <TextField
+            label="Amount"
+            name="amount"
+            inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
+            value={state.amount}
+            onChange={handleChange}
+            required
+          />
+          <TextField
+            label="Notes"
+            name="notes"
+            multiline
+            minRows={4}
+            value={state.notes}
+            onChange={handleChange}
+          />
+          <Button
+            type="submit"
+            variant="contained"
+            endIcon={<SendAndArchiveTwoToneIcon />}
+          >
+            Save
+          </Button>
         </Box>
-      </Fade>
-    </Modal>
-  );
-};
+      </Box>
+    </Fade>
+  </Modal>
+);
 
 ExpenseForm.propTypes = {
   state: PropTypes.objectOf(PropTypes.string).isRequired,
