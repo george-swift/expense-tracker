@@ -3,11 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import ArrowCircleLeftTwoToneIcon from '@mui/icons-material/ArrowCircleLeftTwoTone';
-import TrackChangesTwoToneIcon from '@mui/icons-material/TrackChangesTwoTone';
 import useFormState from '../hooks';
 import { createExpense, deleteExpense, updateExpense } from '../actions';
 import { actionTheme, iconify } from '../utils';
-import Header from '../components/Header';
 import FlashMessage from '../components/FlashMessage';
 import Progress from '../components/Progress';
 import ExpenseForm from '../components/ExpenseForm';
@@ -52,18 +50,13 @@ export default function Tracker() {
   const handleDelete = (id) => dispatch(deleteExpense(id));
 
   return (
-    <>
-      <Header>
-        <span className="theme__heading">
-          <TrackChangesTwoToneIcon />
-        </span>
-      </Header>
-      <div className="wrap-page tracker">
+    <main>
+      <div className="pageWrap tracker">
         {error && <FlashMessage message={error} />}
-        <h3>
+        <h3 className="theme">
           {iconify(listName)}
           {' '}
-          {listName}
+          <span>{listName}</span>
         </h3>
 
         <div className="mt-4 mx-auto">
@@ -77,12 +70,12 @@ export default function Tracker() {
               save={handleCreate}
             />
           )}
-          <div className="px-2">
+          <div>
             {!visible && (
               <div className="actions">
-                <button type="button" className="btn btn-sm" onClick={() => navigate('/app')}>
-                  <ArrowCircleLeftTwoToneIcon fontSize="small" />
-                  <span className="ms-2">Back</span>
+                <button type="button" className="btn-sm" onClick={() => navigate('/')}>
+                  <ArrowCircleLeftTwoToneIcon fontSize="small" sx={{ marginRight: 1 }} />
+                  <span>Back</span>
                 </button>
                 <Fab size="small" sx={actionTheme} aria-label="add" onClick={toggleDisplay}>
                   <AddIcon />
@@ -99,6 +92,6 @@ export default function Tracker() {
           </div>
         </div>
       </div>
-    </>
+    </main>
   );
 }
