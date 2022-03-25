@@ -1,5 +1,5 @@
 # Expense Tracker
-![](./public/images/home.webp)
+![](./public/images/chart.png)
 ## Live Link
 [Get started with Expense Tracker](https://redux-expense-tracker.netlify.app/)
 ## Objectives
@@ -17,15 +17,13 @@
 ## Features
 A single page application that allows users to keep track of expenses. After `Sign up` or `Log in`, users are authenticated and able to access the app. The home page allows for creating and managing categories of expenses. Clicking on `Track expenses` in any category opens a page with information about expenses in a given list. Expenses can be added, edited and deleted as desired. The `Reports` page shows the total outcome of a user's expenses, _by categories_, in a doughnut chart. Lastly, the `Edit Profile` page allows users to edit their profile. _Expense Tracker_ is deployed on Netlify.
 
-_Visualisation of outcomes with Chart.js_
+_Sign in to use the app_
 
-![](./public/images/chart.webp)
+![](./public/images/signin.png)
 
 _Overview of expenses in a given category_
 ![](./public/images/expense.webp)
 
-_Dark mode_
-![](./public/images/home-dark.webp)
 
 ## Prerequisites
 - Internet Connection
@@ -40,7 +38,6 @@ _Dark mode_
 - Redux Saga
 - Javascript
 - Chart.js
-- Bootstrap
 - Material UI
 - SCSS
 - HTML5/CSS3
