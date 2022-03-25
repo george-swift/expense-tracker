@@ -39,7 +39,9 @@ const ExpenseGrid = ({ rows, editCell, deleteCell }) => {
 };
 
 ExpenseGrid.propTypes = {
-  rows: PropTypes.arrayOf(PropTypes.object).isRequired,
+  rows: PropTypes.arrayOf(
+    PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
+  ).isRequired,
   editCell: PropTypes.func.isRequired,
   deleteCell: PropTypes.func.isRequired,
 };
