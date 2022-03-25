@@ -26,8 +26,13 @@ body {
   min-height: 100%;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  letter-spacing: -.025em;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  letter-spacing: -0.025em;
   margin: 0 0 10px;
   font-weight: 700;
 }
@@ -164,7 +169,7 @@ button[type=submit] {
 
 .wrapper {
   padding-left: 200px;
-  
+
 
   main {
     width: 100%;
@@ -249,7 +254,7 @@ button[type=submit] {
 
     main {
       padding: 50px 40px;
-  
+
       h2 {
         text-align: center;
       }
@@ -333,7 +338,6 @@ button[type=submit] {
     }
   }
 }
-
 
 .theme {
   @extend .flex-Center;
@@ -492,6 +496,7 @@ button[type=submit] {
 
   &__info {
     @extend .flex-Center;
+
     background-color: $offWhite;
     color: $purple;
 
@@ -531,4 +536,3 @@ button[type=submit] {
     }
   }
 }
-
