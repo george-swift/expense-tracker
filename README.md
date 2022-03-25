@@ -21,9 +21,6 @@ _Sign in to use the app_
 
 ![](./public/images/signin.png)
 
-_Overview of expenses in a given category_
-![](./public/images/expense.webp)
-
 
 ## Prerequisites
 - Internet Connection
