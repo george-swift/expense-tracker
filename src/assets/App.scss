@@ -168,7 +168,7 @@ button[type=submit] {
 }
 
 .wrapper {
-  padding-left: 200px;
+  padding-left: 125px;
 
   main {
     width: 100%;
@@ -187,7 +187,7 @@ button[type=submit] {
   position: fixed;
   top: 0;
   left: 0;
-  width: 200px;
+  width: 125px;
   background-color: $purple;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   text-align: center;
@@ -203,13 +203,12 @@ button[type=submit] {
     height: 70px;
     transition: all 0.25s cubic-bezier(0.3, 0, 0.4, 1);
 
-    &:hover,
-    &:focus {
-      color: $light-purple;
-    }
-
     svg {
       width: 50px;
+    }
+
+    &:hover svg {
+      color: $light-purple;
     }
   }
 }
