@@ -17,7 +17,6 @@ const Navigation = () => {
         <Link to="/">
           <CreditScoreTwoToneIcon fontSize="large" />
         </Link>
-        <p>Expense Tracker</p>
       </div>
       <ul className="nav__menu">
         <li>
